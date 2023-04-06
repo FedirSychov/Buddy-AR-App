@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/test.dart';
 
-void main() {
+import 'SharedPrefs.dart';
+import 'Timer.dart';
+
+final sharedPrefs = SharedPrefs();
+
+Future<void> main() async {
+  await sharedPrefs.init();
   runApp(const MyApp());
 }
 
@@ -23,12 +29,14 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
       ),
-      home: ObjectGesturesWidget(),
+      home: Countdown(),
     );
   }
 }
+
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
