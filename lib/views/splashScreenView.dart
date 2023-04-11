@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/test.dart';
+import 'package:my_app/views/plantView.dart';
 
 void main() {
   runApp(const MyApp());
