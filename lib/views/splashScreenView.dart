@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/views/plantView.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class SplashScreenView extends StatelessWidget {
+  const SplashScreenView({super.key});
 
   // This widget is the root of your application.
   @override
@@ -23,12 +18,14 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
       ),
-      home: ObjectGesturesWidget(),
+      home: MyHomePage(title: 'Test',),
     );
   }
 }
+
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
