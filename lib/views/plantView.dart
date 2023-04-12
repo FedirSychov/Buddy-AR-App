@@ -98,11 +98,13 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
     anchors = [];
   }
 
-  Future<void> onPlaneOrPointTapped(List<ARHitTestResult> hitTestResults) async {
+  Future<void> onPlaneOrPointTapped(
+      List<ARHitTestResult> hitTestResults) async {
     var singleHitTestResult = hitTestResults.firstWhere(
         (hitTestResult) => hitTestResult.type == ARHitTestResultType.plane);
     if (singleHitTestResult != null) {
-      var newAnchor = ARPlaneAnchor(transformation: singleHitTestResult.worldTransform);
+      var newAnchor =
+          ARPlaneAnchor(transformation: singleHitTestResult.worldTransform);
       bool? didAddAnchor = await this.arAnchorManager!.addAnchor(newAnchor);
       if (didAddAnchor!) {
         this.anchors.add(newAnchor);
