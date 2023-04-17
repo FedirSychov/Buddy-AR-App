@@ -10,22 +10,41 @@ class Countdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-        textDirection: TextDirection.ltr,
-        child: Column(
-          textDirection: TextDirection.ltr,
-          children: [
-            KeyVisual(timeType: TimeType.Learning),
-            TimerSection(),
-            // Testing of Buttons
-            Container(height: 50),
-            SimpleButton("testing", () {
-              print("testing");
-            }),
-            Container(height: 50),
-            CancelButton(() {})
-          ],
-        ));
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
+        primarySwatch: Colors.grey,
+      ),
+      home: TimerView(),
+    );
+  }
+}
+
+class TimerView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        KeyVisual(timeType: TimeType.Learning),
+        TimerSection(),
+        // Testing of Buttons
+        Container(height: 50),
+        SimpleButton("testing", () {
+          print("testing");
+        }),
+        Container(height: 50),
+        CancelButton(() {})
+      ],
+    );
   }
 }
 
@@ -99,7 +118,6 @@ class _TimerState extends State<TimerSection> {
     return Column(
       children: [
         Text(
-          textDirection: TextDirection.ltr,
           '${hours.toString().padLeft(2, '0')}:'
           '${minutes.toString().padLeft(2, '0')}:'
           '${seconds.toString().padLeft(2, '0')}',

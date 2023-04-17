@@ -23,8 +23,7 @@ class _SimpleButtonState extends State<SimpleButton> {
         onPressed: () {
           widget.func();
         },
-        child: Text(widget.text,
-            style: TextStyle(fontSize: 13), textDirection: TextDirection.ltr),
+        child: Text(widget.text, style: TextStyle(fontSize: 13)),
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color.fromARGB(255, 133, 83, 0),
           foregroundColor: Colors.white,
@@ -75,11 +74,9 @@ class _PauseButtonState extends State<PauseButton> {
                   ? Text(
                       "Pause " + widget.text,
                       style: TextStyle(fontSize: 13),
-                      textDirection: TextDirection.ltr,
                     )
                   : Text("Resume " + widget.text,
-                      style: TextStyle(fontSize: 13),
-                      textDirection: TextDirection.ltr),
+                      style: TextStyle(fontSize: 13)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 197, 241, 133),
                 foregroundColor: Colors.black,
