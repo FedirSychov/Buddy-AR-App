@@ -1,41 +1,31 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:my_app/views/DesignViews/buttons.dart';
 
 class Countdown extends StatelessWidget {
-  const Countdown({super.key});
+  bool onGoing = true;
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.grey,
-      ),
-      home: TimerView(),
-    );
-  }
-}
-
-class TimerView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        KeyVisual(timeType: TimeType.Learning),
-        TimerSection()
-      ],
-    );
+    return Directionality(
+        textDirection: TextDirection.ltr,
+        child: Column(
+          textDirection: TextDirection.ltr,
+          children: [
+            KeyVisual(timeType: TimeType.Learning),
+            TimerSection(),
+            // Testing of Buttons
+            Container(height: 50),
+            SimpleButton("testing", () {
+              print("testing");
+            }),
+            Container(height: 50),
+            CancelButton(() {})
+          ],
+        ));
   }
 }
 
@@ -49,7 +39,7 @@ class _TimerState extends State<TimerSection> {
   int minutes = 30;
   int seconds = 20;
   bool onGoing = false;
-  
+
   Timer? timer;
 
   void countDown() {
@@ -69,12 +59,11 @@ class _TimerState extends State<TimerSection> {
       }
     });
   }
-  
+
   void initTimer() {
-    timer = Timer.periodic(const Duration(seconds: 1),
-            (timer) {
-          countDown();
-        });
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      countDown();
+    });
     setState(() => onGoing = true);
   }
 
@@ -109,60 +98,45 @@ class _TimerState extends State<TimerSection> {
 
     return Column(
       children: [
-        Text('${hours.toString().padLeft(2, '0')}:'
-            '${minutes.toString().padLeft(2, '0')}:'
-            '${seconds.toString().padLeft(2, '0')}',
+        Text(
+          textDirection: TextDirection.ltr,
+          '${hours.toString().padLeft(2, '0')}:'
+          '${minutes.toString().padLeft(2, '0')}:'
+          '${seconds.toString().padLeft(2, '0')}',
           style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-              fontSize: 50),),
-        ElevatedButton.icon(
-          onPressed: () {
-            handleButtonPress();
-          },
-          icon: onGoing ? Icon(Icons.add, size:18) : Icon(Icons.read_more, size: 18),
-          label: onGoing ? Text("OnGoing") : Text("Paused")
-        )
+              fontWeight: FontWeight.bold, color: Colors.white, fontSize: 50),
+        ),
+        PauseButton("session", () {
+          handleButtonPress();
+        }, onGoing),
       ],
     );
 
-
-    return Text('$hours:$minutes:$seconds',
+    return Text(
+      '$hours:$minutes:$seconds',
       style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.black,
-          fontSize: 50),);
+          fontWeight: FontWeight.bold, color: Colors.black, fontSize: 50),
+    );
   }
 }
 
 class KeyVisual extends StatelessWidget {
-  const KeyVisual({
-    super.key,
-    required this.timeType
-  });
+  const KeyVisual({super.key, required this.timeType});
 
   final TimeType timeType;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 66.0),
-      child: Image.asset(
-        timeType.imagePath,
-        height: 299,
-        width: 233
-      )
-    );
+        margin: const EdgeInsets.only(top: 66.0),
+        child: Image.asset(timeType.imagePath, height: 299, width: 233));
   }
-
-
 }
 
 enum TimeType {
-  Learning('images/learning.jpg'),
+  Learning('assets/images/learning.jpg'),
   Walking('walking.png');
 
   const TimeType(this.imagePath);
   final String imagePath;
 }
-

@@ -11,5 +11,5 @@ Future<void> main() async {
   await sharedPrefs.init();
   sharedPrefs.setIsReturningUser(true);
   print(sharedPrefs.getReturningUser());
-  runApp(const Countdown());
+  runApp(Countdown());
 }
