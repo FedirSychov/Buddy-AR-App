@@ -109,8 +109,8 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
         this.anchors.add(newAnchor);
         // Add note to anchor
         var newNode = ARNode(
-            type: NodeType.localGLTF2,
-            uri: "assets/models/First.glb",
+            type: NodeType.webGLB,
+            uri: "https://github.com/alval90/flutterApp/raw/chicken/my_app/Second.glb",
             scale: Vector3(0.2, 0.2, 0.2),
             position: Vector3(0.0, 0.0, 0.0),
             rotation: Vector4(1.0, 0.0, 0.0, 0.0));

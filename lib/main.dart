@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/views/onboardingView.dart';
-import 'package:my_app/views/setupSessionView.dart';
 import 'package:my_app/views/splashScreenView.dart';
 import 'package:my_app/clients/sharedPrefs.dart';
 
