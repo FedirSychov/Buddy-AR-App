@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/views/onboardingView.dart';
 import 'package:my_app/views/setupSessionView.dart';
 import 'package:my_app/views/splashScreenView.dart';
 import 'package:my_app/clients/sharedPrefs.dart';
@@ -14,7 +15,7 @@ class BUDdyApp extends StatelessWidget {
   const BUDdyApp({super.key, bool? isReturningUser});
 
   Widget getInitView(bool? isReturningUser) {
-    return SplashScreenView(); // For debugging
+    return OnboardingView(); // For debugging
     if (isReturningUser == null) {
       sharedPrefs.setIsReturningUser(true);
       return const SplashScreenView();
@@ -58,6 +59,7 @@ class BUDdyApp extends StatelessWidget {
           surfaceVariant: const Color(0xffF1E0D0),
           onSurfaceVariant: const Color(0xff504539),
           outline: const Color(0xff827568),
+          outlineVariant: const Color(0xffD4C4B5)
         ),
       ),
       home: getInitView(sharedPrefs.getReturningUser()),

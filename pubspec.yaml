@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   ar_flutter_plugin: ^0.7.3
   shared_preferences: any
+  carousel_slider: ^4.2.1
+  dots_indicator: ^2.1.0
 
 dev_dependencies:
   flutter_test:
