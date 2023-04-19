@@ -7,6 +7,7 @@ import 'package:my_app/clients/sharedPrefs.dart';
 final sharedPrefs = SharedPrefs();
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await sharedPrefs.init();
   runApp(const BUDdyApp());
 }
