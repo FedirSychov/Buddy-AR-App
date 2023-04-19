@@ -14,15 +14,6 @@ Future<void> main() async {
 class BUDdyApp extends StatelessWidget {
   const BUDdyApp({super.key, bool? isReturningUser});
 
-  Widget getInitView(bool? isReturningUser) {
-    return OnboardingView(); // For debugging
-    if (isReturningUser == null) {
-      sharedPrefs.setIsReturningUser(true);
-      return const SplashScreenView();
-    }
-    return isReturningUser ? const SetupSessionView() : const SplashScreenView();
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,10 +21,10 @@ class BUDdyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Lato',
         textTheme: const TextTheme(
-          displayLarge: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w400, height: 32.0),
-          bodyLarge: TextStyle(fontSize: 57.0, fontWeight: FontWeight.w400, height: 64.0),
-          bodyMedium: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400, height: 24.0),
-          bodySmall: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w400, height: 20.0),
+          displayLarge: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w400, color: Color(0xff1F1B16)),
+          bodyLarge: TextStyle(fontSize: 57.0, fontWeight: FontWeight.w400, color: Color(0xff1F1B16)),
+          bodyMedium: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400, color: Color(0xff1F1B16)),
+          bodySmall: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w400, color: Color(0xff1F1B16)),
         ),
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: const Color(0xff855300),
@@ -62,7 +53,7 @@ class BUDdyApp extends StatelessWidget {
           outlineVariant: const Color(0xffD4C4B5)
         ),
       ),
-      home: getInitView(sharedPrefs.getReturningUser()),
+      home: const SplashScreenView(),
     );
   }
 }
