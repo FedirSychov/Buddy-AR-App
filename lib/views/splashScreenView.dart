@@ -83,6 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< Updated upstream
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -131,5 +132,10 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+=======
+    startTimer(context);
+    return FittedBox(
+        fit: BoxFit.fill, child: Image.asset('assets/gifs/SplashIntro.gif'));
+>>>>>>> Stashed changes
   }
 }
