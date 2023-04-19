@@ -12,7 +12,6 @@ import 'package:ar_flutter_plugin/models/ar_node.dart';
 import 'package:ar_flutter_plugin/models/ar_hittest_result.dart';
 import 'package:flutter/services.dart';
 import 'package:vector_math/vector_math_64.dart';
-import 'dart:math';
 
 class ObjectGesturesWidget extends StatefulWidget {
   ObjectGesturesWidget({Key? key}) : super(key: key);
@@ -110,8 +109,8 @@ class _ObjectGesturesWidgetState extends State<ObjectGesturesWidget> {
         this.anchors.add(newAnchor);
         // Add note to anchor
         var newNode = ARNode(
-            type: NodeType.localGLTF2,
-            uri: "assets/images/test.gltf",
+            type: NodeType.webGLB,
+            uri: "https://github.com/alval90/flutterApp/raw/chicken/my_app/Second.glb",
             scale: Vector3(0.2, 0.2, 0.2),
             position: Vector3(0.0, 0.0, 0.0),
             rotation: Vector4(1.0, 0.0, 0.0, 0.0));
