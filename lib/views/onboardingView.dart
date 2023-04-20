@@ -112,7 +112,7 @@ enum Screens {
       'Healthy Study Routine',
       'Hello! I am your Buddy. I will help you create a healthy study routine by reminding you to take mini pauses during your study sessions.'
   ),
-  nourish('assets/images/nourish.png',
+  nourish('assets/gifs/RelaxedBuddy.gif',
     'Nourishing',
     'Your Buddy is connected to an AR plant that grows as you take pauses during your study sessions. Excited? Let’s set your AR plant!'
   ),
