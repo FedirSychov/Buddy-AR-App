@@ -11,43 +11,47 @@ class SplashScreenView extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Lato',
         textTheme: const TextTheme(
-          displayLarge: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w400, height: 32.0),
-          bodyLarge: TextStyle(fontSize: 57.0, fontWeight: FontWeight.w400, height: 64.0),
-          bodyMedium: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400, height: 24.0),
-          bodySmall: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w400, height: 20.0),
+          displayLarge: TextStyle(
+              fontSize: 24.0, fontWeight: FontWeight.w400, height: 32.0),
+          bodyLarge: TextStyle(
+              fontSize: 57.0, fontWeight: FontWeight.w400, height: 64.0),
+          bodyMedium: TextStyle(
+              fontSize: 16.0, fontWeight: FontWeight.w400, height: 24.0),
+          bodySmall: TextStyle(
+              fontSize: 14.0, fontWeight: FontWeight.w400, height: 20.0),
         ),
         colorScheme: ColorScheme.fromSwatch().copyWith(
-            primary: const Color(0xff855300),
-            onPrimary: const Color(0xffFFFFFF),
-            primaryContainer: const Color(0xffFFDDB8),
-            onPrimaryContainer: const Color(0xff2A1700),
-            secondary: const Color(0xff456808),
-            onSecondary: const Color(0xffFFFFFF),
-            secondaryContainer: const Color(0xffC5F185),
-            onSecondaryContainer: const Color(0xff111F00),
-            tertiary: const Color(0xff54643D),
-            onTertiary: const Color(0xffFFFFFF),
-            tertiaryContainer: const Color(0xffD7E9B8),
-            onTertiaryContainer: const Color(0xff131F02),
-            error: const Color(0xffBA1A1A),
-            onError: const Color(0xffFFFFFF),
-            errorContainer: const Color(0xffFFDAD6),
-            onErrorContainer: const Color(0xff410002),
-            background: const Color(0xffFFFBFF),
-            onBackground: const Color(0xff1F1B16),
-            surface: const Color(0xffFFFBFF),
-            onSurface: const Color(0xff1F1B16),
-            surfaceVariant: const Color(0xffF1E0D0),
-            onSurfaceVariant: const Color(0xff504539),
-            outline: const Color(0xff827568),
+          primary: const Color(0xff855300),
+          onPrimary: const Color(0xffFFFFFF),
+          primaryContainer: const Color(0xffFFDDB8),
+          onPrimaryContainer: const Color(0xff2A1700),
+          secondary: const Color(0xff456808),
+          onSecondary: const Color(0xffFFFFFF),
+          secondaryContainer: const Color(0xffC5F185),
+          onSecondaryContainer: const Color(0xff111F00),
+          tertiary: const Color(0xff54643D),
+          onTertiary: const Color(0xffFFFFFF),
+          tertiaryContainer: const Color(0xffD7E9B8),
+          onTertiaryContainer: const Color(0xff131F02),
+          error: const Color(0xffBA1A1A),
+          onError: const Color(0xffFFFFFF),
+          errorContainer: const Color(0xffFFDAD6),
+          onErrorContainer: const Color(0xff410002),
+          background: const Color(0xffFFFBFF),
+          onBackground: const Color(0xff1F1B16),
+          surface: const Color(0xffFFFBFF),
+          onSurface: const Color(0xff1F1B16),
+          surfaceVariant: const Color(0xffF1E0D0),
+          onSurfaceVariant: const Color(0xff504539),
+          outline: const Color(0xff827568),
         ),
       ),
-      home: MyHomePage(title: 'Test',),
+      home: MyHomePage(
+        title: 'Test',
+      ),
     );
   }
 }
-
-
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -83,59 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< Updated upstream
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button thdddis many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-=======
     startTimer(context);
     return FittedBox(
         fit: BoxFit.fill, child: Image.asset('assets/gifs/SplashIntro.gif'));
->>>>>>> Stashed changes
   }
 }
