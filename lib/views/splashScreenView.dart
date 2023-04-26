@@ -26,10 +26,6 @@ class SplashScreenView extends StatelessWidget {
   Widget build(BuildContext context) {
     startTimer(context);
     return FittedBox(
-      fit: BoxFit.fill,
-      child: Image.asset(
-          'assets/gifs/SplashIntro.gif'
-      )
-    );
+        fit: BoxFit.fill, child: Image.asset('assets/gifs/SplashIntro.gif'));
   }
 }

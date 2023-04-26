@@ -7,9 +7,7 @@ class SetupSessionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: const [
-        Text("SetupSessionView")
-      ],
+      children: const [Text("SetupSessionView")],
     );
   }
 }

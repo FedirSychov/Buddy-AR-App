@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/views/setupSessionView.dart';
 
 import '../clients/sharedPrefs.dart';
+import 'choosePlantView.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
@@ -98,7 +99,7 @@ class OnboardingScreen extends StatelessWidget {
             child: SimpleButton('Let\'s start',
               () {
                 SharedPrefs().deletePlantType();
-                Navigator.push(context, MaterialPageRoute(builder: (_) => const SetupSessionView()));
+                Navigator.push(context, MaterialPageRoute(builder: (_) => const ChoosePlantView()));
               }
             )
           )
