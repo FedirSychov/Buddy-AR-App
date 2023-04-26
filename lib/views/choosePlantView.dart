@@ -4,7 +4,7 @@ import 'package:my_app/views/setupSessionView.dart';
 
 import '../clients/sharedPrefs.dart';
 import '../model/plantType.dart';
-import 'onboardingView.dart';
+import 'DesignViews/buttons.dart';
 
 class ChoosePlantView extends StatelessWidget {
   const ChoosePlantView({super.key});
@@ -190,14 +190,14 @@ class Bottom extends StatelessWidget {
             children: [
               Container(
                 margin: const EdgeInsets.only(right: 16.0),
-                child: SimpleButton('Go back', () {
-                  Navigator.pop(context);
-                }
+                child: CancelButton('Go back', () {
+                    Navigator.pop(context);
+                  }
                 ),
               ),
               SimpleButton('Let\'s proceed', () {
-                SharedPrefs().setIsReturningUser(true);
-                Navigator.push(context, MaterialPageRoute(builder: (_) => const SetupSessionView()));
+                  SharedPrefs().setIsReturningUser(true);
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const SetupSessionView()));
                 }
               )
             ]

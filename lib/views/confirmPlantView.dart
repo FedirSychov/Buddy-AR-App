@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/views/DesignViews/buttons.dart';
 
 import '../clients/sharedPrefs.dart';
 import '../model/plantType.dart';
 import 'choosePlantView.dart';
-import 'onboardingView.dart';
 
 class ConfirmPlantView extends StatelessWidget {
   const ConfirmPlantView({super.key, required this.plantType});
@@ -48,16 +48,16 @@ class ConfirmPlantView extends StatelessWidget {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(right: 16.0),
-                      child: SimpleButton('Cancel', () {
+                      child: CancelButton('Cancel', () {
                         SharedPrefs().deletePlantType();
                         Navigator.pop(context);
-                      }
+                        }
                       ),
                     ),
                     SimpleButton('Adopt', () {
-                      SharedPrefs().setPlantType(plantType);
-                      Navigator.push(context, MaterialPageRoute(builder: (_) => const ChoosePlantView()));
-                    }
+                        SharedPrefs().setPlantType(plantType);
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => const ChoosePlantView()));
+                      }
                     )
                   ]
               )
