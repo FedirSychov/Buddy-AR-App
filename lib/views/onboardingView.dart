@@ -21,42 +21,45 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Container(
-          child: CarouselSlider(
-            options: CarouselOptions(
-              height: 653,
-              autoPlay: false,
-              aspectRatio: 2.0,
-              enlargeCenterPage: true,
-              enableInfiniteScroll: false,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  currentIndex = index;
-                });
-              },
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      body: ListView(
+          children: [
+            Container(
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    height: 653,
+                    autoPlay: false,
+                    aspectRatio: 2.0,
+                    enlargeCenterPage: true,
+                    enableInfiniteScroll: false,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        currentIndex = index;
+                      });
+                    },
+                  ),
+                  items: items,
+                )
             ),
-            items: items,
-          )
-        ),
-        Container(
-          height: 30,
-          margin: const EdgeInsets.only(top: 40.0, bottom: 45.0),
-          child: DotsIndicator(
-            dotsCount: items.length,
-            position: currentIndex.toDouble(),
-            decorator: DotsDecorator(
-            color: Theme.of(context).colorScheme.surfaceVariant,
-            activeColor: Theme.of(context).colorScheme.outlineVariant,
-            size: const Size.square(10.0),
-            activeSize: const Size(18.0, 10.0),
-            spacing: const EdgeInsets.all(4.0),
-            activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-            ),
-          )
-        )
-      ]
+            Container(
+                height: 30,
+                margin: const EdgeInsets.only(top: 40.0, bottom: 45.0),
+                child: DotsIndicator(
+                  dotsCount: items.length,
+                  position: currentIndex.toDouble(),
+                  decorator: DotsDecorator(
+                    color: Theme.of(context).colorScheme.surfaceVariant,
+                    activeColor: Theme.of(context).colorScheme.outlineVariant,
+                    size: const Size.square(10.0),
+                    activeSize: const Size(18.0, 10.0),
+                    spacing: const EdgeInsets.all(4.0),
+                    activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                  ),
+                )
+            )
+          ]
+      )
     );
   }
 }
