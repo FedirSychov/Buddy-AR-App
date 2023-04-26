@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:my_app/views/setupSessionView.dart';
 
 import '../clients/sharedPrefs.dart';
+import 'DesignViews/buttons.dart';
+import 'choosePlantView.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
@@ -97,8 +99,8 @@ class OnboardingScreen extends StatelessWidget {
             margin: const EdgeInsets.only(top: 50.0),
             child: SimpleButton('Let\'s start',
               () {
-                SharedPrefs().setIsReturningUser(true);
-                Navigator.push(context, MaterialPageRoute(builder: (_) => const SetupSessionView()));
+                SharedPrefs().deletePlantType();
+                Navigator.push(context, MaterialPageRoute(builder: (_) => const ChoosePlantView()));
               }
             )
           )
@@ -125,44 +127,5 @@ enum Screens {
   final String asset;
   final String title;
   final String description;
-}
-
-
-
-// This here only until Button-Branch has been merged
-
-class SimpleButton extends StatefulWidget {
-  String text;
-  Function func;
-
-  SimpleButton(this.text, this.func);
-
-  @override
-  State<SimpleButton> createState() => _SimpleButtonState();
-}
-
-class _SimpleButtonState extends State<SimpleButton> {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-        child: SizedBox(
-          height: 40,
-          width: 131,
-          child: TextButton(
-            onPressed: () {
-              widget.func();
-            },
-            child: Text(widget.text,
-                style: TextStyle(fontSize: 13), textDirection: TextDirection.ltr),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 133, 83, 0),
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-          ),
-        ));
-  }
 }
 

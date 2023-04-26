@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:my_app/views/DesignViews/buttons.dart';
 
 class Countdown extends StatelessWidget {
-  bool onGoing = true;
+  const Countdown({super.key});
 
   @override
   Widget build(BuildContext context) {
