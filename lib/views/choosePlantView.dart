@@ -129,7 +129,9 @@ class PlantOption extends StatelessWidget {
     }
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (_) => ConfirmPlantView(plantType: plantTypeOption)));
+        if (plantTypeOption == PlantType.APPLETREE) { // Other plants are still WIP
+          Navigator.push(context, MaterialPageRoute(builder: (_) => ConfirmPlantView(plantType: plantTypeOption)));
+        }
       },
       child: Container(
           alignment: Alignment.center,
