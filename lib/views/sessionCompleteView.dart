@@ -7,9 +7,7 @@ class SessionCompleteView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: const [
-        Text("SessionCompleteView")
-      ],
+      children: const [Text("SessionCompleteView")],
     );
   }
 }
