@@ -87,4 +87,8 @@ class SharedPrefs {
     return sharedPrefs?.getInt(PLANT_TYPE);
   }
 
+  void deletePlantType() {
+    sharedPrefs?.remove(PLANT_TYPE);
+  }
+
 }

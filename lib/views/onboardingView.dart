@@ -97,7 +97,7 @@ class OnboardingScreen extends StatelessWidget {
             margin: const EdgeInsets.only(top: 50.0),
             child: SimpleButton('Let\'s start',
               () {
-                SharedPrefs().setIsReturningUser(true);
+                SharedPrefs().deletePlantType();
                 Navigator.push(context, MaterialPageRoute(builder: (_) => const SetupSessionView()));
               }
             )

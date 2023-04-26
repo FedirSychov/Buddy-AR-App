@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/views/choosePlantView.dart';
 import 'package:my_app/views/splashScreenView.dart';
 import 'package:my_app/clients/sharedPrefs.dart';
 
@@ -30,6 +31,7 @@ class BUDdyApp extends StatelessWidget {
           onPrimary: const Color(0xffFFFFFF),
           primaryContainer: const Color(0xffFFDDB8),
           onPrimaryContainer: const Color(0xff2A1700),
+          inversePrimary: const Color(0xffFFB960),
           secondary: const Color(0xff456808),
           onSecondary: const Color(0xffFFFFFF),
           secondaryContainer: const Color(0xffC5F185),
