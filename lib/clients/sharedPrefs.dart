@@ -17,6 +17,9 @@ class SharedPrefs {
 
   final String PLANT_TYPE = "plantType";
 
+  final String SELECTED_SESSION_DURATION = "selectedSessionDuration";
+  final String SELECTED_BREAK_DURATION = "selectedBreakDuration";
+
   init() async {
     if (sharedPrefs == null) {
       sharedPrefs = await SharedPreferences.getInstance();
@@ -87,4 +90,19 @@ class SharedPrefs {
     return sharedPrefs?.getInt(PLANT_TYPE);
   }
 
+  void setSelectedSessionDuration(String sessionDuration) async {
+    await sharedPrefs?.setString(SELECTED_SESSION_DURATION, sessionDuration);
+  }
+
+  String? getSelectedSessionDuration() {
+    return sharedPrefs?.getString(SELECTED_SESSION_DURATION);
+  }
+
+  void setSelectedBreakDuration(String breakDuration) async {
+    await sharedPrefs?.setString(SELECTED_BREAK_DURATION, breakDuration);
+  }
+
+  String? getSelectedBreakDuration() {
+    return sharedPrefs?.getString(SELECTED_BREAK_DURATION);
+  }
 }

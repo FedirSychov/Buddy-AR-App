@@ -6,10 +6,24 @@ class HomeView extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: const [
-        Text("HomeView")
-      ],
-    );
+    // return Scaffold(
+    //     body: Column(children: [
+    //   // const Spacer(),
+    //   Text("test text"),
+    //   DefaultTabController(
+    //       length: 3,
+    //       child: TabBar(
+    //           tabs: [Tab(text: "tab1"), Tab(text: "tab2"), Tab(text: "tab3")]))
+    // ]));
+    return DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+              bottom: TabBar(tabs: [
+            Tab(text: "tab1"),
+            Tab(text: "tab2"),
+            Tab(text: "tab3")
+          ])),
+        ));
   }
 }

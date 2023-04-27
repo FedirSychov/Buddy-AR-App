@@ -23,7 +23,7 @@ class _SimpleButtonState extends State<SimpleButton> {
         onPressed: () {
           widget.func();
         },
-        child: Text(widget.text, style: TextStyle(fontSize: 13)),
+        child: Text(widget.text, style: TextStyle(fontSize: 14)),
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color.fromARGB(255, 133, 83, 0),
           foregroundColor: Colors.white,
