@@ -80,6 +80,7 @@ class SetupSessionView extends StatelessWidget {
           ),
           const Spacer(),
           SimpleButton("Save session", () {
+            //TODO: when it is not first app run, use Navigator.pop instead Navigator.push
             Navigator.push(
                 context, MaterialPageRoute(builder: ((context) => HomeView())));
           }),
@@ -147,7 +148,7 @@ class _TimePickerState extends State<TimePicker> {
                   foregroundColor: Colors.black,
                   elevation: 0,
                   padding: EdgeInsets.zero),
-              icon: const Icon(Icons.arrow_back_ios, size: 18),
+              icon: const Icon(Icons.arrow_left, size: 28),
               label: const Text(""),
             ),
             const Spacer(),
@@ -167,7 +168,7 @@ class _TimePickerState extends State<TimePicker> {
                     foregroundColor: Colors.black,
                     elevation: 0,
                     padding: const EdgeInsets.symmetric(horizontal: 10)),
-                icon: const Icon(Icons.arrow_back_ios, size: 18),
+                icon: const Icon(Icons.arrow_left, size: 28),
                 label: const Text(""),
               ),
             )
