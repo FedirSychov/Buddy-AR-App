@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/clients/sharedPrefs.dart';
 import 'package:my_app/main.dart';
 import 'package:my_app/viewModels/setupSessionViewModel.dart';
 import 'package:my_app/views/DesignViews/buttons.dart';
@@ -80,9 +81,14 @@ class SetupSessionView extends StatelessWidget {
           ),
           const Spacer(),
           SimpleButton("Save session", () {
-            //TODO: when it is not first app run, use Navigator.pop instead Navigator.push
-            Navigator.push(
-                context, MaterialPageRoute(builder: ((context) => HomeView())));
+            bool isOnboarded = SharedPrefs().getReturningUser() ?? false;
+            if (isOnboarded) {
+              // if user have passed onboarding, then setup session comes after home session and needs pop
+              Navigator.pop(context);
+            } else {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) => HomeView())));
+            }
           }),
           const Spacer(),
           const Spacer()
@@ -135,43 +141,47 @@ class _TimePickerState extends State<TimePicker> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ElevatedButton.icon(
-              onPressed: () {
-                //call method from ViewModel
-                if (widget.position > 0) {
-                  setState(() => widget.position--);
-                  widget.setTimeFuntion(widget.timeArray[widget.position]);
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  foregroundColor: Colors.black,
-                  elevation: 0,
-                  padding: EdgeInsets.zero),
-              icon: const Icon(Icons.arrow_left, size: 28),
-              label: const Text(""),
-            ),
+            SizedBox(
+                height: 60,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    //call method from ViewModel
+                    if (widget.position > 0) {
+                      setState(() => widget.position--);
+                      widget.setTimeFuntion(widget.timeArray[widget.position]);
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(0, 0, 0, 0),
+                      foregroundColor: Colors.black,
+                      elevation: 0,
+                      padding: EdgeInsets.zero),
+                  icon: const Icon(Icons.arrow_left, size: 28),
+                  label: const Text(""),
+                )),
             const Spacer(),
             Text(widget.timeArray[widget.position]),
             const Spacer(),
             Directionality(
-              textDirection: TextDirection.rtl,
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  if (widget.position < widget.timeArray.length - 1) {
-                    setState(() => widget.position++);
-                    widget.setTimeFuntion(widget.timeArray[widget.position]);
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(0, 140, 5, 5),
-                    foregroundColor: Colors.black,
-                    elevation: 0,
-                    padding: const EdgeInsets.symmetric(horizontal: 10)),
-                icon: const Icon(Icons.arrow_left, size: 28),
-                label: const Text(""),
-              ),
-            )
+                textDirection: TextDirection.rtl,
+                child: SizedBox(
+                    height: 60,
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        if (widget.position < widget.timeArray.length - 1) {
+                          setState(() => widget.position++);
+                          widget.setTimeFuntion(
+                              widget.timeArray[widget.position]);
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromARGB(0, 140, 5, 5),
+                          foregroundColor: Colors.black,
+                          elevation: 0,
+                          padding: const EdgeInsets.symmetric(horizontal: 10)),
+                      icon: const Icon(Icons.arrow_left, size: 28),
+                      label: const Text(""),
+                    )))
           ],
         ),
       ),

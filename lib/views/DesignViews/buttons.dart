@@ -54,7 +54,7 @@ class _PauseButtonState extends State<PauseButton> {
         child: SizedBox(
             height: 40,
             width: 157,
-            child: ElevatedButton.icon(
+            child: TextButton.icon(
               onPressed: () {
                 widget.func();
                 if (widget.onGoing) {
@@ -68,18 +68,23 @@ class _PauseButtonState extends State<PauseButton> {
                 }
               },
               icon: widget.onGoing
-                  ? Icon(Icons.pause_circle_outline, size: 18)
-                  : Icon(Icons.play_circle_outline, size: 18),
+                  ? const Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: Icon(Icons.pause_circle_outline, size: 18))
+                  : const Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: Icon(Icons.play_circle_outline, size: 18)),
               label: widget.onGoing
                   ? Text(
                       "Pause " + widget.text,
-                      style: TextStyle(fontSize: 13),
+                      style: const TextStyle(fontSize: 13),
                     )
                   : Text("Resume " + widget.text,
-                      style: TextStyle(fontSize: 13)),
+                      style: const TextStyle(fontSize: 13)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 197, 241, 133),
                 foregroundColor: Colors.black,
+                alignment: Alignment.centerLeft,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
