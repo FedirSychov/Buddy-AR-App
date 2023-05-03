@@ -49,11 +49,11 @@ class SharedPrefs {
   }
 
   int getSessionMinsDuration() {
-    return sharedPrefs?.getInt(SESSION_MINS) ?? 0;
+    return sharedPrefs?.getInt(SESSION_MINS) ?? 30;
   }
 
   int getSessionSecsDuration() {
-    return sharedPrefs?.getInt(SESSION_SECS) ?? 15;
+    return sharedPrefs?.getInt(SESSION_SECS) ?? 0;
   }
 
   void setBreakHoursDuration(int hours) async {
