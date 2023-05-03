@@ -257,15 +257,6 @@ class _CountdownState extends State<Countdown> {
     onGoing ? pauseCountdown() : resumeCountdown();
   }
 
-  void startActivityBreak() {
-    cancelCountdown();
-    SharedPrefs().setSessionHoursDuration(hours);
-    SharedPrefs().setSessionMinsDuration(minutes);
-    SharedPrefs().setSessionSecsDuration(seconds);
-    Navigator.push(
-        context, MaterialPageRoute(builder: (_) => const SelectActivityView()));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -291,11 +282,11 @@ class _CountdownState extends State<Countdown> {
 }
 
 enum Activity {
-  Meditating('Meditate', 'assets/gifs/Meditation.gif'),
-  Stretching('Do stretches', 'assets/gifs/Stretch.gif'),
-  Walking('Take a walk', 'assets/gifs/Walk.gif'),
-  Yoga('Easy Yoga', 'assets/gifs/Yoga.gif'),
-  FreeChoice('Free Choice', 'assets/');
+  meditating('Meditate', 'assets/gifs/Meditation.gif'),
+  stretching('Do stretches', 'assets/gifs/Stretch.gif'),
+  walking('Take a walk', 'assets/gifs/Walk.gif'),
+  yoga('Easy Yoga', 'assets/gifs/Yoga.gif'),
+  freeChoice('Free Choice', 'assets/images/freeChoice.png');
 
   const Activity(this.title, this.assetPath);
 
@@ -309,6 +300,8 @@ class VideoPlayer extends StatelessWidget {
     autoPlay: true,
     params: const YoutubePlayerParams(showFullscreenButton: true),
   );
+
+  VideoPlayer({super.key});
 
   @override
   Widget build(BuildContext context) {
