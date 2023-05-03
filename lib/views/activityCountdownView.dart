@@ -90,7 +90,7 @@ class _CountdownState extends State<Countdown> {
 
     setState(() {
       if (timeLeft.inSeconds > 0) {
-        seconds = timeLeft.inSeconds % 60;
+        seconds = timeLeft.inSeconds;
       } else {
         cancelCountdown();
         Navigator.pushReplacement(
