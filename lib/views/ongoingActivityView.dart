@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:my_app/views/DesignViews/buttons.dart';
-import 'package:my_app/views/homeView.dart';
-import 'package:my_app/views/selectActivityView.dart';
-import 'package:my_app/views/sessionCompleteView.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../clients/sharedPrefs.dart';
+import 'activityCompleteView.dart';
 import 'ongoingSessionView.dart';
 
 class OngoingActivityView extends StatelessWidget {
@@ -179,10 +177,8 @@ class _CountdownState extends State<Countdown> {
         seconds = timeLeft.inSeconds % 60;
       } else {
         cancelCountdown();
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) => OngoingSessionView(isFirstHalf: false)));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (_) => const ActivityCompleteView()));
       }
     });
   }
