@@ -9,8 +9,18 @@ import '../clients/sharedPrefs.dart';
 
 class OngoingSessionView extends StatelessWidget {
   final bool isFirstHalf;
+  Timer? timer;
 
-  const OngoingSessionView({super.key, required this.isFirstHalf});
+  Timer _initTimer(Timer timer) {
+    this.timer = timer;
+    return timer;
+  }
+
+  void _cancelTimer() {
+    timer?.cancel();
+  }
+
+  OngoingSessionView({super.key, required this.isFirstHalf});
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +30,13 @@ class OngoingSessionView extends StatelessWidget {
           children: [
             Container(
                 margin: const EdgeInsets.only(top: 32.0),
-                child: const Header()),
+                child: Header(cancelTimer: _cancelTimer)),
             Container(
                 margin: const EdgeInsets.only(top: 73.0),
                 child: const KeyVisual(timeType: TimeType.Learning)),
             Container(
               margin: const EdgeInsets.only(top: 66.0),
-              child: Countdown(isFirstHalf: isFirstHalf),
+              child: Countdown(initTimer: _initTimer, isFirstHalf: isFirstHalf),
             )
           ],
         ));
@@ -34,42 +44,48 @@ class OngoingSessionView extends StatelessWidget {
 }
 
 class Header extends StatelessWidget {
-  const Header({super.key});
+  final Function cancelTimer;
+  const Header({super.key, required this.cancelTimer});
+
+  Widget getAlertDialog(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+      title: Text('Abort study session?',
+          style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
+      content: Text(
+          'This will reset any progress that you have made. Keep going! You’re almost there.',
+          style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurfaceVariant)),
+      actions: <Widget>[
+        TextButton(
+          style: TextButton.styleFrom(
+            textStyle: Theme.of(context).textTheme.labelLarge,
+          ),
+          child: const Text('Cancel'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        TextButton(
+          style: TextButton.styleFrom(
+            textStyle: Theme.of(context).textTheme.labelLarge,
+          ),
+          child: const Text('Accept'),
+          onPressed: () {
+            cancelTimer();
+            Navigator.push(context,
+                MaterialPageRoute(builder: (_) => const HomeView()));
+          },
+        ),
+      ],
+    );
+  }
 
   Future<void> _dialogBuilder(BuildContext context) {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
-          title: Text('Abort study session?',
-              style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
-          content: Text(
-              'This will reset any progress that you have made. Keep going! You’re almost there.',
-              style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant)),
-          actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('Accept'),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const HomeView()));
-              },
-            ),
-          ],
-        );
+        return getAlertDialog(context);
       },
     );
   }
@@ -117,8 +133,9 @@ class KeyVisual extends StatelessWidget {
 
 class Countdown extends StatefulWidget {
   final bool isFirstHalf;
+  final Function initTimer;
 
-  const Countdown({super.key, required this.isFirstHalf});
+  const Countdown({super.key, required this.initTimer, required this.isFirstHalf});
 
   @override
   State<Countdown> createState() => _CountdownState();
@@ -155,12 +172,7 @@ class _CountdownState extends State<Countdown> {
         minutes = timeLeft.inMinutes % 60;
         seconds = timeLeft.inSeconds % 60;
         if (widget.isFirstHalf && timeLeft.inSeconds <= breakPoint) {
-          cancelCountdown();
-          SharedPrefs().setSessionHoursDuration(hours);
-          SharedPrefs().setSessionMinsDuration(minutes);
-          SharedPrefs().setSessionSecsDuration(seconds);
-          Navigator.push(context,
-              MaterialPageRoute(builder: (_) => const SelectActivityView()));
+          startActivityBreak();
         }
       } else {
         cancelCountdown();
@@ -172,9 +184,9 @@ class _CountdownState extends State<Countdown> {
   }
 
   void startCountdown() {
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-        countDown();
-    });
+    timer = widget.initTimer(Timer.periodic(const Duration(seconds: 1), (timer) {
+      countDown();
+    }));
     setState(() => onGoing = true);
   }
 
@@ -232,11 +244,17 @@ class _CountdownState extends State<Countdown> {
     onGoing ? pauseCountdown() : resumeCountdown();
   }
 
+  void startActivityBreak() {
+    cancelCountdown();
+    SharedPrefs().setSessionHoursDuration(hours);
+    SharedPrefs().setSessionMinsDuration(minutes);
+    SharedPrefs().setSessionSecsDuration(seconds);
+    Navigator.push(context,
+        MaterialPageRoute(builder: (_) => const SelectActivityView()));
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (timer == null) {
-      startCountdown();
-    }
     return Column(
       children: [
         Text(

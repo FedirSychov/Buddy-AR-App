@@ -57,7 +57,7 @@ class BUDdyApp extends StatelessWidget {
           outlineVariant: const Color(0xffD4C4B5)
         ),
       ),
-      home: OngoingSessionView(isFirstHalf: false),
+      home: const SplashScreenView(),
     );
   }
 }
