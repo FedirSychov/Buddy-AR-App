@@ -33,7 +33,7 @@ class OngoingSessionView extends StatelessWidget {
                 child: Header(cancelTimer: _cancelTimer)),
             Container(
                 margin: const EdgeInsets.only(top: 73.0),
-                child: const KeyVisual(timeType: TimeType.Learning)),
+                child: const KeyVisual()),
             Container(
               margin: const EdgeInsets.only(top: 66.0),
               child: Countdown(initTimer: _initTimer, isFirstHalf: isFirstHalf),
@@ -45,6 +45,7 @@ class OngoingSessionView extends StatelessWidget {
 
 class Header extends StatelessWidget {
   final Function cancelTimer;
+
   const Header({super.key, required this.cancelTimer});
 
   Widget getAlertDialog(BuildContext context) {
@@ -54,8 +55,8 @@ class Header extends StatelessWidget {
           style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
       content: Text(
           'This will reset any progress that you have made. Keep going! You’re almost there.',
-          style: TextStyle(
-              color: Theme.of(context).colorScheme.onSurfaceVariant)),
+          style:
+              TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant)),
       actions: <Widget>[
         TextButton(
           style: TextButton.styleFrom(
@@ -73,8 +74,8 @@ class Header extends StatelessWidget {
           child: const Text('Accept'),
           onPressed: () {
             cancelTimer();
-            Navigator.push(context,
-                MaterialPageRoute(builder: (_) => const HomeView()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => const HomeView()));
           },
         ),
       ],
@@ -121,13 +122,11 @@ class Header extends StatelessWidget {
 }
 
 class KeyVisual extends StatelessWidget {
-  const KeyVisual({super.key, required this.timeType});
-
-  final TimeType timeType;
+  const KeyVisual({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(timeType.assetPath, height: 233, width: 290);
+    return Image.asset('assets/images/learning.jpg', height: 233, width: 290);
   }
 }
 
@@ -135,7 +134,8 @@ class Countdown extends StatefulWidget {
   final bool isFirstHalf;
   final Function initTimer;
 
-  const Countdown({super.key, required this.initTimer, required this.isFirstHalf});
+  const Countdown(
+      {super.key, required this.initTimer, required this.isFirstHalf});
 
   @override
   State<Countdown> createState() => _CountdownState();
@@ -184,7 +184,8 @@ class _CountdownState extends State<Countdown> {
   }
 
   void startCountdown() {
-    timer = widget.initTimer(Timer.periodic(const Duration(seconds: 1), (timer) {
+    timer =
+        widget.initTimer(Timer.periodic(const Duration(seconds: 1), (timer) {
       countDown();
     }));
     setState(() => onGoing = true);
@@ -249,8 +250,8 @@ class _CountdownState extends State<Countdown> {
     SharedPrefs().setSessionHoursDuration(hours);
     SharedPrefs().setSessionMinsDuration(minutes);
     SharedPrefs().setSessionSecsDuration(seconds);
-    Navigator.push(context,
-        MaterialPageRoute(builder: (_) => const SelectActivityView()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (_) => const SelectActivityView()));
   }
 
   @override
@@ -275,16 +276,4 @@ class _CountdownState extends State<Countdown> {
       ],
     );
   }
-}
-
-enum TimeType {
-  Learning('assets/images/learning.jpg'),
-  Meditating('assets/gifs/Meditation.gif'),
-  Stretching('assets/gifs/Stretch.gif'),
-  Walking('assets/gifs/Walk.gif'),
-  Yoga('assets/gifs/Yoga.gif');
-
-  const TimeType(this.assetPath);
-
-  final String assetPath;
 }
