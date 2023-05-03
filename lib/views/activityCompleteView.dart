@@ -16,7 +16,7 @@ class ActivityCompleteView extends StatelessWidget {
             Container(
                 margin: const EdgeInsets.only(top: 107.0), child: const KeyVisual()),
             Container(
-                margin: const EdgeInsets.only(top: 101.0),
+                margin: const EdgeInsets.only(top: 100.0),
                 child: SimpleButton('Continue', () {
                   Navigator.pushReplacement(
                       context,
@@ -34,15 +34,18 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: [
-      Expanded(
-          child: Text('Looks like your break is up! Let\'s get back to work.',
-              style: Theme.of(context)
-                  .textTheme
-                  .displayLarge
-                  ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
-              textAlign: TextAlign.center)),
-    ]);
+    return SizedBox(
+        width: 290,
+        child: Text('Looks like your break is up! Let\'s get back to work.',
+            style: Theme
+                .of(context)
+                .textTheme
+                .displayLarge
+                ?.copyWith(color: Theme
+                .of(context)
+                .colorScheme
+                .onBackground),
+            textAlign: TextAlign.center));
   }
 }
 
