@@ -36,6 +36,44 @@ class OngoingSessionView extends StatelessWidget {
 class Header extends StatelessWidget {
   const Header({super.key});
 
+  Future<void> _dialogBuilder(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+          title: Text('Abort study session?',
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
+          content: Text(
+              'This will reset any progress that you have made. Keep going! You’re almost there.',
+              style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant)),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Accept'),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const HomeView()));
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(children: [
@@ -53,8 +91,7 @@ class Header extends StatelessWidget {
               textAlign: TextAlign.center)),
       InkWell(
         onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (_) => const HomeView()));
+          _dialogBuilder(context);
         },
         child: Container(
             margin: const EdgeInsets.only(right: 16.0),
@@ -88,43 +125,42 @@ class Countdown extends StatefulWidget {
 }
 
 class _CountdownState extends State<Countdown> {
-  DateTime until = DateTime.now().add(Duration(
-      hours: SharedPrefs().getSessionHourDuration(),
-      minutes: SharedPrefs().getSessionMinsDuration(),
-      seconds: SharedPrefs().getSessionSecsDuration()));
-  late Duration timeLeft;
-  int breakPoint = (Duration(
-                  hours: SharedPrefs().getSessionHourDuration(),
-                  minutes: SharedPrefs().getSessionMinsDuration(),
-                  seconds: SharedPrefs().getSessionSecsDuration())
-              .inSeconds /
-          2)
-      .floor();
-
+  bool onGoing = false;
   int hours = SharedPrefs().getSessionHourDuration();
   int minutes = SharedPrefs().getSessionMinsDuration();
   int seconds = SharedPrefs().getSessionSecsDuration();
+  late Timer timer;
+  late DateTime until;
+  late Duration timeLeft;
+  late int breakPoint;
 
-  bool onGoing = false;
-
-  Timer? timer;
+  @override
+  void initState() {
+    super.initState();
+    until = DateTime.now()
+        .add(Duration(hours: hours, minutes: minutes, seconds: seconds));
+    breakPoint =
+        (Duration(hours: hours, minutes: minutes, seconds: seconds).inSeconds /
+                2)
+            .floor();
+    startCountdown();
+  }
 
   void countDown() {
     timeLeft = until.difference(DateTime.now());
 
     setState(() {
       if (timeLeft.inSeconds > 0) {
+        hours = timeLeft.inHours % 24;
+        minutes = timeLeft.inMinutes % 60;
+        seconds = timeLeft.inSeconds % 60;
         if (widget.isFirstHalf && timeLeft.inSeconds <= breakPoint) {
           cancelCountdown();
-          SharedPrefs().setSessionMinsDuration(timeLeft.inHours);
-          SharedPrefs().setSessionMinsDuration(timeLeft.inMinutes);
-          SharedPrefs().setSessionSecsDuration(timeLeft.inSeconds);
+          SharedPrefs().setSessionHoursDuration(hours);
+          SharedPrefs().setSessionMinsDuration(minutes);
+          SharedPrefs().setSessionSecsDuration(seconds);
           Navigator.push(context,
               MaterialPageRoute(builder: (_) => const SelectActivityView()));
-        } else {
-          hours = timeLeft.inHours % 24;
-          minutes = timeLeft.inMinutes % 60;
-          seconds = timeLeft.inSeconds % 60;
         }
       } else {
         cancelCountdown();
@@ -133,6 +169,13 @@ class _CountdownState extends State<Countdown> {
             MaterialPageRoute(builder: (_) => const SessionCompleteView()));
       }
     });
+  }
+
+  void startCountdown() {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+        countDown();
+    });
+    setState(() => onGoing = true);
   }
 
   void pauseCountdown() {
@@ -176,20 +219,13 @@ class _CountdownState extends State<Countdown> {
 
   void resumeCountdown() {
     until = DateTime.now().add(timeLeft);
-    startTimer();
+    startCountdown();
     Navigator.pop(context);
-  }
-
-  void startTimer() {
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      countDown();
-    });
-    setState(() => onGoing = true);
   }
 
   void cancelCountdown() {
     onGoing = false;
-    timer?.cancel();
+    timer.cancel();
   }
 
   void handleButtonPress() {
@@ -199,9 +235,8 @@ class _CountdownState extends State<Countdown> {
   @override
   Widget build(BuildContext context) {
     if (timer == null) {
-      startTimer();
+      startCountdown();
     }
-
     return Column(
       children: [
         Text(
