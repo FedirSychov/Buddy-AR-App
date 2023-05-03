@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:my_app/views/DesignViews/buttons.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-
 import '../clients/sharedPrefs.dart';
 import 'activityCompleteView.dart';
 import 'ongoingSessionView.dart';
