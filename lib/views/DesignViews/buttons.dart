@@ -23,7 +23,7 @@ class _SimpleButtonState extends State<SimpleButton> {
         onPressed: () {
           widget.func();
         },
-        child: Text(widget.text, style: TextStyle(fontSize: 14)),
+        child: Text(widget.text, style: TextStyle(fontSize: 13)),
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color.fromARGB(255, 133, 83, 0),
           foregroundColor: Colors.white,
@@ -54,7 +54,7 @@ class _PauseButtonState extends State<PauseButton> {
         child: SizedBox(
             height: 40,
             width: 157,
-            child: TextButton.icon(
+            child: ElevatedButton.icon(
               onPressed: () {
                 widget.func();
                 if (widget.onGoing) {
@@ -68,23 +68,18 @@ class _PauseButtonState extends State<PauseButton> {
                 }
               },
               icon: widget.onGoing
-                  ? const Padding(
-                      padding: EdgeInsets.only(left: 20),
-                      child: Icon(Icons.pause_circle_outline, size: 18))
-                  : const Padding(
-                      padding: EdgeInsets.only(left: 20),
-                      child: Icon(Icons.play_circle_outline, size: 18)),
+                  ? Icon(Icons.pause_circle_outline, size: 18)
+                  : Icon(Icons.play_circle_outline, size: 18),
               label: widget.onGoing
                   ? Text(
                       "Pause " + widget.text,
-                      style: const TextStyle(fontSize: 13),
+                      style: TextStyle(fontSize: 13),
                     )
                   : Text("Resume " + widget.text,
-                      style: const TextStyle(fontSize: 13)),
+                      style: TextStyle(fontSize: 13)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 197, 241, 133),
                 foregroundColor: Colors.black,
-                alignment: Alignment.centerLeft,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -94,9 +89,10 @@ class _PauseButtonState extends State<PauseButton> {
 }
 
 class CancelButton extends StatefulWidget {
+  String text;
   Function func;
 
-  CancelButton(this.func);
+  CancelButton(this.text, this.func);
 
   @override
   State<CancelButton> createState() => _CancelButtonState();
@@ -113,7 +109,7 @@ class _CancelButtonState extends State<CancelButton> {
         onPressed: () {
           widget.func();
         },
-        child: Text("Cancel", style: TextStyle(fontSize: 13)),
+        child: Text(widget.text, style: TextStyle(fontSize: 13)),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
           foregroundColor: Colors.grey,
