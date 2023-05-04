@@ -60,7 +60,7 @@ class SetupSessionView extends StatelessWidget {
           ),
           const Center(
             child: Text(
-              "Set a duration for your study session",
+              "Set a duration for your activity break",
               style: TextStyle(fontFamily: 'Lato', fontSize: 14),
             ),
           ),

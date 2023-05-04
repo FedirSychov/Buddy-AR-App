@@ -30,76 +30,74 @@ class HomeView extends StatelessWidget {
           child: Image.asset('assets/gifs/HomeExcitedBuddy.gif',
               height: 280, width: 280)),
       const Spacer(),
-      const Spacer(),
+      const SizedBox(height: 55, width: 50),
       SimpleButton("Start session", () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: ((context) => OngoingSessionView())));
+        Navigator.push(context,
+            MaterialPageRoute(builder: ((context) => OngoingSessionView())));
       }),
       const Spacer(),
+      const Spacer(),
       Container(
-        width: MediaQuery.of(context).size.width,
-        height: 80.0,
-        child: Container(
-          decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 246, 236, 228),
-            shape: BoxShape.rectangle,
-            borderRadius: null,
-          ),
-          child: Center(
-            child: Row(children: [
-            SizedBox(height: 10, width: 50),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-              IconButton(
-                  icon: const Icon(Icons.access_time, size: 28),
-                  onPressed: () {
-                    Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SetupSessionView()));
-                  }
+          width: MediaQuery.of(context).size.width,
+          height: 80.0,
+          child: Container(
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 246, 236, 228),
+                shape: BoxShape.rectangle,
+                borderRadius: null,
+              ),
+              child: Center(
+                child: Row(
+                  children: [
+                    SizedBox(height: 10, width: 50),
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                              icon: const Icon(Icons.access_time, size: 28),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SetupSessionView()));
+                              }),
+                          Text("Session",
+                              style:
+                                  TextStyle(fontFamily: 'Lato', fontSize: 12)),
+                          const Spacer()
+                        ]),
+                    const Spacer(),
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                              icon: const Icon(Icons.home_outlined, size: 28),
+                              onPressed: () {}),
+                          Text("Home",
+                              style:
+                                  TextStyle(fontFamily: 'Lato', fontSize: 12)),
+                          const Spacer()
+                        ]),
+                    const Spacer(),
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                              icon: const Icon(Icons.eco_outlined, size: 28),
+                              onPressed: () {}),
+                          const Text("Buddy",
+                              style:
+                                  TextStyle(fontFamily: 'Lato', fontSize: 12)),
+                          const Spacer(),
+                        ]),
+                    const SizedBox(height: 10, width: 50)
+                  ],
                 ),
-              Text(
-              "Session",
-              style: TextStyle(fontFamily: 'Lato', fontSize: 12)),
-              const Spacer()
-            ]),
-            const Spacer(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-              IconButton(
-                  icon: const Icon(Icons.home_outlined, size: 28),
-                  onPressed: () {
-                    
-                  }
-                ),
-              Text(
-              "Home",
-              style: TextStyle(fontFamily: 'Lato', fontSize: 12)),
-              const Spacer()
-            ]),
-            const Spacer(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.eco_outlined, size: 28),
-                  onPressed: () {
-                    
-                  }
-                ),
-              Text(
-              "Buddy",
-              style: TextStyle(fontFamily: 'Lato', fontSize: 12)),
-              const Spacer()
-            ]),
-            SizedBox(height: 10, width: 50)
-          ],),
-        ))
-      ),
+              ))),
     ]));
   }
 }
