@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:my_app/views/setupSessionView.dart';
 
 import '../clients/sharedPrefs.dart';
+import 'DesignViews/buttons.dart';
+import 'choosePlantView.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
@@ -19,42 +21,45 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Container(
-          child: CarouselSlider(
-            options: CarouselOptions(
-              height: 653,
-              autoPlay: false,
-              aspectRatio: 2.0,
-              enlargeCenterPage: true,
-              enableInfiniteScroll: false,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  currentIndex = index;
-                });
-              },
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      body: ListView(
+          children: [
+            Container(
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    height: 653,
+                    autoPlay: false,
+                    aspectRatio: 2.0,
+                    enlargeCenterPage: true,
+                    enableInfiniteScroll: false,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        currentIndex = index;
+                      });
+                    },
+                  ),
+                  items: items,
+                )
             ),
-            items: items,
-          )
-        ),
-        Container(
-          height: 30,
-          margin: const EdgeInsets.only(top: 40.0, bottom: 45.0),
-          child: DotsIndicator(
-            dotsCount: items.length,
-            position: currentIndex.toDouble(),
-            decorator: DotsDecorator(
-            color: Theme.of(context).colorScheme.surfaceVariant,
-            activeColor: Theme.of(context).colorScheme.outlineVariant,
-            size: const Size.square(10.0),
-            activeSize: const Size(18.0, 10.0),
-            spacing: const EdgeInsets.all(4.0),
-            activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-            ),
-          )
-        )
-      ]
+            Container(
+                height: 30,
+                margin: const EdgeInsets.only(top: 40.0, bottom: 45.0),
+                child: DotsIndicator(
+                  dotsCount: items.length,
+                  position: currentIndex.toDouble(),
+                  decorator: DotsDecorator(
+                    color: Theme.of(context).colorScheme.surfaceVariant,
+                    activeColor: Theme.of(context).colorScheme.outlineVariant,
+                    size: const Size.square(10.0),
+                    activeSize: const Size(18.0, 10.0),
+                    spacing: const EdgeInsets.all(4.0),
+                    activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                  ),
+                )
+            )
+          ]
+      )
     );
   }
 }
@@ -97,8 +102,8 @@ class OnboardingScreen extends StatelessWidget {
             margin: const EdgeInsets.only(top: 50.0),
             child: SimpleButton('Let\'s start',
               () {
-                SharedPrefs().setIsReturningUser(true);
-                Navigator.push(context, MaterialPageRoute(builder: (_) => const SetupSessionView()));
+                SharedPrefs().deletePlantType();
+                Navigator.push(context, MaterialPageRoute(builder: (_) => const ChoosePlantView()));
               }
             )
           )
@@ -125,44 +130,5 @@ enum Screens {
   final String asset;
   final String title;
   final String description;
-}
-
-
-
-// This here only until Button-Branch has been merged
-
-class SimpleButton extends StatefulWidget {
-  String text;
-  Function func;
-
-  SimpleButton(this.text, this.func);
-
-  @override
-  State<SimpleButton> createState() => _SimpleButtonState();
-}
-
-class _SimpleButtonState extends State<SimpleButton> {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-        child: SizedBox(
-          height: 40,
-          width: 131,
-          child: TextButton(
-            onPressed: () {
-              widget.func();
-            },
-            child: Text(widget.text,
-                style: TextStyle(fontSize: 13), textDirection: TextDirection.ltr),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 133, 83, 0),
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-          ),
-        ));
-  }
 }
 

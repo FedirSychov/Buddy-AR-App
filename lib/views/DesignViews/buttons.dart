@@ -23,7 +23,7 @@ class _SimpleButtonState extends State<SimpleButton> {
         onPressed: () {
           widget.func();
         },
-        child: Text(widget.text, style: TextStyle(fontSize: 14)),
+        child: Text(widget.text, style: TextStyle(fontSize: 13)),
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color.fromARGB(255, 133, 83, 0),
           foregroundColor: Colors.white,
@@ -94,9 +94,10 @@ class _PauseButtonState extends State<PauseButton> {
 }
 
 class CancelButton extends StatefulWidget {
+  String text;
   Function func;
 
-  CancelButton(this.func);
+  CancelButton(this.text, this.func);
 
   @override
   State<CancelButton> createState() => _CancelButtonState();
@@ -113,7 +114,7 @@ class _CancelButtonState extends State<CancelButton> {
         onPressed: () {
           widget.func();
         },
-        child: Text("Cancel", style: TextStyle(fontSize: 13)),
+        child: Text(widget.text, style: TextStyle(fontSize: 13)),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
           foregroundColor: Colors.grey,

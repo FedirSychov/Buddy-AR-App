@@ -17,6 +17,7 @@ class SetupSessionView extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return Scaffold(
       body: Column(
         children: [
@@ -188,3 +189,10 @@ class _TimePickerState extends State<TimePicker> {
     ));
   }
 }
+=======
+    return ListView(
+      children: const [Text("SetupSessionView")],
+    );
+  }
+}
+>>>>>>> 66c31bf4fd7952ee31b52259cb493dfd0953d18c

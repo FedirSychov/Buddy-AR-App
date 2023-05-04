@@ -16,6 +16,7 @@ class SharedPrefs {
   final String BREAK_SECS = "breakSecs";
 
   final String PLANT_TYPE = "plantType";
+  final String PLANT_PROGRESS = "plantProgress";
 
   final String SELECTED_SESSION_DURATION = "selectedSessionDuration";
   final String SELECTED_BREAK_DURATION = "selectedBreakDuration";
@@ -46,16 +47,16 @@ class SharedPrefs {
     await sharedPrefs?.setInt(SESSION_SECS, secs);
   }
 
-  int? getSessionHourDuration() {
-    return sharedPrefs?.getInt(SESSION_HOURS);
+  int getSessionHourDuration() {
+    return sharedPrefs?.getInt(SESSION_HOURS) ?? 0;
   }
 
-  int? getSessionMinsDuration() {
-    return sharedPrefs?.getInt(SESSION_MINS);
+  int getSessionMinsDuration() {
+    return sharedPrefs?.getInt(SESSION_MINS) ?? 30;
   }
 
-  int? getSessionSecsDuration() {
-    return sharedPrefs?.getInt(SESSION_SECS);
+  int getSessionSecsDuration() {
+    return sharedPrefs?.getInt(SESSION_SECS) ?? 0;
   }
 
   void setBreakHoursDuration(int hours) async {
@@ -70,16 +71,16 @@ class SharedPrefs {
     await sharedPrefs?.setInt(BREAK_SECS, secs);
   }
 
-  int? getBreakHourDuration() {
-    return sharedPrefs?.getInt(BREAK_HOURS);
+  int getBreakHourDuration() {
+    return sharedPrefs?.getInt(BREAK_HOURS) ?? 0;
   }
 
-  int? getBreakMinsDuration() {
-    return sharedPrefs?.getInt(BREAK_MINS);
+  int getBreakMinsDuration() {
+    return sharedPrefs?.getInt(BREAK_MINS) ?? 15;
   }
 
-  int? getBreakSecsDuration() {
-    return sharedPrefs?.getInt(BREAK_SECS);
+  int getBreakSecsDuration() {
+    return sharedPrefs?.getInt(BREAK_SECS) ?? 0;
   }
 
   void setPlantType(PlantType plantType) async {
@@ -90,6 +91,7 @@ class SharedPrefs {
     return sharedPrefs?.getInt(PLANT_TYPE);
   }
 
+<<<<<<< HEAD
   void setSelectedSessionDuration(String sessionDuration) async {
     await sharedPrefs?.setString(SELECTED_SESSION_DURATION, sessionDuration);
   }
@@ -106,3 +108,20 @@ class SharedPrefs {
     return sharedPrefs?.getString(SELECTED_BREAK_DURATION);
   }
 }
+=======
+  void incPlantProgress() async {
+    if (getPlantProgress() < 3) { // Maximum progress of plants
+      await sharedPrefs?.setInt(PLANT_PROGRESS, getPlantProgress() + 1);
+    }
+  }
+
+  int getPlantProgress() {
+    return sharedPrefs?.getInt(PLANT_PROGRESS) ?? 0;
+  }
+
+  void deletePlantType() {
+    sharedPrefs?.remove(PLANT_TYPE);
+  }
+
+}
+>>>>>>> 66c31bf4fd7952ee31b52259cb493dfd0953d18c
