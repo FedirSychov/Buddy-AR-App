@@ -13,78 +13,55 @@ class ChoosePlantView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      body: ListView(
-        children: [
-          Header()
-        ],
-      )
-    );
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        body: ListView(
+          children: [Header()],
+        ));
   }
 }
 
 class Header extends StatelessWidget {
   Header({super.key});
 
-  final String title = SharedPrefs().getPlantType() == null ? "Let's choose your plant" : "Great choice :D";
-  final String description = SharedPrefs().getPlantType() == null ?
-    "Taking pauses will help your plant grow. You can view growth of your plant in AR mode."
+  final String title = SharedPrefs().getPlantType() == null
+      ? "Let's choose your plant"
+      : "Great choice :D";
+  final String description = SharedPrefs().getPlantType() == null
+      ? "Taking pauses will help your plant grow. You can view growth of your plant in AR mode."
       : "When your plant is fully grown, a new plant will be unlocked as a reward for you.";
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        children: [
-          Container(
-              margin: const EdgeInsets.only(top: 32.0),
-              alignment: Alignment.center,
-              child: Text(title,
-                  style: Theme.of(context).textTheme.displayLarge,
-                  textAlign: TextAlign.center
-              )
-          ),
-          Container(
-              margin: const EdgeInsets.only(top: 24.0),
-              alignment: Alignment.center,
-              width: 320.0,
-              child: Text(description,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  textAlign: TextAlign.center
-              )
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 32.0),
-            child: Row(
-              children: const [
-                Expanded(
-                  child: PlantOption(plantTypeOption: PlantType.APPLETREE)
-                ),
-                Expanded(
-                    child: PlantOption(plantTypeOption: PlantType.MONSTERA)
-                )
-              ]
-            )
-          ),
-          Container(
-              margin: const EdgeInsets.only(top: 29.0),
-              child: Row(
-                  children: const [
-                    Expanded(
-                        child: PlantOption(plantTypeOption: PlantType.CACTUS)
-                    ),
-                    Expanded(
-                        child: PlantOption(plantTypeOption: PlantType.SNAKEPLANT)
-                    )
-                  ]
-              )
-          ),
-          const Bottom()
-        ]
-    );
+    return Column(children: [
+      Container(
+          margin: const EdgeInsets.only(top: 32.0),
+          alignment: Alignment.center,
+          child: Text(title,
+              style: Theme.of(context).textTheme.displayLarge,
+              textAlign: TextAlign.center)),
+      Container(
+          margin: const EdgeInsets.only(top: 24.0),
+          alignment: Alignment.center,
+          width: 320.0,
+          child: Text(description,
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center)),
+      Container(
+          margin: const EdgeInsets.only(top: 32.0),
+          child: Row(children: const [
+            Expanded(child: PlantOption(plantTypeOption: PlantType.APPLETREE)),
+            Expanded(child: PlantOption(plantTypeOption: PlantType.MONSTERA))
+          ])),
+      Container(
+          margin: const EdgeInsets.only(top: 29.0),
+          child: Row(children: const [
+            Expanded(child: PlantOption(plantTypeOption: PlantType.CACTUS)),
+            Expanded(child: PlantOption(plantTypeOption: PlantType.SNAKEPLANT))
+          ])),
+      const Bottom()
+    ]);
   }
 }
-
-
 
 class PlantOption extends StatelessWidget {
   const PlantOption({super.key, required this.plantTypeOption});
@@ -97,11 +74,11 @@ class PlantOption extends StatelessWidget {
       if (plantType == plantTypeOption.index) {
         return Container(
             alignment: Alignment.center,
-            child: Image.asset(plantTypeOption.imagePath,
-                height: 160,
-                width: 160,
-            )
-        );
+            child: Image.asset(
+              plantTypeOption.imagePath,
+              height: 160,
+              width: 160,
+            ));
       } else {
         return Container(
             alignment: Alignment.center,
@@ -112,35 +89,38 @@ class PlantOption extends StatelessWidget {
                 clipBehavior: Clip.hardEdge,
                 children: <Widget>[
                   Opacity(
-                    opacity: 0.5,
-                    child: Image.asset(plantTypeOption.imagePath,
+                      opacity: 0.5,
+                      child: Image.asset(
+                        plantTypeOption.imagePath,
                         height: 160,
                         width: 160,
-                    )
-                  ),
-                  Image.asset("assets/images/Lock.png",
+                      )),
+                  Image.asset(
+                    "assets/images/Lock.png",
                     height: 64.0,
                     width: 64.0,
                   ),
-                ]
-            )
-        );
+                ]));
       }
     }
     return InkWell(
-      onTap: () {
-        if (plantTypeOption == PlantType.APPLETREE) { // Other plants are still WIP
-          Navigator.push(context, MaterialPageRoute(builder: (_) => ConfirmPlantView(plantType: plantTypeOption)));
-        }
-      },
-      child: Container(
-          alignment: Alignment.center,
-          child: Image.asset(plantTypeOption.imagePath,
-            height: 160,
-            width: 160,
-          )
-      )
-    );
+        onTap: () {
+          if (plantTypeOption == PlantType.APPLETREE) {
+            // Other plants are still WIP
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) =>
+                        ConfirmPlantView(plantType: plantTypeOption)));
+          }
+        },
+        child: Container(
+            alignment: Alignment.center,
+            child: Image.asset(
+              plantTypeOption.imagePath,
+              height: 160,
+              width: 160,
+            )));
   }
 
   Widget getShelf(BuildContext context) {
@@ -149,24 +129,17 @@ class PlantOption extends StatelessWidget {
       return Container(
           width: double.infinity,
           height: 24.0,
-          color: Theme.of(context).colorScheme.inversePrimary.withOpacity(0.5)
-      );
+          color: Theme.of(context).colorScheme.inversePrimary.withOpacity(0.5));
     }
     return Container(
         width: double.infinity,
         height: 24.0,
-        color: Theme.of(context).colorScheme.inversePrimary
-    );
+        color: Theme.of(context).colorScheme.inversePrimary);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        children: [
-          getImage(context),
-          getShelf(context)
-        ]
-    );
+    return Column(children: [getImage(context), getShelf(context)]);
   }
 }
 
@@ -178,33 +151,25 @@ class Bottom extends StatelessWidget {
     int? plantType = SharedPrefs().getPlantType();
     if (plantType == null) {
       return Container(
-        margin: const EdgeInsets.only(top: 64.0),
-        child: Text("Tap on a plant to proceed",
-            style: Theme.of(context).textTheme.bodySmall,
-            textAlign: TextAlign.center
-        )
-      );
+          margin: const EdgeInsets.only(top: 64.0),
+          child: Text("Tap on a plant to proceed",
+              style: Theme.of(context).textTheme.bodySmall,
+              textAlign: TextAlign.center));
     }
     return Container(
         margin: const EdgeInsets.only(top: 39.0),
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(right: 16.0),
-                child: CancelButton('Go back', () {
-                    Navigator.pop(context);
-                  }
-                ),
-              ),
-              SimpleButton('Let\'s proceed', () {
-                  SharedPrefs().setIsReturningUser(true);
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => const SetupSessionView()));
-                }
-              )
-            ]
-        )
-    );
+        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Container(
+            margin: const EdgeInsets.only(right: 16.0),
+            child: CancelButton('Go back', () {
+              Navigator.pop(context);
+            }),
+          ),
+          SimpleButton('Let\'s proceed', () {
+            SharedPrefs().setIsReturningUser(true);
+            Navigator.push(context,
+                MaterialPageRoute(builder: (_) => const SetupSessionView()));
+          })
+        ]));
   }
 }
-
