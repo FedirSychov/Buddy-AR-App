@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import 'package:flutter/material.dart';
 
 import '../clients/sharedPrefs.dart';
@@ -23,3 +24,6 @@ class SetupSessionViewModel {
     return sharedPrefs.getSelectedBreakDuration() ?? basicBreakDuration;
   }
 }
+=======
+
+>>>>>>> 66c31bf4fd7952ee31b52259cb493dfd0953d18c

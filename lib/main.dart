@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/views/choosePlantView.dart';
+import 'package:my_app/views/ongoingSessionView.dart';
 import 'package:my_app/views/splashScreenView.dart';
 import 'package:my_app/clients/sharedPrefs.dart';
 
@@ -18,6 +20,7 @@ class BUDdyApp extends StatelessWidget {
     return MaterialApp(
       title: 'BUDdy App',
       theme: ThemeData(
+        useMaterial3: true,
         fontFamily: 'Lato',
         textTheme: const TextTheme(
           displayLarge: TextStyle(
@@ -42,6 +45,7 @@ class BUDdyApp extends StatelessWidget {
             onPrimary: const Color(0xffFFFFFF),
             primaryContainer: const Color(0xffFFDDB8),
             onPrimaryContainer: const Color(0xff2A1700),
+            inversePrimary: const Color(0xffFFB960),
             secondary: const Color(0xff456808),
             onSecondary: const Color(0xffFFFFFF),
             secondaryContainer: const Color(0xffC5F185),
@@ -60,6 +64,7 @@ class BUDdyApp extends StatelessWidget {
             onSurface: const Color(0xff1F1B16),
             surfaceVariant: const Color(0xffF1E0D0),
             onSurfaceVariant: const Color(0xff504539),
+            surfaceTint: const Color(0xffFCF2EA),
             outline: const Color(0xff827568),
             outlineVariant: const Color(0xffD4C4B5)),
       ),

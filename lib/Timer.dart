@@ -42,7 +42,7 @@ class TimerView extends StatelessWidget {
           print("testing");
         }),
         Container(height: 50),
-        CancelButton(() {})
+        CancelButton("Cancel", () {})
       ],
     );
   }

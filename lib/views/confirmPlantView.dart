@@ -37,7 +37,7 @@ class ConfirmPlantView extends StatelessWidget {
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Container(
                   margin: const EdgeInsets.only(right: 16.0),
-                  child: CancelButton("Cancel", () {
+                  child: CancelButton('Cancel', () {
                     SharedPrefs().deletePlantType();
                     Navigator.pop(context);
                   }),
