@@ -12,9 +12,11 @@ class ActivityCompleteView extends StatelessWidget {
         body: Column(
           children: [
             Container(
-                margin: const EdgeInsets.only(top: 32.0), child: const Header()),
+                margin: const EdgeInsets.only(top: 32.0),
+                child: const Header()),
             Container(
-                margin: const EdgeInsets.only(top: 107.0), child: const KeyVisual()),
+                margin: const EdgeInsets.only(top: 107.0),
+                child: const KeyVisual()),
             Container(
                 margin: const EdgeInsets.only(top: 100.0),
                 child: SimpleButton('Continue', () {
@@ -37,14 +39,10 @@ class Header extends StatelessWidget {
     return SizedBox(
         width: 290,
         child: Text('Looks like your break is up! Let\'s get back to work.',
-            style: Theme
-                .of(context)
+            style: Theme.of(context)
                 .textTheme
                 .displayLarge
-                ?.copyWith(color: Theme
-                .of(context)
-                .colorScheme
-                .onBackground),
+                ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
             textAlign: TextAlign.center));
   }
 }
