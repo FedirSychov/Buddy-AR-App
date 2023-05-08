@@ -10,7 +10,7 @@ class SelectActivityViewModel {
         "Meditation gives you a sense of calm, peace and balance instantly."),
     ActivityBanner(4, "Easy yoga", "assets/gifs/Yoga.gif",
         "Yoga helps you relax and helps with anxiety and relieves stress."),
-    ActivityBanner(5, "Free choice", "assets/gifs/Meditation.gif",
+    ActivityBanner(5, "Free choice", "assets/images/freeChoice.png",
         "Don’t like what you see? Do any activity which you like.")
   ];
 }
