@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/viewModels/selectActivityViewModel.dart';
+import 'package:my_app/views/activityCountdownView.dart';
+import 'package:my_app/views/ongoingActivityView.dart';
 
 class SelectActivityView extends StatefulWidget {
   var viewModel = SelectActivityViewModel();
@@ -16,6 +18,24 @@ class _SelectActivityViewState extends State<SelectActivityView> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(children: [
+      Container(
+          margin: const EdgeInsets.only(top: 64),
+          child: const Center(
+              child: Text(
+            "Let’s take a pause!",
+            style: TextStyle(fontFamily: 'Lato', fontSize: 24),
+          ))),
+      Container(
+          margin: const EdgeInsets.only(top: 24),
+          child: const SizedBox(
+            width: 300,
+            height: 48,
+            child: Text(
+              "Refresh, relax, and regain energy. Select an activity that suits you best.",
+              style: TextStyle(fontFamily: 'Lato', fontSize: 16),
+              textAlign: TextAlign.center,
+            ),
+          )),
       Center(
         child: Container(
             margin: const EdgeInsets.symmetric(vertical: 60.0),
@@ -31,7 +51,11 @@ class _SelectActivityViewState extends State<SelectActivityView> {
                 itemCount: widget.viewModel.activityList.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        //MaterialPageRoute(context,
+                        //    builder: (context) => ActivityCountdownView(
+                        //        activity: Activity.walking));
+                      },
                       child: ActivityView(
                         index: index,
                       ));
@@ -45,7 +69,7 @@ class _SelectActivityViewState extends State<SelectActivityView> {
               (index) => Indicator(
                   isActive: widget._selectedIndex == index ? true : false))
         ],
-      )
+      ),
     ]));
   }
 }
@@ -109,10 +133,10 @@ class Indicator extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 350),
       margin: const EdgeInsets.symmetric(horizontal: 4.0),
-      width: isActive ? 22.0 : 8.0,
+      width: isActive ? 15.0 : 8.0,
       height: 8.0,
       decoration: BoxDecoration(
-          color: isActive ? Colors.orange : Colors.grey,
+          color: isActive ? Color.fromARGB(255, 255, 176, 57) : Colors.grey,
           borderRadius: BorderRadius.circular(8.0)),
     );
   }

@@ -32,8 +32,10 @@ class HomeView extends StatelessWidget {
       const Spacer(),
       const SizedBox(height: 55, width: 50),
       SimpleButton("Start session", () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: ((context) => OngoingSessionView(isFirstHalf: true))));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: ((context) => OngoingSessionView(isFirstHalf: true))));
       }),
       const Spacer(),
       const Spacer(),
