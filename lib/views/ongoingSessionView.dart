@@ -251,7 +251,7 @@ class _CountdownState extends State<Countdown> {
     SharedPrefs().setSessionMinsDuration(minutes);
     SharedPrefs().setSessionSecsDuration(seconds);
     Navigator.push(
-        context, MaterialPageRoute(builder: (_) => const SelectActivityView()));
+        context, MaterialPageRoute(builder: (_) => SelectActivityView()));
   }
 
   @override
