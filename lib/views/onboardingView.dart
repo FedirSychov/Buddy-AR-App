@@ -110,6 +110,7 @@ enum Screens {
       'Choose a relaxing stress relieving activity to perform during the pause which will refresh your mind and help you regain your focus.');
 
   const Screens(this.asset, this.title, this.description);
+
   final String asset;
   final String title;
   final String description;

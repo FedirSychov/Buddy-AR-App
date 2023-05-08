@@ -116,22 +116,16 @@ class _CountdownState extends State<Countdown> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        RotatedBox(
-            quarterTurns: -(seconds % 4),
-            child: Image.asset('assets/images/loadingCircle.png', width: 108, height: 108),
-        ),
-        Text(
-          seconds.toString().padLeft(2, '0'),
-          style: Theme.of(context)
-              .textTheme
-              .bodyLarge
-              ?.copyWith(color: Theme.of(context).colorScheme.primary, fontSize: 45.0),
-            textAlign: TextAlign.center
-        ),
-      ]
-    );
+    return Stack(alignment: Alignment.center, children: [
+      RotatedBox(
+        quarterTurns: -(seconds % 4),
+        child: Image.asset('assets/images/loadingCircle.png',
+            width: 108, height: 108),
+      ),
+      Text(seconds.toString().padLeft(2, '0'),
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              color: Theme.of(context).colorScheme.primary, fontSize: 45.0),
+          textAlign: TextAlign.center),
+    ]);
   }
 }

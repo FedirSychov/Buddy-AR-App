@@ -167,8 +167,8 @@ class Bottom extends StatelessWidget {
           ),
           SimpleButton('Let\'s proceed', () {
             SharedPrefs().setIsReturningUser(true);
-            Navigator.push(context,
-                MaterialPageRoute(builder: (_) => const SetupSessionView()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => SetupSessionView()));
           })
         ]));
   }

@@ -17,7 +17,6 @@ class SetupSessionView extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     return Scaffold(
       body: Column(
         children: [
@@ -83,13 +82,8 @@ class SetupSessionView extends StatelessWidget {
           const Spacer(),
           SimpleButton("Save session", () {
             bool isOnboarded = SharedPrefs().getReturningUser() ?? false;
-            if (isOnboarded) {
-              // if user have passed onboarding, then setup session comes after home session and needs pop
-              Navigator.pop(context);
-            } else {
               Navigator.push(context,
                   MaterialPageRoute(builder: ((context) => HomeView())));
-            }
           }),
           const Spacer(),
           const Spacer()
@@ -189,10 +183,3 @@ class _TimePickerState extends State<TimePicker> {
     ));
   }
 }
-=======
-    return ListView(
-      children: const [Text("SetupSessionView")],
-    );
-  }
-}
->>>>>>> 66c31bf4fd7952ee31b52259cb493dfd0953d18c
