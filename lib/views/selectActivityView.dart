@@ -50,15 +50,9 @@ class _SelectActivityViewState extends State<SelectActivityView> {
                 controller: PageController(viewportFraction: 1),
                 itemCount: widget.viewModel.activityList.length,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
-                      onTap: () {
-                        //MaterialPageRoute(context,
-                        //    builder: (context) => ActivityCountdownView(
-                        //        activity: Activity.walking));
-                      },
-                      child: ActivityView(
-                        index: index,
-                      ));
+                  return ActivityView(
+                    index: index,
+                  );
                 })),
       ),
       Row(
@@ -81,45 +75,55 @@ class ActivityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-          horizontal: ((MediaQuery.of(context).size.width - 280) / 2.0),
-          vertical: 20),
-      decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3), // changes position of shadow
-            )
-          ],
-          borderRadius: BorderRadius.circular(20.0),
-          color: Color.fromARGB(255, 246, 236, 228)),
-      child: Center(
-          child: Column(children: [
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 20),
-          child: Text(
-            viewModel.activityList[index].title,
-            style: TextStyle(fontFamily: 'Lato', fontSize: 24),
+    return GestureDetector(
+      child: Container(
+        margin: EdgeInsets.symmetric(
+            horizontal: ((MediaQuery.of(context).size.width - 280) / 2.0),
+            vertical: 20),
+        decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: const Offset(0, 3), // changes position of shadow
+              )
+            ],
+            borderRadius: BorderRadius.circular(20.0),
+            color: Color.fromARGB(255, 246, 236, 228)),
+        child: Center(
+            child: Column(children: [
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 20),
+            child: Text(
+              viewModel.activityList[index].title,
+              style: TextStyle(fontFamily: 'Lato', fontSize: 24),
+            ),
           ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 12, bottom: 43),
-          width: 159,
-          height: 161,
-          child: Image.asset(viewModel.activityList[index].image),
-        ),
-        Container(
-          width: 250,
-          child: Text(
-            viewModel.activityList[index].text,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontFamily: 'Lato', fontSize: 14),
+          Container(
+            margin: const EdgeInsets.only(top: 12, bottom: 43),
+            width: 159,
+            height: 161,
+            child: Image.asset(viewModel.activityList[index].assetPath),
           ),
-        ),
-      ])),
+          Container(
+            width: 250,
+            child: Text(
+              viewModel.activityList[index].text,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontFamily: 'Lato', fontSize: 14),
+            ),
+          ),
+        ])),
+      ),
+      onTap: () {
+        print("test" + viewModel.activityList[index].title);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ActivityCountdownView(
+                    activity: viewModel.activityList[index])));
+      },
     );
   }
 }
