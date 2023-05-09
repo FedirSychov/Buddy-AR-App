@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:my_app/views/DesignViews/buttons.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import '../clients/sharedPrefs.dart';
+import '../model/activity.dart';
 import 'activityCompleteView.dart';
 import 'ongoingSessionView.dart';
 
@@ -274,19 +275,6 @@ class _CountdownState extends State<Countdown> {
       ],
     );
   }
-}
-
-enum Activity {
-  meditating('Meditate', 'assets/gifs/Meditation.gif'),
-  stretching('Do stretches', 'assets/gifs/Stretch.gif'),
-  walking('Take a walk', 'assets/gifs/Walk.gif'),
-  yoga('Easy Yoga', 'assets/gifs/Yoga.gif'),
-  freeChoice('Free Choice', 'assets/images/freeChoice.png');
-
-  const Activity(this.title, this.assetPath);
-
-  final String title;
-  final String assetPath;
 }
 
 class VideoPlayer extends StatelessWidget {

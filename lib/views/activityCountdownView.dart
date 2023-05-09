@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import '../model/activity.dart';
 import 'ongoingActivityView.dart';
 
 class ActivityCountdownView extends StatelessWidget {
