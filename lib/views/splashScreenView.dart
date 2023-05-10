@@ -9,7 +9,7 @@ class SplashScreenView extends StatelessWidget {
   const SplashScreenView({super.key});
 
   Widget getNextView() {
-    bool? isReturningUser = SharedPrefs().getReturningUser();
+    bool isReturningUser = SharedPrefs().getReturningUser();
     return isReturningUser ? SetupSessionView() : const OnboardingView();
   }
 
