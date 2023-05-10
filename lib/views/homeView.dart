@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/views/plantPageARView.dart';
+import 'package:my_app/views/sessionCountdownView.dart';
 import 'package:my_app/views/setupSessionView.dart';
 import 'package:my_app/views/ongoingSessionView.dart';
 
@@ -36,7 +37,7 @@ class HomeView extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: ((context) => OngoingSessionView(isFirstHalf: true))));
+                builder: ((context) => const SessionCountdownView())));
       }),
       const Spacer(),
       const Spacer(),
