@@ -144,8 +144,10 @@ class Countdown extends StatefulWidget {
   State<Countdown> createState() => _CountdownState();
 }
 
-class _CountdownState extends State<Countdown> {
+class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
   bool onGoing = false;
+  bool hasBeenNotified = false;
+  bool _isInForeground = true;
   int hours = SharedPrefs().getSessionHourDuration();
   int minutes = SharedPrefs().getSessionMinsDuration();
   int seconds = SharedPrefs().getSessionSecsDuration();
@@ -157,6 +159,7 @@ class _CountdownState extends State<Countdown> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance!.addObserver(this);
     until = DateTime.now()
         .add(Duration(hours: hours, minutes: minutes, seconds: seconds));
     breakPoint =
@@ -164,6 +167,35 @@ class _CountdownState extends State<Countdown> {
                 2)
             .floor();
     startCountdown();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    _isInForeground = state == AppLifecycleState.resumed;
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
+
+  void _showNotification() {
+    if (!_isInForeground) {
+      if (widget.isFirstHalf) {
+        if (timeLeft.inSeconds <= breakPoint) {
+          widget.viewModel.showBigTextNotification("Let's take a pause!", "Hey! why don't you take a break?\nClick to start.");
+        } else if (timeLeft.inSeconds <= breakPoint + 300 && !hasBeenNotified) {
+          widget.viewModel.showBigTextNotification("Keep going!", "5 more minutes to go.");
+          hasBeenNotified = true;
+        }
+      } else if (!widget.isFirstHalf && timeLeft.inSeconds <= 300) {
+        widget.viewModel.showBigTextNotification("Keep going!", "5 more minutes to go.");
+      } else if (timeLeft.inSeconds <= 0) {
+        widget.viewModel.showBigTextNotification("Hooray! Your session is complete.", "Let's check you plant buddy. ");
+      }
+    }
   }
 
   void countDown() {
@@ -174,6 +206,7 @@ class _CountdownState extends State<Countdown> {
         hours = timeLeft.inHours % 24;
         minutes = timeLeft.inMinutes % 60;
         seconds = timeLeft.inSeconds % 60;
+        _showNotification();
         if (widget.isFirstHalf && timeLeft.inSeconds <= breakPoint) {
           startActivityBreak();
         }
