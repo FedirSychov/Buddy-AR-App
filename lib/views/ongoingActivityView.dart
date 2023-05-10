@@ -36,7 +36,7 @@ class OngoingActivityView extends StatelessWidget {
                 child: KeyVisual(activity: activity)),
             Container(
               margin: const EdgeInsets.only(top: 66.0),
-              child: Countdown(initTimer: _initTimer),
+              child: Countdown(initTimer: _initTimer, activity: activity),
             )
           ],
         ));
@@ -137,8 +137,9 @@ class KeyVisual extends StatelessWidget {
 
 class Countdown extends StatefulWidget {
   final Function initTimer;
+  final Activity activity;
 
-  const Countdown({super.key, required this.initTimer});
+  const Countdown({super.key, required this.initTimer, required this.activity});
 
   @override
   State<Countdown> createState() => _CountdownState();
@@ -201,27 +202,26 @@ class _CountdownState extends State<Countdown> {
             child: Column(
               children: <Widget>[
                 Container(
-                    margin: const EdgeInsets.only(top: 16.0),
+                    margin: const EdgeInsets.only(top: 30.0),
                     width: 294,
-                    child: Text('Take a 15 min walk',
+                    child: Text(widget.activity.title,
                         style: Theme.of(context).textTheme.displayLarge,
                         textAlign: TextAlign.center)),
                 Container(
-                    margin: const EdgeInsets.only(top: 42.0),
+                    margin: const EdgeInsets.only(top: 16.0),
                     width: 328,
                     height: 200,
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: VideoPlayer())),
                 Container(
-                    margin: const EdgeInsets.only(top: 16.0),
+                    margin: const EdgeInsets.only(top: 25.0),
                     width: 294,
-                    child: Text(
-                        'No we aren\'t going to make you watch a tutorial on how to walk. Walk to your fridge for a beverage or take a stroll outside with Rick in your pocket ;-)',
+                    child: Text(widget.activity.breakDescription,
                         style: Theme.of(context).textTheme.bodySmall,
                         textAlign: TextAlign.center)),
                 Container(
-                  margin: const EdgeInsets.only(top: 34.0),
+                  margin: const EdgeInsets.only(top: 25.0),
                   child: PauseButton("session", () {
                     handleButtonPress();
                   }, onGoing),
@@ -229,7 +229,7 @@ class _CountdownState extends State<Countdown> {
               ],
             ),
           );
-        }).whenComplete(() => { if (!onGoing) resumeCountdown() });
+        }).whenComplete(() => {if (!onGoing) resumeCountdown()});
   }
 
   void resumeCountdown() {
