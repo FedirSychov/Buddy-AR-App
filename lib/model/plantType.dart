@@ -1,11 +1,11 @@
 enum PlantType {
-  APPLETREE("Pocket Apple Tree", "assets/images/appleTree.png",
+  appleTree("Pocket Apple Tree", "assets/images/appleTree.png",
       "assets/gifs/AppleTree.gif", "AppleTree"),
-  MONSTERA("Monstera", "assets/images/monstera.png", "assets/gifs/Monstera.gif",
+  monstera("Monstera", "assets/images/monstera.png", "assets/gifs/Monstera.gif",
       "Monstera"),
-  CACTUS("Cactus", "assets/images/cactus.png", "assets/gifs/Cactus.gif",
-      "Cactus"),
-  SNAKEPLANT("Snake Plant", "assets/images/snakePlant.png",
+  cactus(
+      "Cactus", "assets/images/cactus.png", "assets/gifs/Cactus.gif", "Cactus"),
+  snakePlant("Snake Plant", "assets/images/snakePlant.png",
       "assets/gifs/SnakePlant.gif", "SnakePlant");
 
   // GitHub needs to be public
@@ -18,5 +18,5 @@ enum PlantType {
 
   const PlantType(this.name, this.imagePath, this.gifPath, this.folderName);
 
-  String getModelURL() => remoteModelsPath + folderName;
+  String getModelFolderURL() => remoteModelsPath + folderName;
 }

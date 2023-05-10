@@ -49,14 +49,14 @@ class Header extends StatelessWidget {
       Container(
           margin: const EdgeInsets.only(top: 32.0),
           child: Row(children: const [
-            Expanded(child: PlantOption(plantTypeOption: PlantType.APPLETREE)),
-            Expanded(child: PlantOption(plantTypeOption: PlantType.MONSTERA))
+            Expanded(child: PlantOption(plantTypeOption: PlantType.appleTree)),
+            Expanded(child: PlantOption(plantTypeOption: PlantType.monstera))
           ])),
       Container(
           margin: const EdgeInsets.only(top: 29.0),
           child: Row(children: const [
-            Expanded(child: PlantOption(plantTypeOption: PlantType.CACTUS)),
-            Expanded(child: PlantOption(plantTypeOption: PlantType.SNAKEPLANT))
+            Expanded(child: PlantOption(plantTypeOption: PlantType.cactus)),
+            Expanded(child: PlantOption(plantTypeOption: PlantType.snakePlant))
           ])),
       const Bottom()
     ]);
@@ -105,7 +105,7 @@ class PlantOption extends StatelessWidget {
     }
     return InkWell(
         onTap: () {
-          if (plantTypeOption == PlantType.APPLETREE) {
+          if (plantTypeOption == PlantType.appleTree) {
             // Other plants are still WIP
             Navigator.push(
                 context,

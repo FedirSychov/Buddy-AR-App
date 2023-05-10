@@ -98,14 +98,14 @@ class SetupSessionViewModel {
   }
 
   void setCountdownValues() {
-    String breakDuration = sharedPrefs.getSelectedBreakDuration() ?? basicBreakDuration;
-    List<int> studyTime = translateSessionTimeIntoIntArray(breakDuration);
+    String studyDuration = sharedPrefs.getSelectedSessionDuration() ?? basicStudyDuration;
+    List<int> studyTime = translateSessionTimeIntoIntArray(studyDuration);
     sharedPrefs.setSessionHoursDuration(studyTime[0]);
     sharedPrefs.setSessionMinsDuration(studyTime[1]);
     sharedPrefs.setSessionSecsDuration(studyTime[2]);
 
-    String studyDuration = sharedPrefs.getSelectedSessionDuration() ?? basicStudyDuration;
-    List<int> breakTime = translateBreakTimeIntoIntArray(studyDuration);
+    String breakDuration = sharedPrefs.getSelectedBreakDuration() ?? basicBreakDuration;
+    List<int> breakTime = translateBreakTimeIntoIntArray(breakDuration);
     sharedPrefs.setBreakHoursDuration(breakTime[0]);
     sharedPrefs.setBreakMinsDuration(breakTime[1]);
     sharedPrefs.setBreakSecsDuration(breakTime[2]);
