@@ -4,6 +4,7 @@ import 'package:my_app/views/DesignViews/buttons.dart';
 import 'package:my_app/views/homeView.dart';
 import 'package:my_app/views/selectActivityView.dart';
 import 'package:my_app/views/sessionCompleteView.dart';
+import 'package:my_app/views/setupSessionView.dart';
 
 import '../clients/sharedPrefs.dart';
 
@@ -75,7 +76,7 @@ class Header extends StatelessWidget {
           onPressed: () {
             cancelTimer();
             Navigator.push(
-                context, MaterialPageRoute(builder: (_) => const HomeView()));
+                context, MaterialPageRoute(builder: (_) => SetupSessionView()));
           },
         ),
       ],

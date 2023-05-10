@@ -115,17 +115,11 @@ class Header extends StatelessWidget {
                   .displayLarge
                   ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
               textAlign: TextAlign.center)),
-      InkWell(
-        onTap: () {
-          _dialogBuilder(context); // ShowBottomModal
-        },
-        child: Container(
-            margin: const EdgeInsets.only(right: 16.0),
-            width: 32.0,
-            height: 32.0,
-            child: Image.asset('assets/images/icons/Camera.png',
-                width: 24.0, height: 24.0)),
-      )
+      Container(
+        margin: const EdgeInsets.only(right: 16.0),
+        width: 32.0,
+        height: 32.0,
+      ),
     ]);
   }
 }

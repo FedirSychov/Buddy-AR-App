@@ -10,9 +10,9 @@ class SetupSessionView extends StatelessWidget {
 
   SetupSessionView({super.key});
 
-  var sessionTimeArray = ["30 mins", "1 hour", "1,5 hours", "2 hours"];
+  var sessionTimeArray = ["20 secs", "30 mins", "1 hour", "1,5 hours", "2 hours"];
 
-  var breakTimeArray = ["15 mins", "30 mins", "45 mins", "1 hour"];
+  var breakTimeArray = ["20 secs", "15 mins", "30 mins", "45 mins", "1 hour"];
 
   // This widget is the root of your application.
   @override
@@ -81,7 +81,7 @@ class SetupSessionView extends StatelessWidget {
           ),
           const Spacer(),
           SimpleButton("Save session", () {
-            bool isOnboarded = SharedPrefs().getReturningUser() ?? false;
+              viewModel.setCountdownValues();
               Navigator.push(context,
                   MaterialPageRoute(builder: ((context) => HomeView())));
           }),
