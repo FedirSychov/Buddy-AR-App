@@ -4,10 +4,12 @@ import 'package:my_app/views/DesignViews/buttons.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import '../clients/sharedPrefs.dart';
 import '../model/activity.dart';
+import '../viewModels/ongoingActivityViewModel.dart';
 import 'activityCompleteView.dart';
 import 'ongoingSessionView.dart';
 
 class OngoingActivityView extends StatelessWidget {
+  final OngoingActivityViewModel viewModel = OngoingActivityViewModel();
   final Activity activity;
   Timer? timer;
 
@@ -36,7 +38,7 @@ class OngoingActivityView extends StatelessWidget {
                 child: KeyVisual(activity: activity)),
             Container(
               margin: const EdgeInsets.only(top: 65.0),
-              child: Countdown(initTimer: _initTimer, activity: activity),
+              child: Countdown(initTimer: _initTimer, activity: activity, viewModel: viewModel),
             )
           ],
         ));
@@ -138,8 +140,9 @@ class KeyVisual extends StatelessWidget {
 class Countdown extends StatefulWidget {
   final Function initTimer;
   final Activity activity;
+  final OngoingActivityViewModel viewModel;
 
-  const Countdown({super.key, required this.initTimer, required this.activity});
+  const Countdown({super.key, required this.initTimer, required this.activity, required this.viewModel});
 
   @override
   State<Countdown> createState() => _CountdownState();
@@ -172,6 +175,7 @@ class _CountdownState extends State<Countdown> {
         seconds = timeLeft.inSeconds % 60;
       } else {
         cancelCountdown();
+        widget.viewModel.showBigTextNotification("Hooray! Your break is complete.", "Let's get back to work! ");
         Navigator.push(context,
             MaterialPageRoute(builder: (_) => const ActivityCompleteView()));
       }

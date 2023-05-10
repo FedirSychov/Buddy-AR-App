@@ -26,10 +26,11 @@ class NotificationClient {
       required FlutterLocalNotificationsPlugin fln}) async {
     AndroidNotificationDetails androidPlatformChannelSpecifics =
         const AndroidNotificationDetails('example_name', 'channel_name',
-            playSound: true,
-            sound: RawResourceAndroidNotificationSound('notification'),
+            playSound: false,
+            //sound: RawResourceAndroidNotificationSound('notification'),
             importance: Importance.max,
-            priority: Priority.high);
+            priority: Priority.high,
+            icon: "@mipmap/ic_launcher",);
 
     var not = NotificationDetails(
         android: androidPlatformChannelSpecifics,

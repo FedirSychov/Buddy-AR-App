@@ -6,8 +6,10 @@ import 'package:my_app/views/sessionCompleteView.dart';
 import 'package:my_app/views/setupSessionView.dart';
 
 import '../clients/sharedPrefs.dart';
+import '../viewModels/ongoingSessionViewModel.dart';
 
 class OngoingSessionView extends StatelessWidget {
+  final OngoingSessionViewModel viewModel = OngoingSessionViewModel();
   final bool isFirstHalf;
   Timer? timer;
 
@@ -36,7 +38,7 @@ class OngoingSessionView extends StatelessWidget {
                 child: const KeyVisual()),
             Container(
               margin: const EdgeInsets.only(top: 65.0),
-              child: Countdown(initTimer: _initTimer, isFirstHalf: isFirstHalf),
+              child: Countdown(initTimer: _initTimer, isFirstHalf: isFirstHalf, viewModel: viewModel),
             )
           ],
         ));
@@ -133,9 +135,10 @@ class KeyVisual extends StatelessWidget {
 class Countdown extends StatefulWidget {
   final bool isFirstHalf;
   final Function initTimer;
+  final OngoingSessionViewModel viewModel;
 
   const Countdown(
-      {super.key, required this.initTimer, required this.isFirstHalf});
+      {super.key, required this.initTimer, required this.isFirstHalf, required this.viewModel});
 
   @override
   State<Countdown> createState() => _CountdownState();
