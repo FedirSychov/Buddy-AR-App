@@ -1,12 +1,12 @@
 enum PlantType {
   APPLETREE("Pocket Apple Tree", "assets/images/appleTree.png",
-      "assets/gifs/AppleTree.gif", "AppleTree.glb"),
+      "assets/gifs/AppleTree.gif", "AppleTree"),
   MONSTERA("Monstera", "assets/images/monstera.png", "assets/gifs/Monstera.gif",
-      "Monstera.glb"),
+      "Monstera"),
   CACTUS("Cactus", "assets/images/cactus.png", "assets/gifs/Cactus.gif",
-      "Cactus.glb"),
+      "Cactus"),
   SNAKEPLANT("Snake Plant", "assets/images/snakePlant.png",
-      "assets/gifs/SnakePlant.gif", "SnakePlant.glb");
+      "assets/gifs/SnakePlant.gif", "SnakePlant");
 
   // GitHub needs to be public
   final String name;
@@ -14,9 +14,9 @@ enum PlantType {
       "https://github.com/FedirSychov/Buddy-AR-App/raw/main/assets/models/";
   final String imagePath;
   final String gifPath;
-  final String fileName;
+  final String folderName;
 
-  const PlantType(this.name, this.imagePath, this.gifPath, this.fileName);
+  const PlantType(this.name, this.imagePath, this.gifPath, this.folderName);
 
-  String getModelURL() => remoteModelsPath + fileName;
+  String getModelURL() => remoteModelsPath + folderName;
 }
