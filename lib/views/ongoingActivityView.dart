@@ -29,13 +29,13 @@ class OngoingActivityView extends StatelessWidget {
         body: Column(
           children: [
             Container(
-                margin: const EdgeInsets.only(top: 32.0),
+                margin: const EdgeInsets.only(top: 65.0),
                 child: Header(activity: activity, cancelTimer: _cancelTimer)),
             Container(
-                margin: const EdgeInsets.only(top: 73.0),
+                margin: const EdgeInsets.only(top: 75.0),
                 child: KeyVisual(activity: activity)),
             Container(
-              margin: const EdgeInsets.only(top: 66.0),
+              margin: const EdgeInsets.only(top: 65.0),
               child: Countdown(initTimer: _initTimer, activity: activity),
             )
           ],
@@ -102,7 +102,7 @@ class Header extends StatelessWidget {
           _dialogBuilder(context);
         },
         child: Container(
-            margin: const EdgeInsets.only(left: 16.0),
+            margin: const EdgeInsets.only(left: 15.0),
             width: 32.0,
             height: 32.0,
             child: Image.asset('assets/images/icons/Arrow.png',
@@ -116,7 +116,7 @@ class Header extends StatelessWidget {
                   ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
               textAlign: TextAlign.center)),
       Container(
-        margin: const EdgeInsets.only(right: 16.0),
+        margin: const EdgeInsets.only(right: 15.0),
         width: 32.0,
         height: 32.0,
       ),
@@ -208,7 +208,7 @@ class _CountdownState extends State<Countdown> {
                         style: Theme.of(context).textTheme.displayLarge,
                         textAlign: TextAlign.center)),
                 Container(
-                    margin: const EdgeInsets.only(top: 16.0),
+                    margin: const EdgeInsets.only(top: 15.0),
                     width: 328,
                     height: 200,
                     child: ClipRRect(
@@ -265,7 +265,7 @@ class _CountdownState extends State<Countdown> {
               ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
         ),
         Container(
-          margin: const EdgeInsets.only(top: 41.0),
+          margin: const EdgeInsets.only(top: 40.0),
           child: PauseButton("session", () {
             handleButtonPress();
           }, onGoing),

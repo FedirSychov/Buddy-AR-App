@@ -29,13 +29,13 @@ class OngoingSessionView extends StatelessWidget {
         body: Column(
           children: [
             Container(
-                margin: const EdgeInsets.only(top: 32.0),
+                margin: const EdgeInsets.only(top: 65.0),
                 child: Header(cancelTimer: _cancelTimer)),
             Container(
-                margin: const EdgeInsets.only(top: 73.0),
+                margin: const EdgeInsets.only(top: 75.0),
                 child: const KeyVisual()),
             Container(
-              margin: const EdgeInsets.only(top: 66.0),
+              margin: const EdgeInsets.only(top: 65.0),
               child: Countdown(initTimer: _initTimer, isFirstHalf: isFirstHalf),
             )
           ],
@@ -95,7 +95,7 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       Container(
-        margin: const EdgeInsets.only(left: 16.0),
+        margin: const EdgeInsets.only(left: 15.0),
         width: 32.0,
         height: 32.0,
       ),
@@ -111,7 +111,7 @@ class Header extends StatelessWidget {
           _dialogBuilder(context);
         },
         child: Container(
-            margin: const EdgeInsets.only(right: 16.0),
+            margin: const EdgeInsets.only(right: 15.0),
             width: 32.0,
             height: 32.0,
             child: Image.asset('assets/images/icons/Cross.png',
@@ -207,19 +207,19 @@ class _CountdownState extends State<Countdown> {
             child: Column(
               children: <Widget>[
                 Container(
-                    margin: const EdgeInsets.only(top: 42.0),
+                    margin: const EdgeInsets.only(top: 40.0),
                     width: 240,
                     height: 240,
                     child: Image.asset('assets/images/closeBook.png')),
                 Container(
-                    margin: const EdgeInsets.only(top: 16.0),
+                    margin: const EdgeInsets.only(top: 15.0),
                     width: 294,
                     child: Text(
                         'You’re doing well. Let’s continue with the study session. You will get an activity break soon :D',
                         style: Theme.of(context).textTheme.bodySmall,
                         textAlign: TextAlign.center)),
                 Container(
-                  margin: const EdgeInsets.only(top: 34.0),
+                  margin: const EdgeInsets.only(top: 35.0),
                   child: PauseButton("session", () {
                     handleButtonPress();
                   }, onGoing),
@@ -273,7 +273,7 @@ class _CountdownState extends State<Countdown> {
               ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
         ),
         Container(
-          margin: const EdgeInsets.only(top: 41.0),
+          margin: const EdgeInsets.only(top: 40.0),
           child: PauseButton("session", () {
             handleButtonPress();
           }, onGoing),

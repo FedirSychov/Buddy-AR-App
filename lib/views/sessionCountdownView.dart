@@ -12,10 +12,10 @@ class SessionCountdownView extends StatelessWidget {
         body: Column(
           children: [
             Container(
-                margin: const EdgeInsets.only(top: 32.0),
+                margin: const EdgeInsets.only(top: 65.0),
                 child: const Header()),
             Container(
-                margin: const EdgeInsets.only(top: 73.0),
+                margin: const EdgeInsets.only(top: 75.0),
                 child: const KeyVisual()),
             Container(
                 margin: const EdgeInsets.only(top: 40.0),

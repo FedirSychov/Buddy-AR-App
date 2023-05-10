@@ -46,7 +46,7 @@ class _PlantPageARViewState extends State<PlantPageARView> {
         planeDetectionConfig: PlaneDetectionConfig.horizontalAndVertical,
       ),
       Container(
-          margin: const EdgeInsets.only(top: 64.0),
+          margin: const EdgeInsets.only(top: 65.0),
           child: Row(children: [
             const Spacer(),
             InkWell(
@@ -54,7 +54,7 @@ class _PlantPageARViewState extends State<PlantPageARView> {
                 Navigator.pop(context);
               },
               child: Container(
-                  margin: const EdgeInsets.only(right: 16.0),
+                  margin: const EdgeInsets.only(right: 15.0),
                   width: 32.0,
                   height: 32.0,
                   child: Image.asset('assets/images/icons/Cross.png',

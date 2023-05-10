@@ -24,6 +24,7 @@ class _OnboardingViewState extends State<OnboardingView> {
         backgroundColor: Theme.of(context).colorScheme.background,
         body: ListView(children: [
           Container(
+              margin: const EdgeInsets.only(top: 65.0),
               child: CarouselSlider(
             options: CarouselOptions(
               height: 653,
@@ -68,17 +69,16 @@ class OnboardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Container(
-          margin: const EdgeInsets.only(top: 32.0),
           alignment: Alignment.center,
           child: Text(screen.title,
               style: Theme.of(context).textTheme.displayLarge,
               textAlign: TextAlign.center)),
       Container(
-          margin: const EdgeInsets.only(top: 74.0),
+          margin: const EdgeInsets.only(top: 75.0),
           alignment: Alignment.center,
           child: Image.asset(screen.asset, height: 280, width: 280)),
       Container(
-          margin: const EdgeInsets.only(top: 73.0),
+          margin: const EdgeInsets.only(top: 75.0),
           alignment: Alignment.center,
           child: Text(
             screen.description,
