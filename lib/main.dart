@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/views/choosePlantView.dart';
-import 'package:my_app/views/ongoingSessionView.dart';
 import 'package:my_app/views/splashScreenView.dart';
 import 'package:my_app/clients/sharedPrefs.dart';
 
