@@ -12,13 +12,13 @@ class SessionCompleteView extends StatelessWidget {
         body: Column(
           children: [
             Container(
-                margin: const EdgeInsets.only(top: 32.0),
+                margin: const EdgeInsets.only(top: 65.0),
                 child: const Header()),
             Container(
                 margin: const EdgeInsets.only(top: 80.0),
                 child: const KeyVisual()),
             Container(
-                margin: const EdgeInsets.only(top: 73.0),
+                margin: const EdgeInsets.only(top: 75.0),
                 width: 300,
                 child: Text(
                     'Hooray! You have successfully completed your study session.',
@@ -36,7 +36,7 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       Container(
-        margin: const EdgeInsets.only(left: 16.0),
+        margin: const EdgeInsets.only(left: 15.0),
         width: 32.0,
         height: 32.0,
       ),
@@ -53,7 +53,7 @@ class Header extends StatelessWidget {
               context, MaterialPageRoute(builder: (_) => const HomeView()));
         },
         child: Container(
-            margin: const EdgeInsets.only(right: 16.0),
+            margin: const EdgeInsets.only(right: 15.0),
             width: 32.0,
             height: 32.0,
             child: Image.asset('assets/images/icons/Cross.png',

@@ -33,26 +33,26 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Container(
-          margin: const EdgeInsets.only(top: 32.0),
+          margin: const EdgeInsets.only(top: 65.0),
           alignment: Alignment.center,
           child: Text(title,
               style: Theme.of(context).textTheme.displayLarge,
               textAlign: TextAlign.center)),
       Container(
-          margin: const EdgeInsets.only(top: 24.0),
+          margin: const EdgeInsets.only(top: 25.0),
           alignment: Alignment.center,
           width: 320.0,
           child: Text(description,
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center)),
       Container(
-          margin: const EdgeInsets.only(top: 32.0),
+          margin: const EdgeInsets.only(top: 30.0),
           child: Row(children: const [
             Expanded(child: PlantOption(plantTypeOption: PlantType.appleTree)),
             Expanded(child: PlantOption(plantTypeOption: PlantType.monstera))
           ])),
       Container(
-          margin: const EdgeInsets.only(top: 29.0),
+          margin: const EdgeInsets.only(top: 30.0),
           child: Row(children: const [
             Expanded(child: PlantOption(plantTypeOption: PlantType.cactus)),
             Expanded(child: PlantOption(plantTypeOption: PlantType.snakePlant))

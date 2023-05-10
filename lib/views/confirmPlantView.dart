@@ -16,26 +16,26 @@ class ConfirmPlantView extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.surface,
         body: ListView(children: [
           Container(
-              margin: const EdgeInsets.only(top: 32.0),
+              margin: const EdgeInsets.only(top: 65.0),
               alignment: Alignment.center,
               child: Text(plantType.name,
                   style: Theme.of(context).textTheme.displayLarge,
                   textAlign: TextAlign.center)),
           Container(
-              margin: const EdgeInsets.only(top: 119.0),
+              margin: const EdgeInsets.only(top: 120.0),
               alignment: Alignment.center,
               child: Image.asset(plantType.gifPath, width: 260, height: 260)),
           Container(
-              margin: const EdgeInsets.only(top: 18.0),
+              margin: const EdgeInsets.only(top: 20.0),
               alignment: Alignment.center,
               child: Image.asset("assets/images/plantShadow.png",
                   width: 140, height: 20)),
           Container(
-              margin: const EdgeInsets.only(top: 117.0),
+              margin: const EdgeInsets.only(top: 120.0),
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Container(
-                  margin: const EdgeInsets.only(right: 16.0),
+                  margin: const EdgeInsets.only(right: 15.0),
                   child: CancelButton('Cancel', () {
                     SharedPrefs().deletePlantType();
                     Navigator.pop(context);

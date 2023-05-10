@@ -15,10 +15,10 @@ class ActivityCountdownView extends StatelessWidget {
         body: Column(
           children: [
             Container(
-                margin: const EdgeInsets.only(top: 32.0),
+                margin: const EdgeInsets.only(top: 65.0),
                 child: Header(activity: activity)),
             Container(
-                margin: const EdgeInsets.only(top: 73.0),
+                margin: const EdgeInsets.only(top: 75.0),
                 child: KeyVisual(activity: activity)),
             Container(
                 margin: const EdgeInsets.only(top: 40.0),
