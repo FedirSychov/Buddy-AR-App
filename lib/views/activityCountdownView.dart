@@ -104,7 +104,7 @@ class _CountdownState extends State<Countdown> {
   }
 
   void startCountdown() {
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(const Duration(milliseconds: 250), (timer) {
       countDown();
     });
     setState(() => onGoing = true);
