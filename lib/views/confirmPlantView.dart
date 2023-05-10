@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/views/DesignViews/buttons.dart';
-
 import '../clients/sharedPrefs.dart';
 import '../model/plantType.dart';
 import 'choosePlantView.dart';

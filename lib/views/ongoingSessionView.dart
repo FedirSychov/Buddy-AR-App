@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:my_app/views/DesignViews/buttons.dart';
-import 'package:my_app/views/homeView.dart';
 import 'package:my_app/views/selectActivityView.dart';
 import 'package:my_app/views/sessionCompleteView.dart';
 import 'package:my_app/views/setupSessionView.dart';
