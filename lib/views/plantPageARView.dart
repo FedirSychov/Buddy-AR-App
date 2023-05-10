@@ -116,7 +116,7 @@ class _PlantPageARViewState extends State<PlantPageARView> {
   }
 
   String _getModelUrl() {
-    int plantIndex = SharedPrefs().getPlantType();
+    int plantIndex = SharedPrefs().getPlantType() ?? 0;
     int plantProgress = SharedPrefs().getPlantProgress();
     return '${PlantType.values[plantIndex].getModelFolderURL()}/$plantProgress.glb';
   }
