@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/clients/sharedPrefs.dart';
-import 'package:my_app/main.dart';
-import 'package:my_app/viewModels/setupSessionViewModel.dart';
-import 'package:my_app/views/DesignViews/buttons.dart';
-import 'package:my_app/views/homeView.dart';
+import 'package:BUDdy/clients/sharedPrefs.dart';
+import 'package:BUDdy/main.dart';
+import 'package:BUDdy/viewModels/setupSessionViewModel.dart';
+import 'package:BUDdy/views/DesignViews/buttons.dart';
+import 'package:BUDdy/views/homeView.dart';
 
 class SetupSessionView extends StatelessWidget {
   var viewModel = SetupSessionViewModel();

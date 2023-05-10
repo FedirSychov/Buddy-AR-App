@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:my_app/views/DesignViews/buttons.dart';
-import 'package:my_app/views/selectActivityView.dart';
-import 'package:my_app/views/sessionCompleteView.dart';
-import 'package:my_app/views/setupSessionView.dart';
+import 'package:BUDdy/views/DesignViews/buttons.dart';
+import 'package:BUDdy/views/selectActivityView.dart';
+import 'package:BUDdy/views/sessionCompleteView.dart';
+import 'package:BUDdy/views/setupSessionView.dart';
 
 import '../clients/sharedPrefs.dart';
+import '../viewModels/ongoingSessionViewModel.dart';
 
 class OngoingSessionView extends StatelessWidget {
+  final OngoingSessionViewModel viewModel = OngoingSessionViewModel();
   final bool isFirstHalf;
   Timer? timer;
 
@@ -36,7 +38,7 @@ class OngoingSessionView extends StatelessWidget {
                 child: const KeyVisual()),
             Container(
               margin: const EdgeInsets.only(top: 65.0),
-              child: Countdown(initTimer: _initTimer, isFirstHalf: isFirstHalf),
+              child: Countdown(initTimer: _initTimer, isFirstHalf: isFirstHalf, viewModel: viewModel),
             )
           ],
         ));
@@ -133,16 +135,19 @@ class KeyVisual extends StatelessWidget {
 class Countdown extends StatefulWidget {
   final bool isFirstHalf;
   final Function initTimer;
+  final OngoingSessionViewModel viewModel;
 
   const Countdown(
-      {super.key, required this.initTimer, required this.isFirstHalf});
+      {super.key, required this.initTimer, required this.isFirstHalf, required this.viewModel});
 
   @override
   State<Countdown> createState() => _CountdownState();
 }
 
-class _CountdownState extends State<Countdown> {
+class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
   bool onGoing = false;
+  bool hasBeenNotified = false;
+  bool _isInForeground = true;
   int hours = SharedPrefs().getSessionHourDuration();
   int minutes = SharedPrefs().getSessionMinsDuration();
   int seconds = SharedPrefs().getSessionSecsDuration();
@@ -154,6 +159,7 @@ class _CountdownState extends State<Countdown> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance!.addObserver(this);
     until = DateTime.now()
         .add(Duration(hours: hours, minutes: minutes, seconds: seconds));
     breakPoint =
@@ -163,8 +169,39 @@ class _CountdownState extends State<Countdown> {
     startCountdown();
   }
 
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    _isInForeground = state == AppLifecycleState.resumed;
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
+
+  void _showNotification() {
+    if (widget.isFirstHalf) {
+      if (timeLeft.inSeconds <= breakPoint) {
+        widget.viewModel.showBigTextNotification("Let's take a pause!", "Hey! why don't you take a break?\nClick to start.");
+      } else if (timeLeft.inSeconds <= breakPoint + 300 && !hasBeenNotified) {
+        widget.viewModel.showBigTextNotification("Keep going!", "5 more minutes to go.");
+        hasBeenNotified = true;
+      }
+    } else if (timeLeft.inSeconds <= 0) {
+      widget.viewModel.showBigTextNotification("Hooray! Your session is complete.", "Let's check you plant buddy. ");
+    } else if (timeLeft.inSeconds <= 300  && !hasBeenNotified) {
+      widget.viewModel.showBigTextNotification("Keep going!", "5 more minutes to go.");
+      hasBeenNotified = true;
+    }
+  }
+
   void countDown() {
     timeLeft = until.difference(DateTime.now());
+    if (!_isInForeground) {
+      _showNotification();
+    }
 
     setState(() {
       if (timeLeft.inSeconds > 0) {

@@ -27,9 +27,10 @@ class NotificationClient {
     AndroidNotificationDetails androidPlatformChannelSpecifics =
         const AndroidNotificationDetails('example_name', 'channel_name',
             playSound: true,
-            sound: RawResourceAndroidNotificationSound('notification'),
+            //sound: RawResourceAndroidNotificationSound('notification'),
             importance: Importance.max,
-            priority: Priority.high);
+            priority: Priority.high,
+            icon: "@mipmap/ic_launcher",);
 
     var not = NotificationDetails(
         android: androidPlatformChannelSpecifics,

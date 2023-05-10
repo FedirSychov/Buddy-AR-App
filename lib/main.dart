@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/views/splashScreenView.dart';
-import 'package:my_app/clients/sharedPrefs.dart';
+import 'package:BUDdy/views/splashScreenView.dart';
+import 'package:BUDdy/clients/sharedPrefs.dart';
 
 final sharedPrefs = SharedPrefs();
 
