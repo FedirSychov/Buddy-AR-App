@@ -18,6 +18,11 @@ class SetupSessionViewModel {
   List<int> translateSessionTimeIntoIntArray(String sessionTime) {
     List<int> outputArray;
     switch (sessionTime) {
+      case "20 secs": // This case is only for demonstration purpose
+        {
+          outputArray = [0, 0, 20];
+          break;
+        }
       case "30 mins":
         {
           outputArray = [0, 30, 0];
@@ -50,6 +55,11 @@ class SetupSessionViewModel {
   List<int> translateBreakTimeIntoIntArray(String breakTime) {
     List<int> outputArray;
     switch (breakTime) {
+      case "20 secs": // This case is only for demonstration purpose
+        {
+          outputArray = [0, 0, 20];
+          break;
+        }
       case "15 mins":
         {
           outputArray = [0, 15, 0];
@@ -80,19 +90,25 @@ class SetupSessionViewModel {
   }
 
   void saveCurrentStudyTime(String selectedDuration) {
-    List<int> studyTime = translateSessionTimeIntoIntArray(selectedDuration);
-    sharedPrefs.setSessionHoursDuration(studyTime[0]);
-    sharedPrefs.setSessionMinsDuration(studyTime[1]);
-    sharedPrefs.setSessionSecsDuration(studyTime[2]);
     sharedPrefs.setSelectedSessionDuration(selectedDuration);
   }
 
   void saveCurrentBreakTime(String selectedDuration) {
-    List<int> breakTime = translateBreakTimeIntoIntArray(selectedDuration);
-    sharedPrefs.setBreakSecsDuration(breakTime[0]);
-    sharedPrefs.setBreakMinsDuration(breakTime[1]);
-    sharedPrefs.setBreakHoursDuration(breakTime[2]);
     sharedPrefs.setSelectedBreakDuration(selectedDuration);
+  }
+
+  void setCountdownValues() {
+    String breakDuration = sharedPrefs.getSelectedBreakDuration() ?? basicBreakDuration;
+    List<int> studyTime = translateSessionTimeIntoIntArray(breakDuration);
+    sharedPrefs.setSessionHoursDuration(studyTime[0]);
+    sharedPrefs.setSessionMinsDuration(studyTime[1]);
+    sharedPrefs.setSessionSecsDuration(studyTime[2]);
+
+    String studyDuration = sharedPrefs.getSelectedSessionDuration() ?? basicStudyDuration;
+    List<int> breakTime = translateBreakTimeIntoIntArray(studyDuration);
+    sharedPrefs.setBreakHoursDuration(breakTime[0]);
+    sharedPrefs.setBreakMinsDuration(breakTime[1]);
+    sharedPrefs.setBreakSecsDuration(breakTime[2]);
   }
 
   String getCurrentStudyTime() {
