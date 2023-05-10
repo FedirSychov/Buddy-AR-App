@@ -227,13 +227,13 @@ class _CountdownState extends State<Countdown> {
               ],
             ),
           );
-        });
+        }).whenComplete(() => { if (!onGoing) resumeCountdown() });
   }
 
   void resumeCountdown() {
     until = DateTime.now().add(timeLeft);
     startCountdown();
-    Navigator.pop(context);
+    //Navigator.pop(context);
   }
 
   void cancelCountdown() {
@@ -242,7 +242,12 @@ class _CountdownState extends State<Countdown> {
   }
 
   void handleButtonPress() {
-    onGoing ? pauseCountdown() : resumeCountdown();
+    if (onGoing) {
+      pauseCountdown();
+    } else {
+      resumeCountdown();
+      Navigator.pop(context);
+    }
   }
 
   void startActivityBreak() {
