@@ -29,8 +29,8 @@ class SharedPrefs {
     await sharedPrefs?.setBool(IS_RETURNING_USER, isReturningUser);
   }
 
-  bool? getReturningUser() {
-    return sharedPrefs?.getBool(IS_RETURNING_USER);
+  bool getReturningUser() {
+    return sharedPrefs?.getBool(IS_RETURNING_USER) ?? false;
   }
 
   void setSessionHoursDuration(int hours) async {

@@ -222,7 +222,7 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
 
   void startCountdown() {
     timer =
-        widget.initTimer(Timer.periodic(const Duration(seconds: 1), (timer) {
+        widget.initTimer(Timer.periodic(const Duration(milliseconds: 250), (timer) {
       countDown();
     }));
     setState(() => onGoing = true);
