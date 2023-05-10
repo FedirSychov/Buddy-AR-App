@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/views/plantPageARView.dart';
 import 'package:my_app/views/setupSessionView.dart';
 import 'package:my_app/views/ongoingSessionView.dart';
 
@@ -90,7 +91,13 @@ class HomeView extends StatelessWidget {
                         children: [
                           IconButton(
                               icon: const Icon(Icons.eco_outlined, size: 28),
-                              onPressed: () {}),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            PlantPageARView()));
+                              }),
                           const Text("Buddy",
                               style:
                                   TextStyle(fontFamily: 'Lato', fontSize: 12)),

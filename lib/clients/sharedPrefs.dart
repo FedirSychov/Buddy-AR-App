@@ -87,12 +87,12 @@ class SharedPrefs {
     await sharedPrefs?.setInt(PLANT_TYPE, plantType.index);
   }
 
-  int? getPlantType() {
-    return sharedPrefs?.getInt(PLANT_TYPE);
+  int getPlantType() {
+    return sharedPrefs?.getInt(PLANT_TYPE) ?? 0;
   }
 
   void incPlantProgress() async {
-    if (getPlantProgress() < 3) {
+    if (getPlantProgress() < 2) {
       // Maximum progress of plants
       await sharedPrefs?.setInt(PLANT_PROGRESS, getPlantProgress() + 1);
     }
