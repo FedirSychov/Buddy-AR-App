@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:my_app/views/DesignViews/buttons.dart';
+import 'package:BUDdy/views/DesignViews/buttons.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import '../clients/sharedPrefs.dart';
 import '../model/activity.dart';
@@ -148,8 +148,9 @@ class Countdown extends StatefulWidget {
   State<Countdown> createState() => _CountdownState();
 }
 
-class _CountdownState extends State<Countdown> {
+class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
   bool onGoing = false;
+  bool _isInForeground = true;
   int hours = SharedPrefs().getBreakHourDuration();
   int minutes = SharedPrefs().getBreakMinsDuration();
   int seconds = SharedPrefs().getBreakSecsDuration();
@@ -160,9 +161,22 @@ class _CountdownState extends State<Countdown> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance!.addObserver(this);
     until = DateTime.now()
         .add(Duration(hours: hours, minutes: minutes, seconds: seconds));
     startCountdown();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    _isInForeground = state == AppLifecycleState.resumed;
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
   }
 
   void countDown() {
@@ -175,7 +189,9 @@ class _CountdownState extends State<Countdown> {
         seconds = timeLeft.inSeconds % 60;
       } else {
         cancelCountdown();
-        widget.viewModel.showBigTextNotification("Hooray! Your break is complete.", "Let's get back to work! ");
+        if (!_isInForeground) {
+          widget.viewModel.showBigTextNotification("Hooray! Your break is complete.", "Let's get back to work! ");
+        }
         Navigator.push(context,
             MaterialPageRoute(builder: (_) => const ActivityCompleteView()));
       }

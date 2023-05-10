@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/views/confirmPlantView.dart';
-import 'package:my_app/views/setupSessionView.dart';
+import 'package:BUDdy/views/confirmPlantView.dart';
+import 'package:BUDdy/views/setupSessionView.dart';
 import '../clients/sharedPrefs.dart';
 import '../model/plantType.dart';
 import 'DesignViews/buttons.dart';

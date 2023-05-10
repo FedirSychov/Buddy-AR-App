@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:my_app/views/DesignViews/buttons.dart';
-import 'package:my_app/views/selectActivityView.dart';
-import 'package:my_app/views/sessionCompleteView.dart';
-import 'package:my_app/views/setupSessionView.dart';
+import 'package:BUDdy/views/DesignViews/buttons.dart';
+import 'package:BUDdy/views/selectActivityView.dart';
+import 'package:BUDdy/views/sessionCompleteView.dart';
+import 'package:BUDdy/views/setupSessionView.dart';
 
 import '../clients/sharedPrefs.dart';
 import '../viewModels/ongoingSessionViewModel.dart';
@@ -182,31 +182,32 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
   }
 
   void _showNotification() {
-    if (!_isInForeground) {
-      if (widget.isFirstHalf) {
-        if (timeLeft.inSeconds <= breakPoint) {
-          widget.viewModel.showBigTextNotification("Let's take a pause!", "Hey! why don't you take a break?\nClick to start.");
-        } else if (timeLeft.inSeconds <= breakPoint + 300 && !hasBeenNotified) {
-          widget.viewModel.showBigTextNotification("Keep going!", "5 more minutes to go.");
-          hasBeenNotified = true;
-        }
-      } else if (!widget.isFirstHalf && timeLeft.inSeconds <= 300) {
+    if (widget.isFirstHalf) {
+      if (timeLeft.inSeconds <= breakPoint) {
+        widget.viewModel.showBigTextNotification("Let's take a pause!", "Hey! why don't you take a break?\nClick to start.");
+      } else if (timeLeft.inSeconds <= breakPoint + 300 && !hasBeenNotified) {
         widget.viewModel.showBigTextNotification("Keep going!", "5 more minutes to go.");
-      } else if (timeLeft.inSeconds <= 0) {
-        widget.viewModel.showBigTextNotification("Hooray! Your session is complete.", "Let's check you plant buddy. ");
+        hasBeenNotified = true;
       }
+    } else if (timeLeft.inSeconds <= 0) {
+      widget.viewModel.showBigTextNotification("Hooray! Your session is complete.", "Let's check you plant buddy. ");
+    } else if (timeLeft.inSeconds <= 300  && !hasBeenNotified) {
+      widget.viewModel.showBigTextNotification("Keep going!", "5 more minutes to go.");
+      hasBeenNotified = true;
     }
   }
 
   void countDown() {
     timeLeft = until.difference(DateTime.now());
+    if (!_isInForeground) {
+      _showNotification();
+    }
 
     setState(() {
       if (timeLeft.inSeconds > 0) {
         hours = timeLeft.inHours % 24;
         minutes = timeLeft.inMinutes % 60;
         seconds = timeLeft.inSeconds % 60;
-        _showNotification();
         if (widget.isFirstHalf && timeLeft.inSeconds <= breakPoint) {
           startActivityBreak();
         }

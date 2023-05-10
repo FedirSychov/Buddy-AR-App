@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/views/DesignViews/buttons.dart';
+import 'package:BUDdy/views/DesignViews/buttons.dart';
 import 'ongoingSessionView.dart';
 
 class ActivityCompleteView extends StatelessWidget {
