@@ -90,14 +90,14 @@ class ActivityView extends StatelessWidget {
               )
             ],
             borderRadius: BorderRadius.circular(20.0),
-            color: Color.fromARGB(255, 246, 236, 228)),
+            color: const Color.fromARGB(255, 246, 236, 228)),
         child: Center(
             child: Column(children: [
           Container(
             margin: const EdgeInsets.symmetric(vertical: 20),
             child: Text(
               viewModel.activityList[index].title,
-              style: TextStyle(fontFamily: 'Lato', fontSize: 24),
+              style: const TextStyle(fontFamily: 'Lato', fontSize: 24),
             ),
           ),
           Container(
@@ -111,13 +111,12 @@ class ActivityView extends StatelessWidget {
             child: Text(
               viewModel.activityList[index].text,
               textAlign: TextAlign.center,
-              style: TextStyle(fontFamily: 'Lato', fontSize: 14),
+              style: const TextStyle(fontFamily: 'Lato', fontSize: 14),
             ),
           ),
         ])),
       ),
       onTap: () {
-        print("test" + viewModel.activityList[index].title);
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -140,7 +139,8 @@ class Indicator extends StatelessWidget {
       width: isActive ? 15.0 : 8.0,
       height: 8.0,
       decoration: BoxDecoration(
-          color: isActive ? Color.fromARGB(255, 255, 176, 57) : Colors.grey,
+          color:
+              isActive ? const Color.fromARGB(255, 255, 176, 57) : Colors.grey,
           borderRadius: BorderRadius.circular(8.0)),
     );
   }
