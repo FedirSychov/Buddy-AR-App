@@ -37,7 +37,7 @@ class HomeView extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: ((context) => const SessionCountdownView())));
+                builder: ((context) => OngoingSessionView(isFirstHalf: true))));
       }),
       const Spacer(),
       const Spacer(),

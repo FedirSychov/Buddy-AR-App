@@ -8,21 +8,17 @@ class SetupSessionViewModel {
   SetupSessionViewModel() {
     sharedPrefs = SharedPrefs();
     if (sharedPrefs.getSelectedSessionDuration() == null) {
-      saveCurrentStudyTime(basicStudyDuration);
+      sharedPrefs.setSelectedSessionDuration(basicStudyDuration);
     }
     if (sharedPrefs.getSelectedBreakDuration() == null) {
-      saveCurrentBreakTime(basicBreakDuration);
+      sharedPrefs.setSelectedBreakDuration(basicBreakDuration);
     }
   }
 
-  List<int> translateSessionTimeIntoIntArray(String sessionTime) {
+  List<int> translateSessionTimeIntoIntArray() {
+    final sessionTime = sharedPrefs.getSelectedSessionDuration();
     List<int> outputArray;
     switch (sessionTime) {
-      case "20 secs": // This case is only for demonstration purpose
-        {
-          outputArray = [0, 0, 20];
-          break;
-        }
       case "30 mins":
         {
           outputArray = [0, 30, 0];
@@ -52,14 +48,10 @@ class SetupSessionViewModel {
     return outputArray;
   }
 
-  List<int> translateBreakTimeIntoIntArray(String breakTime) {
+  List<int> translatebrakTimeIntoIntArray() {
+    final breakTime = sharedPrefs.getSelectedBreakDuration();
     List<int> outputArray;
     switch (breakTime) {
-      case "20 secs": // This case is only for demonstration purpose
-        {
-          outputArray = [0, 0, 20];
-          break;
-        }
       case "15 mins":
         {
           outputArray = [0, 15, 0];
