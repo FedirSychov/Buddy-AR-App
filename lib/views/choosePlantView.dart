@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/views/confirmPlantView.dart';
-import 'package:my_app/views/setupSessionView.dart';
-
+import 'package:BUDdy/views/confirmPlantView.dart';
+import 'package:BUDdy/views/setupSessionView.dart';
 import '../clients/sharedPrefs.dart';
 import '../model/plantType.dart';
 import 'DesignViews/buttons.dart';
@@ -34,29 +33,29 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Container(
-          margin: const EdgeInsets.only(top: 32.0),
+          margin: const EdgeInsets.only(top: 65.0),
           alignment: Alignment.center,
           child: Text(title,
               style: Theme.of(context).textTheme.displayLarge,
               textAlign: TextAlign.center)),
       Container(
-          margin: const EdgeInsets.only(top: 24.0),
+          margin: const EdgeInsets.only(top: 25.0),
           alignment: Alignment.center,
           width: 320.0,
           child: Text(description,
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center)),
       Container(
-          margin: const EdgeInsets.only(top: 32.0),
+          margin: const EdgeInsets.only(top: 30.0),
           child: Row(children: const [
-            Expanded(child: PlantOption(plantTypeOption: PlantType.APPLETREE)),
-            Expanded(child: PlantOption(plantTypeOption: PlantType.MONSTERA))
+            Expanded(child: PlantOption(plantTypeOption: PlantType.appleTree)),
+            Expanded(child: PlantOption(plantTypeOption: PlantType.monstera))
           ])),
       Container(
-          margin: const EdgeInsets.only(top: 29.0),
+          margin: const EdgeInsets.only(top: 30.0),
           child: Row(children: const [
-            Expanded(child: PlantOption(plantTypeOption: PlantType.CACTUS)),
-            Expanded(child: PlantOption(plantTypeOption: PlantType.SNAKEPLANT))
+            Expanded(child: PlantOption(plantTypeOption: PlantType.cactus)),
+            Expanded(child: PlantOption(plantTypeOption: PlantType.snakePlant))
           ])),
       const Bottom()
     ]);
@@ -105,7 +104,7 @@ class PlantOption extends StatelessWidget {
     }
     return InkWell(
         onTap: () {
-          if (plantTypeOption == PlantType.APPLETREE) {
+          if (plantTypeOption == PlantType.appleTree) {
             // Other plants are still WIP
             Navigator.push(
                 context,

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import '../model/activity.dart';
-import 'ongoingActivityView.dart';
+import 'ongoingSessionView.dart';
 
-class ActivityCountdownView extends StatelessWidget {
-  final Activity activity;
-
-  const ActivityCountdownView({super.key, required this.activity});
+class SessionCountdownView extends StatelessWidget {
+  const SessionCountdownView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +13,17 @@ class ActivityCountdownView extends StatelessWidget {
           children: [
             Container(
                 margin: const EdgeInsets.only(top: 65.0),
-                child: Header(activity: activity)),
+                child: const Header()),
             Container(
                 margin: const EdgeInsets.only(top: 75.0),
-                child: KeyVisual(activity: activity)),
+                child: const KeyVisual()),
             Container(
                 margin: const EdgeInsets.only(top: 40.0),
                 child: Text('Let\'s start?',
                     style: Theme.of(context).textTheme.displayLarge)),
             Container(
               margin: const EdgeInsets.only(top: 60.0),
-              child: Countdown(activity: activity),
+              child: const Countdown(),
             )
           ],
         ));
@@ -34,15 +31,13 @@ class ActivityCountdownView extends StatelessWidget {
 }
 
 class Header extends StatelessWidget {
-  final Activity activity;
-
-  const Header({super.key, required this.activity});
+  const Header({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Row(children: [
       Expanded(
-          child: Text(activity.title,
+          child: Text("My study session",
               style: Theme.of(context)
                   .textTheme
                   .displayLarge
@@ -53,20 +48,16 @@ class Header extends StatelessWidget {
 }
 
 class KeyVisual extends StatelessWidget {
-  const KeyVisual({super.key, required this.activity});
-
-  final Activity activity;
+  const KeyVisual({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(activity.assetPath, height: 233, width: 290);
+    return Image.asset("assets/images/learning.jpg", height: 233, width: 290);
   }
 }
 
 class Countdown extends StatefulWidget {
-  final Activity activity;
-
-  const Countdown({super.key, required this.activity});
+  const Countdown({super.key});
 
   @override
   State<Countdown> createState() => _CountdownState();
@@ -97,8 +88,7 @@ class _CountdownState extends State<Countdown> {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (_) =>
-                    OngoingActivityView(activity: widget.activity)));
+                builder: (_) => OngoingSessionView(isFirstHalf: true)));
       }
     });
   }

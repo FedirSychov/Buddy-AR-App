@@ -22,17 +22,15 @@ class SharedPrefs {
   final String SELECTED_BREAK_DURATION = "selectedBreakDuration";
 
   init() async {
-    if (sharedPrefs == null) {
-      sharedPrefs = await SharedPreferences.getInstance();
-    }
+    sharedPrefs ??= await SharedPreferences.getInstance();
   }
 
   void setIsReturningUser(bool isReturningUser) async {
     await sharedPrefs?.setBool(IS_RETURNING_USER, isReturningUser);
   }
 
-  bool? getReturningUser() {
-    return sharedPrefs?.getBool(IS_RETURNING_USER);
+  bool getReturningUser() {
+    return sharedPrefs?.getBool(IS_RETURNING_USER) ?? false;
   }
 
   void setSessionHoursDuration(int hours) async {
@@ -92,8 +90,7 @@ class SharedPrefs {
   }
 
   void incPlantProgress() async {
-    if (getPlantProgress() < 3) {
-      // Maximum progress of plants
+    if (getPlantProgress() < 2) { // Maximum progress of plants
       await sharedPrefs?.setInt(PLANT_PROGRESS, getPlantProgress() + 1);
     }
   }

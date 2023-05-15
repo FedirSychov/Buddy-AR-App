@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/clients/sharedPrefs.dart';
-import 'package:my_app/main.dart';
-import 'package:my_app/viewModels/setupSessionViewModel.dart';
-import 'package:my_app/views/DesignViews/buttons.dart';
-import 'package:my_app/views/homeView.dart';
+import 'package:BUDdy/clients/sharedPrefs.dart';
+import 'package:BUDdy/main.dart';
+import 'package:BUDdy/viewModels/setupSessionViewModel.dart';
+import 'package:BUDdy/views/DesignViews/buttons.dart';
+import 'package:BUDdy/views/homeView.dart';
 
 class SetupSessionView extends StatelessWidget {
   var viewModel = SetupSessionViewModel();
 
   SetupSessionView({super.key});
 
-  var sessionTimeArray = ["30 mins", "1 hour", "1,5 hours", "2 hours"];
+  var sessionTimeArray = ["20 secs", "30 mins", "1 hour", "1,5 hours", "2 hours"];
 
-  var breakTimeArray = ["15 mins", "30 mins", "45 mins", "1 hour"];
+  var breakTimeArray = ["20 secs", "15 mins", "30 mins", "45 mins", "1 hour"];
 
   // This widget is the root of your application.
   @override
@@ -81,7 +81,7 @@ class SetupSessionView extends StatelessWidget {
           ),
           const Spacer(),
           SimpleButton("Save session", () {
-            bool isOnboarded = SharedPrefs().getReturningUser() ?? false;
+              viewModel.setCountdownValues();
               Navigator.push(context,
                   MaterialPageRoute(builder: ((context) => HomeView())));
           }),

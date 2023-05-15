@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:my_app/views/DesignViews/buttons.dart';
+import 'package:BUDdy/views/DesignViews/buttons.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import '../clients/sharedPrefs.dart';
 import '../model/activity.dart';
+import '../viewModels/ongoingActivityViewModel.dart';
 import 'activityCompleteView.dart';
 import 'ongoingSessionView.dart';
 
 class OngoingActivityView extends StatelessWidget {
+  final OngoingActivityViewModel viewModel = OngoingActivityViewModel();
   final Activity activity;
   Timer? timer;
 
@@ -29,14 +31,14 @@ class OngoingActivityView extends StatelessWidget {
         body: Column(
           children: [
             Container(
-                margin: const EdgeInsets.only(top: 32.0),
+                margin: const EdgeInsets.only(top: 65.0),
                 child: Header(activity: activity, cancelTimer: _cancelTimer)),
             Container(
-                margin: const EdgeInsets.only(top: 73.0),
+                margin: const EdgeInsets.only(top: 75.0),
                 child: KeyVisual(activity: activity)),
             Container(
-              margin: const EdgeInsets.only(top: 66.0),
-              child: Countdown(initTimer: _initTimer),
+              margin: const EdgeInsets.only(top: 65.0),
+              child: Countdown(initTimer: _initTimer, activity: activity, viewModel: viewModel),
             )
           ],
         ));
@@ -102,7 +104,7 @@ class Header extends StatelessWidget {
           _dialogBuilder(context);
         },
         child: Container(
-            margin: const EdgeInsets.only(left: 16.0),
+            margin: const EdgeInsets.only(left: 15.0),
             width: 32.0,
             height: 32.0,
             child: Image.asset('assets/images/icons/Arrow.png',
@@ -115,17 +117,11 @@ class Header extends StatelessWidget {
                   .displayLarge
                   ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
               textAlign: TextAlign.center)),
-      InkWell(
-        onTap: () {
-          _dialogBuilder(context); // ShowBottomModal
-        },
-        child: Container(
-            margin: const EdgeInsets.only(right: 16.0),
-            width: 32.0,
-            height: 32.0,
-            child: Image.asset('assets/images/icons/Camera.png',
-                width: 24.0, height: 24.0)),
-      )
+      Container(
+        margin: const EdgeInsets.only(right: 15.0),
+        width: 32.0,
+        height: 32.0,
+      ),
     ]);
   }
 }
@@ -143,15 +139,18 @@ class KeyVisual extends StatelessWidget {
 
 class Countdown extends StatefulWidget {
   final Function initTimer;
+  final Activity activity;
+  final OngoingActivityViewModel viewModel;
 
-  const Countdown({super.key, required this.initTimer});
+  const Countdown({super.key, required this.initTimer, required this.activity, required this.viewModel});
 
   @override
   State<Countdown> createState() => _CountdownState();
 }
 
-class _CountdownState extends State<Countdown> {
+class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
   bool onGoing = false;
+  bool _isInForeground = true;
   int hours = SharedPrefs().getBreakHourDuration();
   int minutes = SharedPrefs().getBreakMinsDuration();
   int seconds = SharedPrefs().getBreakSecsDuration();
@@ -162,9 +161,22 @@ class _CountdownState extends State<Countdown> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance!.addObserver(this);
     until = DateTime.now()
         .add(Duration(hours: hours, minutes: minutes, seconds: seconds));
     startCountdown();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    _isInForeground = state == AppLifecycleState.resumed;
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
   }
 
   void countDown() {
@@ -177,6 +189,9 @@ class _CountdownState extends State<Countdown> {
         seconds = timeLeft.inSeconds % 60;
       } else {
         cancelCountdown();
+        if (!_isInForeground) {
+          widget.viewModel.showBigTextNotification("Hooray! Your break is complete.", "Let's get back to work! ");
+        }
         Navigator.push(context,
             MaterialPageRoute(builder: (_) => const ActivityCompleteView()));
       }
@@ -185,7 +200,7 @@ class _CountdownState extends State<Countdown> {
 
   void startCountdown() {
     timer =
-        widget.initTimer(Timer.periodic(const Duration(seconds: 1), (timer) {
+        widget.initTimer(Timer.periodic(const Duration(milliseconds: 250), (timer) {
       countDown();
     }));
     setState(() => onGoing = true);
@@ -207,27 +222,26 @@ class _CountdownState extends State<Countdown> {
             child: Column(
               children: <Widget>[
                 Container(
-                    margin: const EdgeInsets.only(top: 16.0),
+                    margin: const EdgeInsets.only(top: 30.0),
                     width: 294,
-                    child: Text('Take a 15 min walk',
+                    child: Text(widget.activity.title,
                         style: Theme.of(context).textTheme.displayLarge,
                         textAlign: TextAlign.center)),
                 Container(
-                    margin: const EdgeInsets.only(top: 42.0),
+                    margin: const EdgeInsets.only(top: 15.0),
                     width: 328,
                     height: 200,
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: VideoPlayer())),
                 Container(
-                    margin: const EdgeInsets.only(top: 16.0),
+                    margin: const EdgeInsets.only(top: 25.0),
                     width: 294,
-                    child: Text(
-                        'No we aren\'t going to make you watch a tutorial on how to walk. Walk to your fridge for a beverage or take a stroll outside with Rick in your pocket ;-)',
+                    child: Text(widget.activity.breakDescription,
                         style: Theme.of(context).textTheme.bodySmall,
                         textAlign: TextAlign.center)),
                 Container(
-                  margin: const EdgeInsets.only(top: 34.0),
+                  margin: const EdgeInsets.only(top: 25.0),
                   child: PauseButton("session", () {
                     handleButtonPress();
                   }, onGoing),
@@ -235,13 +249,12 @@ class _CountdownState extends State<Countdown> {
               ],
             ),
           );
-        });
+        }).whenComplete(() => {if (!onGoing) resumeCountdown()});
   }
 
   void resumeCountdown() {
     until = DateTime.now().add(timeLeft);
     startCountdown();
-    Navigator.pop(context);
   }
 
   void cancelCountdown() {
@@ -250,7 +263,12 @@ class _CountdownState extends State<Countdown> {
   }
 
   void handleButtonPress() {
-    onGoing ? pauseCountdown() : resumeCountdown();
+    if (onGoing) {
+      pauseCountdown();
+    } else {
+      resumeCountdown();
+      Navigator.pop(context);
+    }
   }
 
   @override
@@ -267,7 +285,7 @@ class _CountdownState extends State<Countdown> {
               ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
         ),
         Container(
-          margin: const EdgeInsets.only(top: 41.0),
+          margin: const EdgeInsets.only(top: 40.0),
           child: PauseButton("session", () {
             handleButtonPress();
           }, onGoing),

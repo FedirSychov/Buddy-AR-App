@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/views/DesignViews/buttons.dart';
+import 'package:BUDdy/views/DesignViews/buttons.dart';
 import 'ongoingSessionView.dart';
 
 class ActivityCompleteView extends StatelessWidget {
@@ -12,10 +12,10 @@ class ActivityCompleteView extends StatelessWidget {
         body: Column(
           children: [
             Container(
-                margin: const EdgeInsets.only(top: 32.0),
+                margin: const EdgeInsets.only(top: 65.0),
                 child: const Header()),
             Container(
-                margin: const EdgeInsets.only(top: 107.0),
+                margin: const EdgeInsets.only(top: 100.0),
                 child: const KeyVisual()),
             Container(
                 margin: const EdgeInsets.only(top: 100.0),

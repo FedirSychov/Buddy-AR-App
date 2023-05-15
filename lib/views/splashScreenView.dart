@@ -1,18 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:my_app/clients/sharedPrefs.dart';
-import 'package:my_app/views/onboardingView.dart';
-import 'package:my_app/views/setupSessionView.dart';
+import 'package:BUDdy/clients/sharedPrefs.dart';
+import 'package:BUDdy/views/onboardingView.dart';
+import 'package:BUDdy/views/setupSessionView.dart';
 
 class SplashScreenView extends StatelessWidget {
   const SplashScreenView({super.key});
 
   Widget getNextView() {
-    bool? isReturningUser = SharedPrefs().getReturningUser();
-    if (isReturningUser == null) {
-      return const OnboardingView();
-    }
+    bool isReturningUser = SharedPrefs().getReturningUser();
     return isReturningUser ? SetupSessionView() : const OnboardingView();
   }
 
