@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:my_app/views/DesignViews/customShape.dart';
+import 'package:BUDdy/views/DesignViews/customShape.dart';
 
 class SpeechBubble extends StatefulWidget {
   String message;
