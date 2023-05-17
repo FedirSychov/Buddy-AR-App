@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CustomShape extends CustomPainter {
+  final int textLength;
   final Color bgColor;
   final bool leftSide;
   final double width;
   final bool smallText;
 
-  CustomShape(this.bgColor, this.leftSide, this.width, this.smallText);
+  CustomShape(
+      this.textLength, this.bgColor, this.leftSide, this.width, this.smallText);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -22,9 +24,9 @@ class CustomShape extends CustomPainter {
     ]; //0,1,2 = x1,x2,x3, 3,4,5 = y1,y2,y3
 
     if (leftSide) {
-      xyAray[0] = -width / 4 - 10;
-      xyAray[1] = -width / 4 - 20;
-      xyAray[2] = -width / 4 - 30;
+      xyAray[0] = -width / 4 - 50;
+      xyAray[1] = -width / 4 - 60;
+      xyAray[2] = -width / 4 - 70;
     } else {
       xyAray[0] = -20;
       xyAray[1] = -30;
@@ -39,6 +41,12 @@ class CustomShape extends CustomPainter {
       xyAray[3] = 55;
       xyAray[4] = 85;
       xyAray[5] = 55;
+    }
+
+    if (smallText && textLength > 32) {
+      xyAray[3] = 20;
+      xyAray[4] = 50;
+      xyAray[5] = 20;
     }
 
     path.lineTo(xyAray[0], xyAray[3]);

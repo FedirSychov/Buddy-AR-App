@@ -1,15 +1,15 @@
+import 'package:BUDdy/model/EnumSpeechBubbles.dart';
+import 'package:BUDdy/views/DesignViews/customShape.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:my_app/views/DesignViews/customShape.dart';
 
 class SpeechBubble extends StatefulWidget {
-  String message;
-  bool smallText;
-  bool leftSide;
+  bool withAnimation;
+  BubbleType type;
   var context;
   late double width;
-  SpeechBubble(this.message, this.smallText, this.leftSide, this.context) {
+  SpeechBubble(this.withAnimation, this.type, this.context) {
     width = MediaQuery.of(context).size.height;
   }
 
@@ -24,8 +24,8 @@ class _SpeechBubble extends State<SpeechBubble> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    controller = AnimationController(
+        vsync: this, duration: Duration(seconds: widget.withAnimation ? 1 : 0));
     animation = CurvedAnimation(parent: controller, curve: Curves.easeInOut);
 
     repeatOnce();
@@ -70,10 +70,11 @@ class _SpeechBubble extends State<SpeechBubble> with TickerProviderStateMixin {
                           topRight: Radius.circular(18)),
                     ),
                     child: Text(
-                      widget.message,
+                      widget.type.message,
                       style: TextStyle(
                           fontFamily: 'Lato',
-                          fontSize: widget.smallText ? 14 : 24),
+                          fontSize: widget.type.smallText ? 14 : 24),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
@@ -81,10 +82,11 @@ class _SpeechBubble extends State<SpeechBubble> with TickerProviderStateMixin {
                   margin: const EdgeInsets.only(top: 50, right: 20),
                   child: CustomPaint(
                       painter: CustomShape(
+                          widget.type.message.length,
                           const Color.fromARGB(255, 246, 236, 228),
-                          widget.leftSide,
+                          widget.type.leftSide,
                           widget.width,
-                          widget.smallText)),
+                          widget.type.smallText)),
                 )
               ],
             ))
