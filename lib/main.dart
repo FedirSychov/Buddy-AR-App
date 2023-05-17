@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:BUDdy/views/splashScreenView.dart';
 import 'package:BUDdy/clients/sharedPrefs.dart';
+import 'package:flutter/services.dart';
 
 final sharedPrefs = SharedPrefs();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode (SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
   await sharedPrefs.init();
   runApp(const BUDdyApp());
 }
