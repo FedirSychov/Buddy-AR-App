@@ -38,7 +38,10 @@ class OngoingActivityView extends StatelessWidget {
                 child: KeyVisual(activity: activity)),
             Container(
               margin: const EdgeInsets.only(top: 65.0),
-              child: Countdown(initTimer: _initTimer, activity: activity, viewModel: viewModel),
+              child: Countdown(
+                  initTimer: _initTimer,
+                  activity: activity,
+                  viewModel: viewModel),
             )
           ],
         ));
@@ -63,7 +66,10 @@ class Header extends StatelessWidget {
       actions: <Widget>[
         TextButton(
           style: TextButton.styleFrom(
-            textStyle: Theme.of(context).textTheme.labelLarge,
+            textStyle: Theme.of(context)
+                .textTheme
+                .labelLarge
+                ?.copyWith(color: Theme.of(context).colorScheme.primary),
           ),
           child: const Text('Cancel'),
           onPressed: () {
@@ -72,7 +78,10 @@ class Header extends StatelessWidget {
         ),
         TextButton(
           style: TextButton.styleFrom(
-            textStyle: Theme.of(context).textTheme.labelLarge,
+            textStyle: Theme.of(context)
+                .textTheme
+                .labelLarge
+                ?.copyWith(color: Theme.of(context).colorScheme.primary),
           ),
           child: const Text('Accept'),
           onPressed: () {
@@ -142,7 +151,11 @@ class Countdown extends StatefulWidget {
   final Activity activity;
   final OngoingActivityViewModel viewModel;
 
-  const Countdown({super.key, required this.initTimer, required this.activity, required this.viewModel});
+  const Countdown(
+      {super.key,
+      required this.initTimer,
+      required this.activity,
+      required this.viewModel});
 
   @override
   State<Countdown> createState() => _CountdownState();
@@ -190,7 +203,8 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
       } else {
         cancelCountdown();
         if (!_isInForeground) {
-          widget.viewModel.showBigTextNotification("Hooray! Your break is complete.", "Let's get back to work! ");
+          widget.viewModel.showBigTextNotification(
+              "Hooray! Your break is complete.", "Let's get back to work! ");
         }
         Navigator.push(context,
             MaterialPageRoute(builder: (_) => const ActivityCompleteView()));
@@ -199,8 +213,8 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
   }
 
   void startCountdown() {
-    timer =
-        widget.initTimer(Timer.periodic(const Duration(milliseconds: 250), (timer) {
+    timer = widget
+        .initTimer(Timer.periodic(const Duration(milliseconds: 250), (timer) {
       countDown();
     }));
     setState(() => onGoing = true);
@@ -225,7 +239,11 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
                     margin: const EdgeInsets.only(top: 30.0),
                     width: 294,
                     child: Text(widget.activity.title,
-                        style: Theme.of(context).textTheme.displayLarge,
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge
+                            ?.copyWith(
+                                color: Theme.of(context).colorScheme.onSurface),
                         textAlign: TextAlign.center)),
                 Container(
                     margin: const EdgeInsets.only(top: 15.0),
@@ -238,7 +256,9 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
                     margin: const EdgeInsets.only(top: 25.0),
                     width: 294,
                     child: Text(widget.activity.breakDescription,
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant),
                         textAlign: TextAlign.center)),
                 Container(
                   margin: const EdgeInsets.only(top: 25.0),

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:BUDdy/clients/sharedPrefs.dart';
-import 'package:BUDdy/main.dart';
 import 'package:BUDdy/viewModels/setupSessionViewModel.dart';
 import 'package:BUDdy/views/DesignViews/buttons.dart';
 import 'package:BUDdy/views/homeView.dart';
@@ -10,7 +8,13 @@ class SetupSessionView extends StatelessWidget {
 
   SetupSessionView({super.key});
 
-  var sessionTimeArray = ["20 secs", "30 mins", "1 hour", "1,5 hours", "2 hours"];
+  var sessionTimeArray = [
+    "20 secs",
+    "30 mins",
+    "1 hour",
+    "1,5 hours",
+    "2 hours"
+  ];
 
   var breakTimeArray = ["20 secs", "15 mins", "30 mins", "45 mins", "1 hour"];
 
@@ -18,35 +22,43 @@ class SetupSessionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Column(
         children: [
           const SizedBox(
             width: 10,
             height: 64,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 62, vertical: 24),
-            child: Center(
-                child: Text(
-              "Set-up a study session",
-              style: TextStyle(fontFamily: 'Lato', fontSize: 24),
-            )),
-          ),
-          const Center(
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: 62, vertical: 24),
+              child: Center(
+                child: Text("Set-up a study session",
+                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground),
+                    textAlign: TextAlign.center),
+              )),
+          Center(
               child: SizedBox(
             width: 350,
             height: 48,
             child: Text(
               "Set-up a study session by choosing your preferable study and activity duration.",
-              style: TextStyle(fontFamily: 'Lato', fontSize: 16),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
               textAlign: TextAlign.center,
             ),
           )),
           const Spacer(),
-          const Center(
+          Center(
             child: Text(
               "Set a duration for your study session",
-              style: TextStyle(fontFamily: 'Lato', fontSize: 14),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall
+                  ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
+              textAlign: TextAlign.center,
             ),
           ),
           Padding(
@@ -58,10 +70,14 @@ class SetupSessionView extends StatelessWidget {
             width: 10,
             height: 42,
           ),
-          const Center(
+          Center(
             child: Text(
               "Set a duration for your activity break",
-              style: TextStyle(fontFamily: 'Lato', fontSize: 14),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall
+                  ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
+              textAlign: TextAlign.center,
             ),
           ),
           Padding(
@@ -73,17 +89,19 @@ class SetupSessionView extends StatelessWidget {
             width: 10,
             height: 52,
           ),
-          const Center(
+          Center(
             child: Text(
               "You can change these settings anytime later",
-              style: TextStyle(fontFamily: 'Lato', fontSize: 12),
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant),
+              textAlign: TextAlign.center,
             ),
           ),
           const Spacer(),
           SimpleButton("Save session", () {
-              viewModel.setCountdownValues();
-              Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => HomeView())));
+            viewModel.setCountdownValues();
+            Navigator.push(
+                context, MaterialPageRoute(builder: ((context) => HomeView())));
           }),
           const Spacer(),
           const Spacer()
@@ -97,11 +115,11 @@ class TimePicker extends StatefulWidget {
   var timeArray = [];
   var position = 0;
   var basicTime = "";
-  Function(String time) setTimeFuntion;
+  Function(String time) setTimeFunction;
   Function getTimeFunction;
 
-  TimePicker(this.timeArray, this.position, this.basicTime, this.setTimeFuntion,
-      this.getTimeFunction) {
+  TimePicker(this.timeArray, this.position, this.basicTime,
+      this.setTimeFunction, this.getTimeFunction) {
     for (var i = 0; i < timeArray.length; i++) {
       if (timeArray[i] == getTimeFunction()) {
         position = i;
@@ -117,7 +135,6 @@ class _TimePickerState extends State<TimePicker> {
   BoxDecoration myBoxDecoration() {
     return BoxDecoration(
         border: Border.all(),
-        color: const Color.fromARGB(255, 130, 117, 104),
         borderRadius: const BorderRadius.all(Radius.circular(8.0)));
   }
 
@@ -129,8 +146,8 @@ class _TimePickerState extends State<TimePicker> {
       width: 300,
       height: 62,
       child: Container(
-        decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 255, 248, 244),
+        decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.all(Radius.circular(8.0))),
         child: Row(
@@ -143,19 +160,23 @@ class _TimePickerState extends State<TimePicker> {
                     //call method from ViewModel
                     if (widget.position > 0) {
                       setState(() => widget.position--);
-                      widget.setTimeFuntion(widget.timeArray[widget.position]);
+                      widget.setTimeFunction(widget.timeArray[widget.position]);
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(0, 0, 0, 0),
-                      foregroundColor: Colors.black,
+                      backgroundColor: Theme.of(context).colorScheme.surface,
+                      foregroundColor: Theme.of(context).colorScheme.onSurface,
                       elevation: 0,
                       padding: EdgeInsets.zero),
                   icon: const Icon(Icons.arrow_left, size: 28),
                   label: const Text(""),
                 )),
             const Spacer(),
-            Text(widget.timeArray[widget.position]),
+            Text(widget.timeArray[widget.position],
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(color: Theme.of(context).colorScheme.onSurface)),
             const Spacer(),
             Directionality(
                 textDirection: TextDirection.rtl,
@@ -165,13 +186,15 @@ class _TimePickerState extends State<TimePicker> {
                       onPressed: () {
                         if (widget.position < widget.timeArray.length - 1) {
                           setState(() => widget.position++);
-                          widget.setTimeFuntion(
+                          widget.setTimeFunction(
                               widget.timeArray[widget.position]);
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(0, 140, 5, 5),
-                          foregroundColor: Colors.black,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.surface,
+                          foregroundColor:
+                              Theme.of(context).colorScheme.onSurface,
                           elevation: 0,
                           padding: const EdgeInsets.symmetric(horizontal: 10)),
                       icon: const Icon(Icons.arrow_left, size: 28),

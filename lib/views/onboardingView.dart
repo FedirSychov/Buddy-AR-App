@@ -26,20 +26,20 @@ class _OnboardingViewState extends State<OnboardingView> {
           Container(
               margin: const EdgeInsets.only(top: 65.0),
               child: CarouselSlider(
-            options: CarouselOptions(
-              height: 653,
-              autoPlay: false,
-              aspectRatio: 2.0,
-              enlargeCenterPage: true,
-              enableInfiniteScroll: false,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  currentIndex = index;
-                });
-              },
-            ),
-            items: items,
-          )),
+                options: CarouselOptions(
+                  height: 653,
+                  autoPlay: false,
+                  aspectRatio: 2.0,
+                  enlargeCenterPage: true,
+                  enableInfiniteScroll: false,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      currentIndex = index;
+                    });
+                  },
+                ),
+                items: items,
+              )),
           Container(
               height: 30,
               margin: const EdgeInsets.only(top: 40.0, bottom: 45.0),
@@ -71,7 +71,10 @@ class OnboardingScreen extends StatelessWidget {
       Container(
           alignment: Alignment.center,
           child: Text(screen.title,
-              style: Theme.of(context).textTheme.displayLarge,
+              style: Theme.of(context)
+                  .textTheme
+                  .displayLarge
+                  ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
               textAlign: TextAlign.center)),
       Container(
           margin: const EdgeInsets.only(top: 75.0),
@@ -83,7 +86,10 @@ class OnboardingScreen extends StatelessWidget {
           child: Text(
             screen.description,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
           )),
       if (screen == Screens.stressRelieving)
         Container(

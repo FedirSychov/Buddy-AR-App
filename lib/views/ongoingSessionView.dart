@@ -38,7 +38,10 @@ class OngoingSessionView extends StatelessWidget {
                 child: const KeyVisual()),
             Container(
               margin: const EdgeInsets.only(top: 65.0),
-              child: Countdown(initTimer: _initTimer, isFirstHalf: isFirstHalf, viewModel: viewModel),
+              child: Countdown(
+                  initTimer: _initTimer,
+                  isFirstHalf: isFirstHalf,
+                  viewModel: viewModel),
             )
           ],
         ));
@@ -62,7 +65,10 @@ class Header extends StatelessWidget {
       actions: <Widget>[
         TextButton(
           style: TextButton.styleFrom(
-            textStyle: Theme.of(context).textTheme.labelLarge,
+            textStyle: Theme.of(context)
+                .textTheme
+                .labelLarge
+                ?.copyWith(color: Theme.of(context).colorScheme.primary),
           ),
           child: const Text('Cancel'),
           onPressed: () {
@@ -71,7 +77,10 @@ class Header extends StatelessWidget {
         ),
         TextButton(
           style: TextButton.styleFrom(
-            textStyle: Theme.of(context).textTheme.labelLarge,
+            textStyle: Theme.of(context)
+                .textTheme
+                .labelLarge
+                ?.copyWith(color: Theme.of(context).colorScheme.primary),
           ),
           child: const Text('Accept'),
           onPressed: () {
@@ -138,7 +147,10 @@ class Countdown extends StatefulWidget {
   final OngoingSessionViewModel viewModel;
 
   const Countdown(
-      {super.key, required this.initTimer, required this.isFirstHalf, required this.viewModel});
+      {super.key,
+      required this.initTimer,
+      required this.isFirstHalf,
+      required this.viewModel});
 
   @override
   State<Countdown> createState() => _CountdownState();
@@ -184,15 +196,19 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
   void _showNotification() {
     if (widget.isFirstHalf) {
       if (timeLeft.inSeconds <= breakPoint) {
-        widget.viewModel.showBigTextNotification("Let's take a pause!", "Hey! why don't you take a break?\nClick to start.");
+        widget.viewModel.showBigTextNotification("Let's take a pause!",
+            "Hey! why don't you take a break?\nClick to start.");
       } else if (timeLeft.inSeconds <= breakPoint + 300 && !hasBeenNotified) {
-        widget.viewModel.showBigTextNotification("Keep going!", "5 more minutes to go.");
+        widget.viewModel
+            .showBigTextNotification("Keep going!", "5 more minutes to go.");
         hasBeenNotified = true;
       }
     } else if (timeLeft.inSeconds <= 0) {
-      widget.viewModel.showBigTextNotification("Hooray! Your session is complete.", "Let's check you plant buddy. ");
-    } else if (timeLeft.inSeconds <= 300  && !hasBeenNotified) {
-      widget.viewModel.showBigTextNotification("Keep going!", "5 more minutes to go.");
+      widget.viewModel.showBigTextNotification(
+          "Hooray! Your session is complete.", "Let's check you plant buddy. ");
+    } else if (timeLeft.inSeconds <= 300 && !hasBeenNotified) {
+      widget.viewModel
+          .showBigTextNotification("Keep going!", "5 more minutes to go.");
       hasBeenNotified = true;
     }
   }
@@ -221,8 +237,8 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
   }
 
   void startCountdown() {
-    timer =
-        widget.initTimer(Timer.periodic(const Duration(milliseconds: 250), (timer) {
+    timer = widget
+        .initTimer(Timer.periodic(const Duration(milliseconds: 250), (timer) {
       countDown();
     }));
     setState(() => onGoing = true);
@@ -253,7 +269,9 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
                     width: 294,
                     child: Text(
                         'You’re doing well. Let’s continue with the study session. You will get an activity break soon :D',
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant),
                         textAlign: TextAlign.center)),
                 Container(
                   margin: const EdgeInsets.only(top: 35.0),
@@ -264,7 +282,7 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
               ],
             ),
           );
-        }).whenComplete(() => { if (!onGoing) resumeCountdown() });
+        }).whenComplete(() => {if (!onGoing) resumeCountdown()});
   }
 
   void resumeCountdown() {

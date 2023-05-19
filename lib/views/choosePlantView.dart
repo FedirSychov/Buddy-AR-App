@@ -36,14 +36,20 @@ class Header extends StatelessWidget {
           margin: const EdgeInsets.only(top: 65.0),
           alignment: Alignment.center,
           child: Text(title,
-              style: Theme.of(context).textTheme.displayLarge,
+              style: Theme.of(context)
+                  .textTheme
+                  .displayLarge
+                  ?.copyWith(color: Theme.of(context).colorScheme.onSurface),
               textAlign: TextAlign.center)),
       Container(
           margin: const EdgeInsets.only(top: 25.0),
           alignment: Alignment.center,
           width: 320.0,
           child: Text(description,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: Theme.of(context).colorScheme.onSurface),
               textAlign: TextAlign.center)),
       Container(
           margin: const EdgeInsets.only(top: 30.0),
@@ -152,7 +158,8 @@ class Bottom extends StatelessWidget {
       return Container(
           margin: const EdgeInsets.only(top: 64.0),
           child: Text("Tap on a plant to proceed",
-              style: Theme.of(context).textTheme.bodySmall,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant),
               textAlign: TextAlign.center));
     }
     return Container(

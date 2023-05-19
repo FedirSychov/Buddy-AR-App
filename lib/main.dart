@@ -26,19 +26,27 @@ class BUDdyApp extends StatelessWidget {
           displayLarge: TextStyle(
               fontSize: 24.0,
               fontWeight: FontWeight.w400,
-              color: Color(0xff1F1B16)),
+              color: Color(0xffff0000)), // to see missing use of context colorScheme
           bodyLarge: TextStyle(
               fontSize: 57.0,
               fontWeight: FontWeight.w400,
-              color: Color(0xff1F1B16)),
+              color: Color(0xffff0000)),
           bodyMedium: TextStyle(
               fontSize: 16.0,
               fontWeight: FontWeight.w400,
-              color: Color(0xff1F1B16)),
+              color: Color(0xffff0000)),
           bodySmall: TextStyle(
               fontSize: 14.0,
               fontWeight: FontWeight.w400,
-              color: Color(0xff1F1B16)),
+              color: Color(0xffff0000)),
+          labelLarge: TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              color: Color(0xffff0000)),
+          labelMedium: TextStyle(
+              fontSize: 12.0,
+              fontWeight: FontWeight.w500,
+              color: Color(0xffff0000)),
         ),
         colorScheme: ColorScheme.fromSwatch().copyWith(
             primary: const Color(0xff855300),
@@ -60,10 +68,11 @@ class BUDdyApp extends StatelessWidget {
             onErrorContainer: const Color(0xff410002),
             background: const Color(0xffFFFBFF),
             onBackground: const Color(0xff1F1B16),
-            surface: const Color(0xffFFFBFF),
+            surface: const Color(0xffFFF8F4),
             onSurface: const Color(0xff1F1B16),
             surfaceVariant: const Color(0xffF1E0D0),
             onSurfaceVariant: const Color(0xff504539),
+            inverseSurface: const Color(0xffF6ECE4), // surfaceContainer (not supported anymore) in design
             surfaceTint: const Color(0xffFCF2EA),
             outline: const Color(0xff827568),
             outlineVariant: const Color(0xffD4C4B5)),
