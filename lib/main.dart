@@ -26,7 +26,7 @@ class BUDdyApp extends StatelessWidget {
           displayLarge: TextStyle(
               fontSize: 24.0,
               fontWeight: FontWeight.w400,
-              color: Color(0xffff0000)),
+              color: Color(0xffff0000)), // to see missing use of context colorScheme
           bodyLarge: TextStyle(
               fontSize: 57.0,
               fontWeight: FontWeight.w400,

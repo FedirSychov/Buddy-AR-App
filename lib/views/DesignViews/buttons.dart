@@ -22,10 +22,9 @@ class _SimpleButtonState extends State<SimpleButton> {
           widget.func();
         },
         child: Text(widget.text,
-            style: Theme.of(context)
-                .textTheme
-                .labelLarge
-                ?.copyWith(fontFamily: 'Roboto', color: Theme.of(context).colorScheme.onPrimary)),
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                fontFamily: 'Roboto',
+                color: Theme.of(context).colorScheme.onPrimary)),
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.fromLTRB(25, 10, 25, 10),
           backgroundColor: Theme.of(context).colorScheme.primary,
@@ -122,10 +121,9 @@ class _CancelButtonState extends State<CancelButton> {
           widget.func();
         },
         child: Text(widget.text,
-            style: Theme.of(context)
-                .textTheme
-                .labelLarge
-                ?.copyWith(fontFamily: 'Roboto', color: Theme.of(context).colorScheme.outline)),
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                fontFamily: 'Roboto',
+                color: Theme.of(context).colorScheme.outline)),
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.fromLTRB(25, 10, 25, 10),
           backgroundColor: Colors.transparent,
