@@ -17,15 +17,19 @@ class _SimpleButtonState extends State<SimpleButton> {
     return Center(
         child: SizedBox(
       height: 40,
-      width: 131,
       child: TextButton(
         onPressed: () {
           widget.func();
         },
-        child: Text(widget.text, style: TextStyle(fontSize: 13)),
+        child: Text(widget.text,
+            style: Theme.of(context)
+                .textTheme
+                .labelLarge
+                ?.copyWith(fontFamily: 'Roboto', color: Theme.of(context).colorScheme.onPrimary)),
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color.fromARGB(255, 133, 83, 0),
-          foregroundColor: Colors.white,
+          padding: EdgeInsets.fromLTRB(25, 10, 25, 10),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          foregroundColor: Theme.of(context).colorScheme.onPrimary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -52,7 +56,6 @@ class _PauseButtonState extends State<PauseButton> {
     return Center(
         child: SizedBox(
             height: 40,
-            width: 157,
             child: ElevatedButton.icon(
               onPressed: () {
                 widget.func();
@@ -72,13 +75,24 @@ class _PauseButtonState extends State<PauseButton> {
               label: widget.onGoing
                   ? Text(
                       "Pause " + widget.text,
-                      style: TextStyle(fontSize: 13),
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontFamily: 'Roboto',
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSecondaryContainer),
                     )
                   : Text("Resume " + widget.text,
-                      style: TextStyle(fontSize: 13)),
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontFamily: 'Roboto',
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSecondaryContainer)),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 197, 241, 133),
-                foregroundColor: Colors.black,
+                padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+                backgroundColor:
+                    Theme.of(context).colorScheme.secondaryContainer,
+                foregroundColor:
+                    Theme.of(context).colorScheme.onSecondaryContainer,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -103,18 +117,24 @@ class _CancelButtonState extends State<CancelButton> {
     return Center(
         child: SizedBox(
       height: 40,
-      width: 131,
       child: TextButton(
         onPressed: () {
           widget.func();
         },
-        child: Text(widget.text, style: TextStyle(fontSize: 13)),
+        child: Text(widget.text,
+            style: Theme.of(context)
+                .textTheme
+                .labelLarge
+                ?.copyWith(fontFamily: 'Roboto', color: Theme.of(context).colorScheme.outline)),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.grey,
+          padding: EdgeInsets.fromLTRB(25, 10, 25, 10),
+          backgroundColor: Colors.transparent,
+          foregroundColor: Theme.of(context).colorScheme.outline,
           shape: RoundedRectangleBorder(
               side: BorderSide(
-                  color: Colors.black, width: 2, style: BorderStyle.solid),
+                  color: Theme.of(context).colorScheme.outline,
+                  width: 1,
+                  style: BorderStyle.solid),
               borderRadius: BorderRadius.circular(50)),
         ),
       ),

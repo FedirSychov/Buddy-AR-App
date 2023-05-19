@@ -22,7 +22,8 @@ class SessionCompleteView extends StatelessWidget {
                 width: 300,
                 child: Text(
                     'Hooray! You have successfully completed your study session.',
-                    style: Theme.of(context).textTheme.displayLarge,
+                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurface),
                     textAlign: TextAlign.center))
           ],
         ));
