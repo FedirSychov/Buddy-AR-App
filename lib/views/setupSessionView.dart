@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:BUDdy/clients/sharedPrefs.dart';
-import 'package:BUDdy/main.dart';
 import 'package:BUDdy/viewModels/setupSessionViewModel.dart';
 import 'package:BUDdy/views/DesignViews/buttons.dart';
 import 'package:BUDdy/views/homeView.dart';
@@ -137,7 +135,6 @@ class _TimePickerState extends State<TimePicker> {
   BoxDecoration myBoxDecoration() {
     return BoxDecoration(
         border: Border.all(),
-        color: Color(0xffff0000),
         borderRadius: const BorderRadius.all(Radius.circular(8.0)));
   }
 

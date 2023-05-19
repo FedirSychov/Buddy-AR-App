@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:BUDdy/viewModels/selectActivityViewModel.dart';
 import 'package:BUDdy/views/activityCountdownView.dart';
-import 'package:BUDdy/views/ongoingActivityView.dart';
 
 class SelectActivityView extends StatefulWidget {
   var viewModel = SelectActivityViewModel();

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:BUDdy/views/plantPageARView.dart';
 import 'package:BUDdy/views/sessionCountdownView.dart';
 import 'package:BUDdy/views/setupSessionView.dart';
-import 'package:BUDdy/views/ongoingSessionView.dart';
 
 import 'DesignViews/buttons.dart';
 
