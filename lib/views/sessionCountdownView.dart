@@ -20,7 +20,8 @@ class SessionCountdownView extends StatelessWidget {
             Container(
                 margin: const EdgeInsets.only(top: 40.0),
                 child: Text('Let\'s start?',
-                    style: Theme.of(context).textTheme.displayLarge)),
+                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground))),
             Container(
               margin: const EdgeInsets.only(top: 60.0),
               child: const Countdown(),
