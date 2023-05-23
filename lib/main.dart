@@ -7,7 +7,8 @@ final sharedPrefs = SharedPrefs();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode (SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+      overlays: [SystemUiOverlay.top]);
   await sharedPrefs.init();
   runApp(const BUDdyApp());
 }
@@ -26,7 +27,8 @@ class BUDdyApp extends StatelessWidget {
           displayLarge: TextStyle(
               fontSize: 24.0,
               fontWeight: FontWeight.w400,
-              color: Color(0xffff0000)), // to see missing use of context colorScheme
+              color: Color(
+                  0xffff0000)), // to see missing use of context colorScheme
           bodyLarge: TextStyle(
               fontSize: 57.0,
               fontWeight: FontWeight.w400,
@@ -72,12 +74,13 @@ class BUDdyApp extends StatelessWidget {
             onSurface: const Color(0xff1F1B16),
             surfaceVariant: const Color(0xffF1E0D0),
             onSurfaceVariant: const Color(0xff504539),
-            inverseSurface: const Color(0xffF6ECE4), // surfaceContainer (not supported anymore) in design
+            inverseSurface: const Color(
+                0xffF6ECE4), // surfaceContainer (not supported anymore) in design
             surfaceTint: const Color(0xffFCF2EA),
             outline: const Color(0xff827568),
             outlineVariant: const Color(0xffD4C4B5)),
       ),
-      home: const SplashScreenView(),
+      home: SplashScreenView(),
     );
   }
 }
