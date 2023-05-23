@@ -1,3 +1,4 @@
+import 'package:BUDdy/viewModels/confirmPlantViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:BUDdy/views/DesignViews/buttons.dart';
 import '../clients/sharedPrefs.dart';
@@ -5,9 +6,10 @@ import '../model/plantType.dart';
 import 'choosePlantView.dart';
 
 class ConfirmPlantView extends StatelessWidget {
-  const ConfirmPlantView({super.key, required this.plantType});
+  ConfirmPlantView({super.key, required this.plantType});
 
   final PlantType plantType;
+  final viewModel = ConfirmPlantViewModel();
 
   // This widget is the root of your application.
   @override
@@ -38,12 +40,12 @@ class ConfirmPlantView extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.only(right: 15.0),
                   child: CancelButton('Cancel', () {
-                    SharedPrefs().deletePlantType();
+                    viewModel.removePlantType();
                     Navigator.pop(context);
                   }),
                 ),
                 SimpleButton('Adopt', () {
-                  SharedPrefs().setPlantType(plantType);
+                  viewModel.setPlantType(plantType);
                   Navigator.push(
                       context,
                       MaterialPageRoute(

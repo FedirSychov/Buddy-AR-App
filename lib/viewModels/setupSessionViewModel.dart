@@ -3,7 +3,11 @@ import '../clients/sharedPrefs.dart';
 class SetupSessionViewModel {
   SharedPrefs sharedPrefs = SharedPrefs();
   final basicStudyDuration = "1 hour";
-  final basicBreakDuration = "10 mins";
+  final basicBreakDuration = "15 mins";
+
+  var sessionTimeArray = ["30 mins", "1 hour", "1,5 hours", "2 hours"];
+
+  var breakTimeArray = ["15 mins", "30 mins", "45 mins", "1 hour"];
 
   SetupSessionViewModel() {
     sharedPrefs = SharedPrefs();
@@ -98,13 +102,15 @@ class SetupSessionViewModel {
   }
 
   void setCountdownValues() {
-    String studyDuration = sharedPrefs.getSelectedSessionDuration() ?? basicStudyDuration;
+    String studyDuration =
+        sharedPrefs.getSelectedSessionDuration() ?? basicStudyDuration;
     List<int> studyTime = translateSessionTimeIntoIntArray(studyDuration);
     sharedPrefs.setSessionHoursDuration(studyTime[0]);
     sharedPrefs.setSessionMinsDuration(studyTime[1]);
     sharedPrefs.setSessionSecsDuration(studyTime[2]);
 
-    String breakDuration = sharedPrefs.getSelectedBreakDuration() ?? basicBreakDuration;
+    String breakDuration =
+        sharedPrefs.getSelectedBreakDuration() ?? basicBreakDuration;
     List<int> breakTime = translateBreakTimeIntoIntArray(breakDuration);
     sharedPrefs.setBreakHoursDuration(breakTime[0]);
     sharedPrefs.setBreakMinsDuration(breakTime[1]);

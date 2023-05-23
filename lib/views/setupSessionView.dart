@@ -8,16 +8,6 @@ class SetupSessionView extends StatelessWidget {
 
   SetupSessionView({super.key});
 
-  var sessionTimeArray = [
-    "20 secs",
-    "30 mins",
-    "1 hour",
-    "1,5 hours",
-    "2 hours"
-  ];
-
-  var breakTimeArray = ["20 secs", "15 mins", "30 mins", "45 mins", "1 hour"];
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -63,8 +53,12 @@ class SetupSessionView extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(10),
-            child: TimePicker(sessionTimeArray, 2, viewModel.basicStudyDuration,
-                viewModel.saveCurrentStudyTime, viewModel.getCurrentStudyTime),
+            child: TimePicker(
+                this.viewModel.sessionTimeArray,
+                2,
+                viewModel.basicStudyDuration,
+                viewModel.saveCurrentStudyTime,
+                viewModel.getCurrentStudyTime),
           ),
           const SizedBox(
             width: 10,
@@ -82,8 +76,12 @@ class SetupSessionView extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(10),
-            child: TimePicker(breakTimeArray, 2, viewModel.basicBreakDuration,
-                viewModel.saveCurrentBreakTime, viewModel.getCurrentBreakTime),
+            child: TimePicker(
+                this.viewModel.breakTimeArray,
+                2,
+                viewModel.basicBreakDuration,
+                viewModel.saveCurrentBreakTime,
+                viewModel.getCurrentBreakTime),
           ),
           const SizedBox(
             width: 10,

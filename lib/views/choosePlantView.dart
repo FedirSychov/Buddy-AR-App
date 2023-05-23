@@ -3,6 +3,7 @@ import 'package:BUDdy/views/confirmPlantView.dart';
 import 'package:BUDdy/views/setupSessionView.dart';
 import '../clients/sharedPrefs.dart';
 import '../model/plantType.dart';
+import '../viewModels/choosePlantViewModel.dart';
 import 'DesignViews/buttons.dart';
 
 class ChoosePlantView extends StatelessWidget {
@@ -63,7 +64,7 @@ class Header extends StatelessWidget {
             Expanded(child: PlantOption(plantTypeOption: PlantType.cactus)),
             Expanded(child: PlantOption(plantTypeOption: PlantType.snakePlant))
           ])),
-      const Bottom()
+      Bottom()
     ]);
   }
 }
@@ -149,7 +150,9 @@ class PlantOption extends StatelessWidget {
 }
 
 class Bottom extends StatelessWidget {
-  const Bottom({super.key});
+  Bottom({super.key});
+
+  var viewModel = ChoosePlantViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +175,7 @@ class Bottom extends StatelessWidget {
             }),
           ),
           SimpleButton('Let\'s proceed', () {
-            SharedPrefs().setIsReturningUser(true);
+            viewModel.setIsRetunringUser(true);
             Navigator.push(
                 context, MaterialPageRoute(builder: (_) => SetupSessionView()));
           })

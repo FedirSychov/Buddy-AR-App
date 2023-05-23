@@ -1,21 +1,20 @@
 import 'dart:async';
 
+import 'package:BUDdy/viewModels/splashScreenViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:BUDdy/clients/sharedPrefs.dart';
 import 'package:BUDdy/views/onboardingView.dart';
 import 'package:BUDdy/views/setupSessionView.dart';
 
 class SplashScreenView extends StatelessWidget {
-  const SplashScreenView({super.key});
+  SplashScreenView({super.key});
 
-  Widget getNextView() {
-    bool isReturningUser = SharedPrefs().getReturningUser();
-    return isReturningUser ? SetupSessionView() : const OnboardingView();
-  }
+  final viewModel = SplashScreenViewModel();
 
   void startTimer(BuildContext context) {
     Timer(const Duration(seconds: 5), () {
-      Navigator.push(context, MaterialPageRoute(builder: (_) => getNextView()));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (_) => this.viewModel.getNextView()));
     });
   }
 

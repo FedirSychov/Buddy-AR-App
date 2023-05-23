@@ -1,12 +1,14 @@
+import 'package:BUDdy/viewModels/onboardingViewModel.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import '../clients/sharedPrefs.dart';
+import '../model/enumScreens.dart';
 import 'DesignViews/buttons.dart';
 import 'choosePlantView.dart';
 
 class OnboardingView extends StatefulWidget {
-  const OnboardingView({super.key});
+  OnboardingView({super.key});
 
   @override
   State<OnboardingView> createState() => _OnboardingViewState();
@@ -61,9 +63,10 @@ class _OnboardingViewState extends State<OnboardingView> {
 }
 
 class OnboardingScreen extends StatelessWidget {
-  const OnboardingScreen({super.key, required this.screen});
+  OnboardingScreen({super.key, required this.screen});
 
   final Screens screen;
+  final viewModel = OnboardingViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -95,27 +98,10 @@ class OnboardingScreen extends StatelessWidget {
         Container(
             margin: const EdgeInsets.only(top: 50.0),
             child: SimpleButton('Let\'s start', () {
-              SharedPrefs().deletePlantType();
+              viewModel.removePlantType();
               Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const ChoosePlantView()));
             }))
     ]);
   }
-}
-
-enum Screens {
-  healthyStudying(
-      'assets/gifs/OnboardingWelcomeBuddy.gif',
-      'Healthy Study Routine',
-      'Hello! I am your Buddy. I will help you create a healthy study routine by reminding you to take mini pauses during your study sessions.'),
-  nourish('assets/gifs/RelaxedBuddy.gif', 'Nourishing',
-      'Your Buddy is connected to an AR plant that grows as you take pauses during your study sessions. Excited? Let’s set your AR plant!'),
-  stressRelieving('assets/gifs/BoardingPlantGrow.gif', 'Stress Relieving',
-      'Choose a relaxing stress relieving activity to perform during the pause which will refresh your mind and help you regain your focus.');
-
-  const Screens(this.asset, this.title, this.description);
-
-  final String asset;
-  final String title;
-  final String description;
 }

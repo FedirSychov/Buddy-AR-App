@@ -18,61 +18,8 @@ class HomeView extends StatelessWidget {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         body: Column(children: [
-      const SizedBox(width: 10, height: 104),
-      Visibility(
-          child: const Center(
-              child: SizedBox(
-            width: 200,
-            height: 65,
-            child: Text(
-              "Let’s start your study session!",
-              style: TextStyle(fontFamily: 'Lato', fontSize: 24),
-              textAlign: TextAlign.center,
-            ),
-          )),
-          visible: topSpeechBubble == null),
-      Visibility(
-          child: SpeechBubble(true, BubbleType.topNewSession, context),
-          visible: topSpeechBubble == BubbleType.topNewSession),
-      Visibility(
-          child: SpeechBubble(true, BubbleType.topSessionStart, context),
-          visible: topSpeechBubble == BubbleType.topSessionStart),
-      Visibility(
-          child: SpeechBubble(true, BubbleType.topPlantGrew, context),
-          visible: topSpeechBubble == BubbleType.topPlantGrew),
-      const Spacer(),
-      Container(
-          margin: const EdgeInsets.only(top: 74.0),
-          alignment: Alignment.center,
-          child: Image.asset('assets/gifs/HomeExcitedBuddy.gif',
-              height: 280, width: 280)),
-      const Spacer(),
-      const SizedBox(height: 55, width: 50),
-      Visibility(
-          child: SimpleButton("Start session", () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: ((context) => const SessionCountdownView())));
-          }),
-          visible: bottomSpeechBubble == null),
-      Visibility(
-          child: SpeechBubble(true, BubbleType.bottomBuddyProgress, context),
-          visible: bottomSpeechBubble == BubbleType.bottomBuddyProgress),
-      Visibility(
-          child: SpeechBubble(true, BubbleType.bottomSessionIcon, context),
-          visible: bottomSpeechBubble == BubbleType.bottomSessionIcon),
-      const Spacer(),
-      const Spacer(),
-      Container(
-          width: MediaQuery.of(context).size.width,
-          height: 80.0,
-          child: Container(
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 246, 236, 228),
-                shape: BoxShape.rectangle,
-                borderRadius: null,
-              ),
+          const SizedBox(width: 10, height: 104),
+          Visibility(
               child: Center(
                   child: SizedBox(
                 width: 200,
