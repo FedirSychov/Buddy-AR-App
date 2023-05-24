@@ -10,6 +10,7 @@ import 'DesignViews/buttons.dart';
 class HomeView extends StatelessWidget {
   final BubbleType? topSpeechBubble;
   final BubbleType? bottomSpeechBubble;
+
   const HomeView({super.key, this.topSpeechBubble, this.bottomSpeechBubble});
 
   // This widget is the root of your application.
@@ -68,6 +69,7 @@ class HomeView extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               height: 80.0,
               child: Container(
+                  margin: EdgeInsets.only(top: 16.0),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.inverseSurface,
                     shape: BoxShape.rectangle,
@@ -82,7 +84,7 @@ class HomeView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               IconButton(
-                                  icon: const Icon(Icons.access_time, size: 28),
+                                  icon: const Icon(Icons.schedule, size: 24),
                                   onPressed: () {
                                     Navigator.push(
                                         context,
@@ -108,8 +110,7 @@ class HomeView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               IconButton(
-                                  icon:
-                                      const Icon(Icons.home_outlined, size: 28),
+                                  icon: const Icon(Icons.home, size: 24),
                                   onPressed: () {}),
                               Text("Home",
                                   style: Theme.of(context)
@@ -129,8 +130,7 @@ class HomeView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               IconButton(
-                                  icon:
-                                      const Icon(Icons.eco_outlined, size: 28),
+                                  icon: const Icon(Icons.eco, size: 24),
                                   onPressed: () {
                                     Navigator.push(
                                         context,

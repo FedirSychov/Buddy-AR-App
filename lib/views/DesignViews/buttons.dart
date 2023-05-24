@@ -68,8 +68,8 @@ class _PauseButtonState extends State<PauseButton> {
                 }
               },
               icon: widget.onGoing
-                  ? Icon(Icons.pause_circle_outline, size: 18)
-                  : Icon(Icons.play_circle_outline, size: 18),
+                  ? Icon(Icons.pause, size: 18)
+                  : Icon(Icons.play_arrow, size: 18),
               label: widget.onGoing
                   ? Text(
                       "Pause " + widget.text,

@@ -308,7 +308,7 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
         ),
         Container(
           margin: const EdgeInsets.only(top: 40.0),
-          child: PauseButton("session", () {
+          child: PauseButton("activity", () {
             handleButtonPress();
           }, onGoing),
         )
