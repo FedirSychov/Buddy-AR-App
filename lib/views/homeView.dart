@@ -79,7 +79,6 @@ class HomeView extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   height: 80.0,
                   child: Container(
-                      margin: EdgeInsets.only(top: 16.0),
                       decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.inverseSurface,
                         shape: BoxShape.rectangle,
