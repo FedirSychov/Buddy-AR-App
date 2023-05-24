@@ -1,7 +1,6 @@
-import 'package:BUDdy/model/EnumSpeechBubbles.dart';
+import 'package:BUDdy/model/speechBubbles.dart';
 import 'package:BUDdy/views/DesignViews/customShape.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class SpeechBubble extends StatefulWidget {
   bool withAnimation;

@@ -164,24 +164,22 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
   bool onGoing = false;
   bool hasBeenNotified = false;
   bool _isInForeground = true;
-  int hours = SharedPrefs().getSessionHourDuration();
-  int minutes = SharedPrefs().getSessionMinsDuration();
-  int seconds = SharedPrefs().getSessionSecsDuration();
+
+  DateTime until =
+      DateTime.now().add(Duration(seconds: SharedPrefs().getSessionDuration()));
+  Duration timeLeft = DateTime.now()
+      .add(Duration(seconds: SharedPrefs().getSessionDuration()))
+      .difference(DateTime.now());
+  int breakPoint =
+      (Duration(seconds: SharedPrefs().getSessionDuration()).inSeconds / 2)
+          .floor();
+
   late Timer timer;
-  late DateTime until;
-  late Duration timeLeft;
-  late int breakPoint;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addObserver(this);
-    until = DateTime.now()
-        .add(Duration(hours: hours, minutes: minutes, seconds: seconds));
-    breakPoint =
-        (Duration(hours: hours, minutes: minutes, seconds: seconds).inSeconds /
-                2)
-            .floor();
     startCountdown();
   }
 
@@ -225,9 +223,6 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
 
     setState(() {
       if (timeLeft.inSeconds > 0) {
-        hours = timeLeft.inHours % 24;
-        minutes = timeLeft.inMinutes % 60;
-        seconds = timeLeft.inSeconds % 60;
         if (widget.isFirstHalf && timeLeft.inSeconds <= breakPoint) {
           startActivityBreak();
         }
@@ -318,15 +313,16 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
 
   void startActivityBreak() {
     cancelCountdown();
-    SharedPrefs().setSessionHoursDuration(hours);
-    SharedPrefs().setSessionMinsDuration(minutes);
-    SharedPrefs().setSessionSecsDuration(seconds);
+    SharedPrefs().setSessionDuration(timeLeft.inSeconds);
     Navigator.push(
         context, MaterialPageRoute(builder: (_) => SelectActivityView()));
   }
 
   @override
   Widget build(BuildContext context) {
+    int hours = timeLeft.inHours % 24;
+    int minutes = timeLeft.inMinutes % 60;
+    int seconds = timeLeft.inSeconds % 60;
     return Column(
       children: [
         Text(

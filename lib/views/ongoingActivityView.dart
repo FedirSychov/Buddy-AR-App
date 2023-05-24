@@ -169,19 +169,19 @@ class Countdown extends StatefulWidget {
 class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
   bool onGoing = false;
   bool _isInForeground = true;
-  int hours = SharedPrefs().getBreakHourDuration();
-  int minutes = SharedPrefs().getBreakMinsDuration();
-  int seconds = SharedPrefs().getBreakSecsDuration();
+
+  DateTime until = DateTime.now()
+      .add(Duration(seconds: SharedPrefs().getBreakDuration()));
+  Duration timeLeft = DateTime.now()
+      .add(Duration(seconds: SharedPrefs().getBreakDuration())).difference(DateTime.now());
+
   late Timer timer;
-  late DateTime until;
-  late Duration timeLeft;
+
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addObserver(this);
-    until = DateTime.now()
-        .add(Duration(hours: hours, minutes: minutes, seconds: seconds));
     startCountdown();
   }
 
@@ -198,14 +198,9 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
   }
 
   void countDown() {
-    timeLeft = until.difference(DateTime.now());
-
     setState(() {
-      if (timeLeft.inSeconds > 0) {
-        hours = timeLeft.inHours % 24;
-        minutes = timeLeft.inMinutes % 60;
-        seconds = timeLeft.inSeconds % 60;
-      } else {
+      timeLeft = until.difference(DateTime.now());
+      if (timeLeft.inSeconds <= 0)  {
         cancelCountdown();
         if (!_isInForeground) {
           widget.viewModel.showBigTextNotification(
@@ -301,6 +296,9 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    int hours = timeLeft.inHours % 24;
+    int minutes = timeLeft.inMinutes % 60;
+    int seconds = timeLeft.inSeconds % 60;
     return Column(
       children: [
         Text(

@@ -2,7 +2,7 @@ import 'package:BUDdy/viewModels/onboardingViewModel.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import '../model/enumScreens.dart';
+import '../model/screens.dart';
 import 'DesignViews/buttons.dart';
 import 'choosePlantView.dart';
 

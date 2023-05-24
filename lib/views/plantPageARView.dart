@@ -13,7 +13,7 @@ import 'package:ar_flutter_plugin/datatypes/hittest_result_types.dart';
 import 'package:ar_flutter_plugin/models/ar_node.dart';
 import 'package:ar_flutter_plugin/models/ar_hittest_result.dart';
 import 'package:vector_math/vector_math_64.dart';
-import '../model/EnumSpeechBubbles.dart';
+import '../model/speechBubbles.dart';
 
 class PlantPageARView extends StatefulWidget {
   final bool promptSessionSetUpOnReturn;
