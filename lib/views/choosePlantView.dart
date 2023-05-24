@@ -17,7 +17,7 @@ class ChoosePlantView extends StatelessWidget {
         child: Scaffold(
             backgroundColor: Theme.of(context).colorScheme.surface,
             body: ListView(
-              children: [Header()],
+              children: [Header(), PlantShelf(), Bottom()],
             )));
   }
 }
@@ -53,7 +53,17 @@ class Header extends StatelessWidget {
                   .textTheme
                   .bodyMedium
                   ?.copyWith(color: Theme.of(context).colorScheme.onSurface),
-              textAlign: TextAlign.center)),
+              textAlign: TextAlign.center))
+    ]);
+  }
+}
+
+class PlantShelf extends StatelessWidget {
+  PlantShelf({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
       Container(
           margin: const EdgeInsets.only(top: 30.0),
           child: Row(children: const [
@@ -65,8 +75,7 @@ class Header extends StatelessWidget {
           child: Row(children: const [
             Expanded(child: PlantOption(plantTypeOption: PlantType.cactus)),
             Expanded(child: PlantOption(plantTypeOption: PlantType.snakePlant))
-          ])),
-      Bottom()
+          ]))
     ]);
   }
 }
