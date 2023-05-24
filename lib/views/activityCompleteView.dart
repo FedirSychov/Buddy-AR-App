@@ -7,27 +7,29 @@ class ActivityCompleteView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        body: Column(
-          children: [
-            Container(
-                margin: const EdgeInsets.only(top: 65.0),
-                child: const Header()),
-            Container(
-                margin: const EdgeInsets.only(top: 100.0),
-                child: const KeyVisual()),
-            Container(
-                margin: const EdgeInsets.only(top: 100.0),
-                child: SimpleButton('Continue', () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) =>
-                              OngoingSessionView(isFirstHalf: false)));
-                }))
-          ],
-        ));
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            body: Column(
+              children: [
+                Container(
+                    margin: const EdgeInsets.only(top: 65.0),
+                    child: const Header()),
+                Container(
+                    margin: const EdgeInsets.only(top: 100.0),
+                    child: const KeyVisual()),
+                Container(
+                    margin: const EdgeInsets.only(top: 100.0),
+                    child: SimpleButton('Continue', () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) =>
+                                  OngoingSessionView(isFirstHalf: false)));
+                    }))
+              ],
+            )));
   }
 }
 

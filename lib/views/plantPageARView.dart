@@ -35,41 +35,43 @@ class _PlantPageARViewState extends State<PlantPageARView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Stack(children: [
-      ARView(
-        onARViewCreated: onARViewCreated,
-        planeDetectionConfig: PlaneDetectionConfig.horizontalAndVertical,
-      ),
-      Container(
-          margin: const EdgeInsets.only(top: 65.0),
-          child: Row(children: [
-            const Spacer(),
-            InkWell(
-              onTap: () {
-                if (widget.promptSessionSetUpOnReturn) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => HomeView(
-                              topSpeechBubble: BubbleType.topNewSession,
-                              bottomSpeechBubble:
-                                  BubbleType.bottomSessionIcon)));
-                } else {
-                  Navigator.pop(context);
-                }
-              },
-              child: Container(
-                  margin: const EdgeInsets.only(right: 15.0),
-                  width: 32.0,
-                  height: 32.0,
-                  child: Image.asset('assets/images/icons/Cross.png',
-                      width: 24.0,
-                      height: 24.0,
-                      color: Theme.of(context).colorScheme.onBackground)),
-            ),
-          ]))
-    ]));
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+            body: Stack(children: [
+          ARView(
+            onARViewCreated: onARViewCreated,
+            planeDetectionConfig: PlaneDetectionConfig.horizontalAndVertical,
+          ),
+          Container(
+              margin: const EdgeInsets.only(top: 65.0),
+              child: Row(children: [
+                const Spacer(),
+                InkWell(
+                  onTap: () {
+                    if (widget.promptSessionSetUpOnReturn) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomeView(
+                                  topSpeechBubble: BubbleType.topNewSession,
+                                  bottomSpeechBubble:
+                                      BubbleType.bottomSessionIcon)));
+                    } else {
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: Container(
+                      margin: const EdgeInsets.only(right: 15.0),
+                      width: 32.0,
+                      height: 32.0,
+                      child: Image.asset('assets/images/icons/Cross.png',
+                          width: 24.0,
+                          height: 24.0,
+                          color: Theme.of(context).colorScheme.onBackground)),
+                ),
+              ]))
+        ])));
   }
 
   void onARViewCreated(

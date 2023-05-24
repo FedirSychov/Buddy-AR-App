@@ -10,26 +10,31 @@ class SessionCompleteView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        body: Column(
-          children: [
-            Container(
-                margin: const EdgeInsets.only(top: 65.0),
-                child: Header(plantHasGrown: plantHasGrown)),
-            Container(
-                margin: const EdgeInsets.only(top: 80.0),
-                child: const KeyVisual()),
-            Container(
-                margin: const EdgeInsets.only(top: 75.0),
-                width: 300,
-                child: Text(
-                    'Hooray! You have successfully completed your study session.',
-                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface),
-                    textAlign: TextAlign.center))
-          ],
-        ));
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            body: Column(
+              children: [
+                Container(
+                    margin: const EdgeInsets.only(top: 65.0),
+                    child: Header(plantHasGrown: plantHasGrown)),
+                Container(
+                    margin: const EdgeInsets.only(top: 80.0),
+                    child: const KeyVisual()),
+                Container(
+                    margin: const EdgeInsets.only(top: 75.0),
+                    width: 300,
+                    child: Text(
+                        'Hooray! You have successfully completed your study session.',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge
+                            ?.copyWith(
+                                color: Theme.of(context).colorScheme.onSurface),
+                        textAlign: TextAlign.center))
+              ],
+            )));
   }
 }
 

@@ -10,27 +10,34 @@ class ActivityCountdownView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        body: Column(
-          children: [
-            Container(
-                margin: const EdgeInsets.only(top: 65.0),
-                child: Header(activity: activity)),
-            Container(
-                margin: const EdgeInsets.only(top: 75.0),
-                child: KeyVisual(activity: activity)),
-            Container(
-                margin: const EdgeInsets.only(top: 40.0),
-                child: Text('Let\'s start?',
-                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground))),
-            Container(
-              margin: const EdgeInsets.only(top: 60.0),
-              child: Countdown(activity: activity),
-            )
-          ],
-        ));
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+            backgroundColor: Theme.of(context).colorScheme.background,
+            body: Column(
+              children: [
+                Container(
+                    margin: const EdgeInsets.only(top: 65.0),
+                    child: Header(activity: activity)),
+                Container(
+                    margin: const EdgeInsets.only(top: 75.0),
+                    child: KeyVisual(activity: activity)),
+                Container(
+                    margin: const EdgeInsets.only(top: 40.0),
+                    child: Text('Let\'s start?',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge
+                            ?.copyWith(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onBackground))),
+                Container(
+                  margin: const EdgeInsets.only(top: 60.0),
+                  child: Countdown(activity: activity),
+                )
+              ],
+            )));
   }
 }
 

@@ -2,9 +2,6 @@ import 'dart:async';
 
 import 'package:BUDdy/viewModels/splashScreenViewModel.dart';
 import 'package:flutter/material.dart';
-import 'package:BUDdy/clients/sharedPrefs.dart';
-import 'package:BUDdy/views/onboardingView.dart';
-import 'package:BUDdy/views/setupSessionView.dart';
 
 class SplashScreenView extends StatelessWidget {
   SplashScreenView({super.key});
@@ -21,7 +18,10 @@ class SplashScreenView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     startTimer(context);
-    return FittedBox(
-        fit: BoxFit.fill, child: Image.asset('assets/gifs/SplashIntro.gif'));
+    return new WillPopScope(
+        onWillPop: () async => false,
+        child: FittedBox(
+            fit: BoxFit.fill,
+            child: Image.asset('assets/gifs/SplashIntro.gif')));
   }
 }

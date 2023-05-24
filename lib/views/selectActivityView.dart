@@ -15,56 +15,64 @@ class SelectActivityView extends StatefulWidget {
 class _SelectActivityViewState extends State<SelectActivityView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        body: Column(children: [
-          Container(
-              margin: const EdgeInsets.only(top: 64),
-              child: Center(
-                  child: Text("Let’s take a pause!",
-                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                          color: Theme.of(context).colorScheme.onBackground),
-                      textAlign: TextAlign.center))),
-          Container(
-              margin: const EdgeInsets.only(top: 24),
-              child: SizedBox(
-                width: 300,
-                height: 48,
-                child: Text(
-                    "Refresh, relax, and regain energy.\nSelect an activity that suits you best.",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground),
-                    textAlign: TextAlign.center),
-              )),
-          Center(
-            child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 60.0),
-                height: 400,
-                // width: 200,
-                child: PageView.builder(
-                    onPageChanged: (index) {
-                      setState(() {
-                        widget._selectedIndex = index;
-                      });
-                    },
-                    controller: PageController(viewportFraction: 1),
-                    itemCount: widget.viewModel.activityList.length,
-                    itemBuilder: (context, index) {
-                      return ActivityView(
-                        index: index,
-                      );
-                    })),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ...List.generate(
-                  widget.viewModel.activityList.length,
-                  (index) => Indicator(
-                      isActive: widget._selectedIndex == index ? true : false))
-            ],
-          ),
-        ]));
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+            backgroundColor: Theme.of(context).colorScheme.background,
+            body: Column(children: [
+              Container(
+                  margin: const EdgeInsets.only(top: 64),
+                  child: Center(
+                      child: Text("Let’s take a pause!",
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayLarge
+                              ?.copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground),
+                          textAlign: TextAlign.center))),
+              Container(
+                  margin: const EdgeInsets.only(top: 24),
+                  child: SizedBox(
+                    width: 300,
+                    height: 48,
+                    child: Text(
+                        "Refresh, relax, and regain energy.\nSelect an activity that suits you best.",
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.onBackground),
+                        textAlign: TextAlign.center),
+                  )),
+              Center(
+                child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 60.0),
+                    height: 400,
+                    // width: 200,
+                    child: PageView.builder(
+                        onPageChanged: (index) {
+                          setState(() {
+                            widget._selectedIndex = index;
+                          });
+                        },
+                        controller: PageController(viewportFraction: 1),
+                        itemCount: widget.viewModel.activityList.length,
+                        itemBuilder: (context, index) {
+                          return ActivityView(
+                            index: index,
+                          );
+                        })),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ...List.generate(
+                      widget.viewModel.activityList.length,
+                      (index) => Indicator(
+                          isActive:
+                              widget._selectedIndex == index ? true : false))
+                ],
+              ),
+            ])));
   }
 }
 
