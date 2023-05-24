@@ -103,7 +103,7 @@ class Themes {
         background: const Color(0xff1F1B16),
         onBackground: const Color(0xffEBE1D9),
         surface: const Color(0xff17130E),
-        onSurface: const Color(0xffEBE1D9),
+        onSurface: const Color(0xffCEC5BD),
         surfaceVariant: const Color(0xff504539),
         onSurfaceVariant: const Color(0xffD4C4B5),
         inverseSurface: const Color(0xff231F1A),

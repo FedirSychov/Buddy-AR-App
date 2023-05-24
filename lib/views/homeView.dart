@@ -132,11 +132,15 @@ class HomeView extends StatelessWidget {
                               IconButton(
                                   icon: const Icon(Icons.eco, size: 24),
                                   onPressed: () {
+                                    bool promptSessionSetUpOnReturn =
+                                        topSpeechBubble ==
+                                            BubbleType.topPlantGrew;
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                PlantPageARView()));
+                                            builder: (context) => PlantPageARView(
+                                                promptSessionSetUpOnReturn:
+                                                    promptSessionSetUpOnReturn)));
                                   }),
                               Text("Buddy",
                                   style: Theme.of(context)

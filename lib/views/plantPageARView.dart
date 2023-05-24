@@ -1,4 +1,5 @@
 import 'package:BUDdy/viewModels/plantPageARViewModel.dart';
+import 'package:BUDdy/views/homeView.dart';
 import 'package:ar_flutter_plugin/managers/ar_location_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_session_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_object_manager.dart';
@@ -12,12 +13,13 @@ import 'package:ar_flutter_plugin/datatypes/hittest_result_types.dart';
 import 'package:ar_flutter_plugin/models/ar_node.dart';
 import 'package:ar_flutter_plugin/models/ar_hittest_result.dart';
 import 'package:vector_math/vector_math_64.dart';
-import '../model/plantType.dart';
-
-import '../clients/sharedPrefs.dart';
+import '../model/EnumSpeechBubbles.dart';
 
 class PlantPageARView extends StatefulWidget {
-  PlantPageARView({Key? key}) : super(key: key);
+  final bool promptSessionSetUpOnReturn;
+
+  PlantPageARView({super.key, required this.promptSessionSetUpOnReturn});
+
   final viewModel = PlantPageARViewModel();
 
   @override
@@ -45,7 +47,17 @@ class _PlantPageARViewState extends State<PlantPageARView> {
             const Spacer(),
             InkWell(
               onTap: () {
-                Navigator.pop(context);
+                if (widget.promptSessionSetUpOnReturn) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomeView(
+                              topSpeechBubble: BubbleType.topNewSession,
+                              bottomSpeechBubble:
+                                  BubbleType.bottomSessionIcon)));
+                } else {
+                  Navigator.pop(context);
+                }
               },
               child: Container(
                   margin: const EdgeInsets.only(right: 15.0),

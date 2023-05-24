@@ -9,6 +9,7 @@ class SpeechBubble extends StatefulWidget {
   BubbleType type;
   var context;
   late double width;
+
   SpeechBubble(this.withAnimation, this.type, this.context) {
     width = MediaQuery.of(context).size.height;
   }
@@ -65,8 +66,8 @@ class _SpeechBubble extends State<SpeechBubble> with TickerProviderStateMixin {
                       height: widget.type.smallText ? 60 : 106,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 0, vertical: 0),
-                      decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 246, 236, 228),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.inverseSurface,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(18),
                             bottomLeft: Radius.circular(18),
@@ -76,9 +77,17 @@ class _SpeechBubble extends State<SpeechBubble> with TickerProviderStateMixin {
                       child: Center(
                         child: Text(
                           widget.type.message,
-                          style: TextStyle(
-                              fontFamily: 'Lato',
-                              fontSize: widget.type.smallText ? 12 : 24),
+                          style: widget.type.smallText
+                              ? Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface)
+                              : Theme.of(context)
+                                  .textTheme
+                                  .displayLarge
+                                  ?.copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface),
                           textAlign: TextAlign.center,
                         ),
                       )),
@@ -88,7 +97,7 @@ class _SpeechBubble extends State<SpeechBubble> with TickerProviderStateMixin {
                   child: CustomPaint(
                       painter: CustomShape(
                           widget.type.message.length,
-                          const Color.fromARGB(255, 246, 236, 228),
+                          Theme.of(context).colorScheme.inverseSurface,
                           widget.type.leftSide,
                           widget.width,
                           widget.type.smallText)),

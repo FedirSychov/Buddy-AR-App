@@ -1,9 +1,12 @@
+import 'package:BUDdy/model/EnumSpeechBubbles.dart';
 import 'package:flutter/material.dart';
 
 import 'homeView.dart';
 
 class SessionCompleteView extends StatelessWidget {
-  const SessionCompleteView({super.key});
+  final bool plantHasGrown;
+
+  const SessionCompleteView({super.key, required this.plantHasGrown});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,7 @@ class SessionCompleteView extends StatelessWidget {
           children: [
             Container(
                 margin: const EdgeInsets.only(top: 65.0),
-                child: const Header()),
+                child: Header(plantHasGrown: plantHasGrown)),
             Container(
                 margin: const EdgeInsets.only(top: 80.0),
                 child: const KeyVisual()),
@@ -31,7 +34,9 @@ class SessionCompleteView extends StatelessWidget {
 }
 
 class Header extends StatelessWidget {
-  const Header({super.key});
+  final bool plantHasGrown;
+
+  const Header({super.key, required this.plantHasGrown});
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +55,21 @@ class Header extends StatelessWidget {
               textAlign: TextAlign.center)),
       InkWell(
         onTap: () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (_) => const HomeView()));
+          if (plantHasGrown) {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => const HomeView(
+                        topSpeechBubble: BubbleType.topPlantGrew,
+                        bottomSpeechBubble: BubbleType.bottomBuddyProgress)));
+          } else {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => const HomeView(
+                        topSpeechBubble: BubbleType.topNewSession,
+                        bottomSpeechBubble: BubbleType.bottomSessionIcon)));
+          }
         },
         child: Container(
             margin: const EdgeInsets.only(right: 15.0),

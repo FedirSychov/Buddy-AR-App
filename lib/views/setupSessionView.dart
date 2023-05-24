@@ -3,6 +3,8 @@ import 'package:BUDdy/viewModels/setupSessionViewModel.dart';
 import 'package:BUDdy/views/DesignViews/buttons.dart';
 import 'package:BUDdy/views/homeView.dart';
 
+import '../model/EnumSpeechBubbles.dart';
+
 class SetupSessionView extends StatelessWidget {
   var viewModel = SetupSessionViewModel();
 
@@ -99,7 +101,10 @@ class SetupSessionView extends StatelessWidget {
           SimpleButton("Save session", () {
             viewModel.setCountdownValues();
             Navigator.push(
-                context, MaterialPageRoute(builder: ((context) => HomeView())));
+                context,
+                MaterialPageRoute(
+                    builder: ((context) => HomeView(
+                        topSpeechBubble: BubbleType.topSessionStart))));
           }),
           const Spacer(),
           const Spacer()
@@ -133,7 +138,8 @@ class _TimePickerState extends State<TimePicker> {
   BoxDecoration myBoxDecoration() {
     return BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
-        border: Border.all(color: Theme.of(context).colorScheme.outline, width: 1.0),
+        border: Border.all(
+            color: Theme.of(context).colorScheme.outline, width: 1.0),
         borderRadius: const BorderRadius.all(Radius.circular(20.0)));
   }
 
