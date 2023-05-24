@@ -86,7 +86,7 @@ class ActivityView extends StatelessWidget {
               BoxShadow(
                 color: Theme.of(context).colorScheme.shadow.withOpacity(0.3),
                 blurRadius: 2,
-                offset: const Offset(0, 1), // changes position of shadow
+                offset: const Offset(0, 1),
               )
             ],
             borderRadius: BorderRadius.circular(20.0),

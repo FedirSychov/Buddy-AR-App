@@ -238,6 +238,9 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
     });
   }
 
+  /// Starts the countdown to update the view every second
+  /// Setting the Duration to exactly 1 second would update the view every >= 1 second
+  /// The Duration chosen is therefor shorter
   void startCountdown() {
     timer = widget
         .initTimer(Timer.periodic(const Duration(milliseconds: 250), (timer) {

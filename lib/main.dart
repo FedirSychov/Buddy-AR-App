@@ -68,7 +68,7 @@ class Themes {
       surfaceVariant: const Color(0xffF1E0D0),
       onSurfaceVariant: const Color(0xff504539),
       inverseSurface: const Color(0xffF6ECE4),
-      // surfaceContainer (not supported anymore) in design
+      // surfaceContainer in design (value not supported by Flutter anymore)
       onInverseSurface: const Color(0xff855300),
       // primaryFixed in design (value not supported by Flutter anymore)
       surfaceTint: const Color(0xffFCF2EA),
@@ -111,7 +111,6 @@ class Themes {
         onInverseSurface: const Color(0xffFFDDB8),
         // primaryFixed in design (value not supported by Flutter anymore)
         surfaceTint: const Color(0xff1F1B16),
-        // ??
         outline: const Color(0xff9C8E80),
         outlineVariant: const Color(0xff9C8E80),
         shadow: const Color(0xff000000),
