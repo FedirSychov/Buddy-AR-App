@@ -26,25 +26,27 @@ class OngoingSessionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        body: Column(
-          children: [
-            Container(
-                margin: const EdgeInsets.only(top: 65.0),
-                child: Header(cancelTimer: _cancelTimer)),
-            Container(
-                margin: const EdgeInsets.only(top: 75.0),
-                child: const KeyVisual()),
-            Container(
-              margin: const EdgeInsets.only(top: 65.0),
-              child: Countdown(
-                  initTimer: _initTimer,
-                  isFirstHalf: isFirstHalf,
-                  viewModel: viewModel),
-            )
-          ],
-        ));
+    return new WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+            backgroundColor: Theme.of(context).colorScheme.background,
+            body: Column(
+              children: [
+                Container(
+                    margin: const EdgeInsets.only(top: 65.0),
+                    child: Header(cancelTimer: _cancelTimer)),
+                Container(
+                    margin: const EdgeInsets.only(top: 75.0),
+                    child: const KeyVisual()),
+                Container(
+                  margin: const EdgeInsets.only(top: 65.0),
+                  child: Countdown(
+                      initTimer: _initTimer,
+                      isFirstHalf: isFirstHalf,
+                      viewModel: viewModel),
+                )
+              ],
+            )));
   }
 }
 

@@ -12,11 +12,13 @@ class ChoosePlantView extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        body: ListView(
-          children: [Header()],
-        ));
+    return new WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            body: ListView(
+              children: [Header()],
+            )));
   }
 }
 

@@ -13,104 +13,104 @@ class SetupSessionView extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Column(
-        children: [
-          const SizedBox(
-            width: 10,
-            height: 64,
-          ),
-          Padding(
-              padding: EdgeInsets.symmetric(horizontal: 62, vertical: 24),
-              child: Center(
-                child: Text("Set-up a study session",
-                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground),
-                    textAlign: TextAlign.center),
+    return new WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          body: Column(
+            children: [
+              const SizedBox(
+                width: 10,
+                height: 64,
+              ),
+              Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 62, vertical: 24),
+                  child: Center(
+                    child: Text("Set-up a study session",
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge
+                            ?.copyWith(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground),
+                        textAlign: TextAlign.center),
+                  )),
+              Center(
+                  child: SizedBox(
+                width: 350,
+                height: 48,
+                child: Text(
+                  "Set-up a study session by choosing your preferable study and activity duration.",
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground),
+                  textAlign: TextAlign.center,
+                ),
               )),
-          Center(
-              child: SizedBox(
-            width: 350,
-            height: 48,
-            child: Text(
-              "Set-up a study session by choosing your preferable study and activity duration.",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
-              textAlign: TextAlign.center,
-            ),
-          )),
-          const Spacer(),
-          Center(
-            child: Text(
-              "Set a duration for your study session",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall
-                  ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
-              textAlign: TextAlign.center,
-            ),
+              const Spacer(),
+              Center(
+                child: Text(
+                  "Set a duration for your study session",
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TimePicker(
+                    this.viewModel.sessionTimeArray,
+                    2,
+                    viewModel.basicStudyDuration,
+                    viewModel.saveCurrentStudyTime,
+                    viewModel.getCurrentStudyTime),
+              ),
+              const SizedBox(
+                width: 10,
+                height: 42,
+              ),
+              Center(
+                child: Text(
+                  "Set a duration for your activity break",
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TimePicker(
+                    this.viewModel.breakTimeArray,
+                    2,
+                    viewModel.basicBreakDuration,
+                    viewModel.saveCurrentBreakTime,
+                    viewModel.getCurrentBreakTime),
+              ),
+              const SizedBox(
+                width: 10,
+                height: 52,
+              ),
+              Center(
+                child: Text(
+                  "You can change these settings anytime later",
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const Spacer(),
+              SimpleButton("Save session", () {
+                viewModel.setCountdownValues();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) => HomeView(
+                            topSpeechBubble: BubbleType.topSessionStart))));
+              }),
+              const Spacer(),
+              const Spacer()
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: TimePicker(
-                this.viewModel.sessionTimeArray,
-                2,
-                viewModel.basicStudyDuration,
-                viewModel.saveCurrentStudyTime,
-                viewModel.getCurrentStudyTime),
-          ),
-          const SizedBox(
-            width: 10,
-            height: 42,
-          ),
-          Center(
-            child: Text(
-              "Set a duration for your activity break",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall
-                  ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: TimePicker(
-                this.viewModel.breakTimeArray,
-                2,
-                viewModel.basicBreakDuration,
-                viewModel.saveCurrentBreakTime,
-                viewModel.getCurrentBreakTime),
-          ),
-          const SizedBox(
-            width: 10,
-            height: 52,
-          ),
-          Center(
-            child: Text(
-              "You can change these settings anytime later",
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          const Spacer(),
-          SimpleButton("Save session", () {
-            viewModel.setCountdownValues();
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: ((context) => HomeView(
-                        topSpeechBubble: BubbleType.topSessionStart))));
-          }),
-          const Spacer(),
-          const Spacer()
-        ],
-      ),
-    );
+        ));
   }
 }
 

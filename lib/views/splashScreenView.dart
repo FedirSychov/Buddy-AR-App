@@ -21,7 +21,10 @@ class SplashScreenView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     startTimer(context);
-    return FittedBox(
-        fit: BoxFit.fill, child: Image.asset('assets/gifs/SplashIntro.gif'));
+    return new WillPopScope(
+        onWillPop: () async => false,
+        child: FittedBox(
+            fit: BoxFit.fill,
+            child: Image.asset('assets/gifs/SplashIntro.gif')));
   }
 }
