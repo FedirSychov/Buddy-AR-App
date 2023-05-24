@@ -105,6 +105,7 @@ class PlantOption extends StatelessWidget {
                     "assets/images/Lock.png",
                     height: 64.0,
                     width: 64.0,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
                   ),
                 ]));
       }

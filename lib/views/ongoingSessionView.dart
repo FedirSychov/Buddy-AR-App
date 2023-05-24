@@ -126,7 +126,9 @@ class Header extends StatelessWidget {
             width: 32.0,
             height: 32.0,
             child: Image.asset('assets/images/icons/Cross.png',
-                width: 24.0, height: 24.0)),
+                width: 24.0,
+                height: 24.0,
+                color: Theme.of(context).colorScheme.onBackground)),
       )
     ]);
   }

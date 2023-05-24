@@ -146,6 +146,7 @@ class _TimePickerState extends State<TimePicker> {
       child: Container(
         decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surface,
+            border: Border.all(color: Theme.of(context).colorScheme.outline),
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.all(Radius.circular(8.0))),
         child: Row(

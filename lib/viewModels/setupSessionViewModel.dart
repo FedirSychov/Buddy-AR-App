@@ -5,9 +5,15 @@ class SetupSessionViewModel {
   final basicStudyDuration = "1 hour";
   final basicBreakDuration = "15 mins";
 
-  var sessionTimeArray = ["30 mins", "1 hour", "1,5 hours", "2 hours"];
+  var sessionTimeArray = [
+    "20 secs",
+    "30 mins",
+    "1 hour",
+    "1,5 hours",
+    "2 hours"
+  ];
 
-  var breakTimeArray = ["15 mins", "30 mins", "45 mins", "1 hour"];
+  var breakTimeArray = ["20 secs", "15 mins", "30 mins", "45 mins", "1 hour"];
 
   SetupSessionViewModel() {
     sharedPrefs = SharedPrefs();
