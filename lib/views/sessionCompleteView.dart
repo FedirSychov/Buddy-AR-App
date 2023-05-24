@@ -1,4 +1,4 @@
-import 'package:BUDdy/model/EnumSpeechBubbles.dart';
+import 'package:BUDdy/model/speechBubbles.dart';
 import 'package:flutter/material.dart';
 
 import 'homeView.dart';

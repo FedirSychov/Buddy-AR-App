@@ -7,16 +7,11 @@ class SharedPrefs {
 
   final String IS_RETURNING_USER = "isReturningUser";
 
-  final String SESSION_HOURS = "sessionHours";
-  final String SESSION_MINS = "sessionMins";
-  final String SESSION_SECS = "sessionSecs";
-
-  final String BREAK_HOURS = "breakHours";
-  final String BREAK_MINS = "breakMins";
-  final String BREAK_SECS = "breakSecs";
-
   final String PLANT_TYPE = "plantType";
   final String PLANT_PROGRESS = "plantProgress";
+
+  final String SESSION_DURATION = "sessionDuration";
+  final String BREAK_DURATION = "breakDuration";
 
   final String SELECTED_SESSION_DURATION = "selectedSessionDuration";
   final String SELECTED_BREAK_DURATION = "selectedBreakDuration";
@@ -33,53 +28,7 @@ class SharedPrefs {
     return sharedPrefs?.getBool(IS_RETURNING_USER) ?? false;
   }
 
-  void setSessionHoursDuration(int hours) async {
-    await sharedPrefs?.setInt(SESSION_HOURS, hours);
-  }
 
-  void setSessionMinsDuration(int mins) async {
-    await sharedPrefs?.setInt(SESSION_MINS, mins);
-  }
-
-  void setSessionSecsDuration(int secs) async {
-    await sharedPrefs?.setInt(SESSION_SECS, secs);
-  }
-
-  int getSessionHourDuration() {
-    return sharedPrefs?.getInt(SESSION_HOURS) ?? 0;
-  }
-
-  int getSessionMinsDuration() {
-    return sharedPrefs?.getInt(SESSION_MINS) ?? 30;
-  }
-
-  int getSessionSecsDuration() {
-    return sharedPrefs?.getInt(SESSION_SECS) ?? 0;
-  }
-
-  void setBreakHoursDuration(int hours) async {
-    await sharedPrefs?.setInt(BREAK_HOURS, hours);
-  }
-
-  void setBreakMinsDuration(int mins) async {
-    await sharedPrefs?.setInt(BREAK_MINS, mins);
-  }
-
-  void setBreakSecsDuration(int secs) async {
-    await sharedPrefs?.setInt(BREAK_SECS, secs);
-  }
-
-  int getBreakHourDuration() {
-    return sharedPrefs?.getInt(BREAK_HOURS) ?? 0;
-  }
-
-  int getBreakMinsDuration() {
-    return sharedPrefs?.getInt(BREAK_MINS) ?? 15;
-  }
-
-  int getBreakSecsDuration() {
-    return sharedPrefs?.getInt(BREAK_SECS) ?? 0;
-  }
 
   void setPlantType(PlantType plantType) async {
     await sharedPrefs?.setInt(PLANT_TYPE, plantType.index);
@@ -105,6 +54,26 @@ class SharedPrefs {
 
   void deletePlantType() {
     sharedPrefs?.remove(PLANT_TYPE);
+  }
+
+  /// set the remaining session duration [secs]
+  void setSessionDuration(int duration) async {
+    await sharedPrefs?.setInt(SESSION_DURATION, duration);
+  }
+
+  /// get the remaining session duration in seconds
+  int getSessionDuration() {
+    return sharedPrefs?.getInt(SESSION_DURATION) ?? 1800;
+  }
+
+  /// set the remaining break duration [secs]
+  void setBreakDuration(int duration) async {
+    await sharedPrefs?.setInt(BREAK_DURATION, duration);
+  }
+
+  /// get the remaining break duration in seconds
+  int getBreakDuration() {
+    return sharedPrefs?.getInt(BREAK_DURATION) ?? 900;
   }
 
   void setSelectedSessionDuration(String sessionDuration) async {

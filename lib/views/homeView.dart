@@ -1,10 +1,9 @@
-import 'package:BUDdy/model/EnumSpeechBubbles.dart';
+import 'package:BUDdy/model/speechBubbles.dart';
 import 'package:BUDdy/views/DesignViews/sendMessageScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:BUDdy/views/plantPageARView.dart';
 import 'package:BUDdy/views/sessionCountdownView.dart';
 import 'package:BUDdy/views/setupSessionView.dart';
-
 import 'DesignViews/buttons.dart';
 
 class HomeView extends StatelessWidget {

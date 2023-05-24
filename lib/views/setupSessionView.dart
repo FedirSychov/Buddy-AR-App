@@ -3,7 +3,7 @@ import 'package:BUDdy/viewModels/setupSessionViewModel.dart';
 import 'package:BUDdy/views/DesignViews/buttons.dart';
 import 'package:BUDdy/views/homeView.dart';
 
-import '../model/EnumSpeechBubbles.dart';
+import '../model/speechBubbles.dart';
 
 class SetupSessionView extends StatelessWidget {
   var viewModel = SetupSessionViewModel();

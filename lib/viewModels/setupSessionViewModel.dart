@@ -111,16 +111,14 @@ class SetupSessionViewModel {
     String studyDuration =
         sharedPrefs.getSelectedSessionDuration() ?? basicStudyDuration;
     List<int> studyTime = translateSessionTimeIntoIntArray(studyDuration);
-    sharedPrefs.setSessionHoursDuration(studyTime[0]);
-    sharedPrefs.setSessionMinsDuration(studyTime[1]);
-    sharedPrefs.setSessionSecsDuration(studyTime[2]);
+    int studyTimeInSeconds = studyTime[0] * 3600 + studyTime[1] * 60 + studyTime[2];
+    sharedPrefs.setSessionDuration(studyTimeInSeconds);
 
     String breakDuration =
         sharedPrefs.getSelectedBreakDuration() ?? basicBreakDuration;
     List<int> breakTime = translateBreakTimeIntoIntArray(breakDuration);
-    sharedPrefs.setBreakHoursDuration(breakTime[0]);
-    sharedPrefs.setBreakMinsDuration(breakTime[1]);
-    sharedPrefs.setBreakSecsDuration(breakTime[2]);
+    int breakTimeInSeconds = breakTime[0] * 3600 + breakTime[1] * 60 + breakTime[2];
+    sharedPrefs.setBreakDuration(breakTimeInSeconds);
   }
 
   String getCurrentStudyTime() {
