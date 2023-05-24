@@ -24,9 +24,9 @@ class CustomShape extends CustomPainter {
     ]; //0,1,2 = x1,x2,x3, 3,4,5 = y1,y2,y3
 
     if (leftSide) {
-      xyAray[0] = -width / 4 - 50;
-      xyAray[1] = -width / 4 - 60;
-      xyAray[2] = -width / 4 - 70;
+      xyAray[0] = -width / 6;
+      xyAray[1] = -width / 6 - 10;
+      xyAray[2] = -width / 6 - 20;
     } else {
       xyAray[0] = -20;
       xyAray[1] = -30;
@@ -44,9 +44,9 @@ class CustomShape extends CustomPainter {
     }
 
     if (smallText && textLength > 32) {
-      xyAray[3] = 20;
-      xyAray[4] = 50;
-      xyAray[5] = 20;
+      xyAray[3] = 10;
+      xyAray[4] = 40;
+      xyAray[5] = 10;
     }
 
     path.lineTo(xyAray[0], xyAray[3]);

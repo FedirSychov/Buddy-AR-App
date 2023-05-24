@@ -23,7 +23,7 @@ class BUDdyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: Themes.lightTheme,
       darkTheme: Themes.darkTheme,
-      home: const SplashScreenView(),
+      home: SplashScreenView(),
     );
   }
 }

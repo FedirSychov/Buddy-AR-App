@@ -1,3 +1,4 @@
+import 'package:BUDdy/viewModels/plantPageARViewModel.dart';
 import 'package:ar_flutter_plugin/managers/ar_location_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_session_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_object_manager.dart';
@@ -16,25 +17,18 @@ import '../model/plantType.dart';
 import '../clients/sharedPrefs.dart';
 
 class PlantPageARView extends StatefulWidget {
-  const PlantPageARView({Key? key}) : super(key: key);
+  PlantPageARView({Key? key}) : super(key: key);
+  final viewModel = PlantPageARViewModel();
 
   @override
   _PlantPageARViewState createState() => _PlantPageARViewState();
 }
 
 class _PlantPageARViewState extends State<PlantPageARView> {
-  bool didAddPlant = false;
-  ARSessionManager? arSessionManager;
-  ARObjectManager? arObjectManager;
-  ARAnchorManager? arAnchorManager;
-
-  List<ARNode> nodes = [];
-  List<ARAnchor> anchors = [];
-
   @override
   void dispose() {
     super.dispose();
-    arSessionManager!.dispose();
+    widget.viewModel.arSessionManager!.dispose();
   }
 
   @override
@@ -69,43 +63,44 @@ class _PlantPageARViewState extends State<PlantPageARView> {
       ARObjectManager arObjectManager,
       ARAnchorManager arAnchorManager,
       ARLocationManager arLocationManager) {
-    this.arSessionManager = arSessionManager;
-    this.arObjectManager = arObjectManager;
-    this.arAnchorManager = arAnchorManager;
+    widget.viewModel.arSessionManager = arSessionManager;
+    widget.viewModel.arObjectManager = arObjectManager;
+    widget.viewModel.arAnchorManager = arAnchorManager;
 
-    this.arSessionManager!.onInitialize(
-          showPlanes: true,
-          handlePans: true,
-          handleRotation: true,
-        );
-    this.arObjectManager!.onInitialize();
+    widget.viewModel.arSessionManager!.onInitialize(
+      showPlanes: true,
+      handlePans: true,
+      handleRotation: true,
+    );
+    widget.viewModel.arObjectManager!.onInitialize();
 
-    this.arSessionManager!.onPlaneOrPointTap = onPlaneOrPointTapped;
+    widget.viewModel.arSessionManager!.onPlaneOrPointTap = onPlaneOrPointTapped;
   }
 
   Future<void> onPlaneOrPointTapped(
       List<ARHitTestResult> hitTestResults) async {
-    if (!didAddPlant) {
+    if (!widget.viewModel.didAddPlant) {
       ARHitTestResult singleHitTestResult = hitTestResults.firstWhere(
           (hitTestResult) => hitTestResult.type == ARHitTestResultType.plane);
       ARPlaneAnchor newAnchor =
           ARPlaneAnchor(transformation: singleHitTestResult.worldTransform);
-      bool? didAddAnchor = await arAnchorManager!.addAnchor(newAnchor);
+      bool? didAddAnchor =
+          await widget.viewModel.arAnchorManager!.addAnchor(newAnchor);
       if (didAddAnchor!) {
-        anchors.add(newAnchor);
-        String modelURL = _getModelUrl();
+        widget.viewModel.anchors.add(newAnchor);
+        String modelURL = widget.viewModel.getModelUrl();
         ARNode newNode = ARNode(
             type: NodeType.webGLB,
             uri: modelURL,
             scale: Vector3(0.2, 0.2, 0.2),
             position: Vector3(0.0, 0.0, 0.0),
             rotation: Vector4(1.0, 0.0, 0.0, 0.0));
-        bool? didAddNodeToAnchor =
-            await arObjectManager!.addNode(newNode, planeAnchor: newAnchor);
+        bool? didAddNodeToAnchor = await widget.viewModel.arObjectManager!
+            .addNode(newNode, planeAnchor: newAnchor);
         if (didAddNodeToAnchor!) {
-          nodes.add(newNode);
-          didAddPlant = true;
-          arSessionManager?.onInitialize(
+          widget.viewModel.nodes.add(newNode);
+          widget.viewModel.didAddPlant = true;
+          widget.viewModel.arSessionManager?.onInitialize(
             showPlanes: false,
             handlePans: true,
             handleRotation: true,
@@ -113,11 +108,5 @@ class _PlantPageARViewState extends State<PlantPageARView> {
         }
       }
     }
-  }
-
-  String _getModelUrl() {
-    int plantIndex = SharedPrefs().getPlantType() ?? 0;
-    int plantProgress = SharedPrefs().getPlantProgress();
-    return '${PlantType.values[plantIndex].getModelFolderURL()}/$plantProgress.glb';
   }
 }

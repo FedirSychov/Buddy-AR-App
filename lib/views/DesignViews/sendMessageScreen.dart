@@ -54,29 +54,34 @@ class _SpeechBubble extends State<SpeechBubble> with TickerProviderStateMixin {
             // SizedBox(height: 30),
             Flexible(
                 child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: widget.type.leftSide
+                  ? MainAxisAlignment.start
+                  : MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Flexible(
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 20),
-                    decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 246, 236, 228),
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(18),
-                          bottomLeft: Radius.circular(18),
-                          bottomRight: Radius.circular(18),
-                          topRight: Radius.circular(18)),
-                    ),
-                    child: Text(
-                      widget.type.message,
-                      style: TextStyle(
-                          fontFamily: 'Lato',
-                          fontSize: widget.type.smallText ? 14 : 24),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+                      width: widget.type.smallText ? 180 : 200,
+                      height: widget.type.smallText ? 60 : 106,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 0),
+                      decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 246, 236, 228),
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(18),
+                            bottomLeft: Radius.circular(18),
+                            bottomRight: Radius.circular(18),
+                            topRight: Radius.circular(18)),
+                      ),
+                      child: Center(
+                        child: Text(
+                          widget.type.message,
+                          style: TextStyle(
+                              fontFamily: 'Lato',
+                              fontSize: widget.type.smallText ? 12 : 24),
+                          textAlign: TextAlign.center,
+                        ),
+                      )),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 50, right: 20),

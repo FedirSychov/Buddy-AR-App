@@ -10,7 +10,6 @@ import 'DesignViews/buttons.dart';
 class HomeView extends StatelessWidget {
   final BubbleType? topSpeechBubble;
   final BubbleType? bottomSpeechBubble;
-
   const HomeView({super.key, this.topSpeechBubble, this.bottomSpeechBubble});
 
   // This widget is the root of your application.
