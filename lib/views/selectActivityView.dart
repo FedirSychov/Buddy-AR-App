@@ -31,7 +31,7 @@ class _SelectActivityViewState extends State<SelectActivityView> {
                 width: 300,
                 height: 48,
                 child: Text(
-                    "Refresh, relax, and regain energy. Select an activity that suits you best.",
+                    "Refresh, relax, and regain energy.\nSelect an activity that suits you best.",
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Theme.of(context).colorScheme.onBackground),
                     textAlign: TextAlign.center),
@@ -84,10 +84,9 @@ class ActivityView extends StatelessWidget {
         decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: const Offset(0, 3), // changes position of shadow
+                color: Theme.of(context).colorScheme.shadow.withOpacity(0.3),
+                blurRadius: 2,
+                offset: const Offset(0, 1),
               )
             ],
             borderRadius: BorderRadius.circular(20.0),

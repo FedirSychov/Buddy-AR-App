@@ -132,8 +132,9 @@ class TimePicker extends StatefulWidget {
 class _TimePickerState extends State<TimePicker> {
   BoxDecoration myBoxDecoration() {
     return BoxDecoration(
-        border: Border.all(),
-        borderRadius: const BorderRadius.all(Radius.circular(8.0)));
+        color: Theme.of(context).colorScheme.surface,
+        border: Border.all(color: Theme.of(context).colorScheme.outline, width: 1.0),
+        borderRadius: const BorderRadius.all(Radius.circular(20.0)));
   }
 
   @override
@@ -145,9 +146,8 @@ class _TimePickerState extends State<TimePicker> {
       height: 62,
       child: Container(
         decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surface,
             shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.all(Radius.circular(8.0))),
+            borderRadius: BorderRadius.all(Radius.circular(20.0))),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

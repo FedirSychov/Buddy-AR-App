@@ -117,7 +117,9 @@ class Header extends StatelessWidget {
             width: 32.0,
             height: 32.0,
             child: Image.asset('assets/images/icons/Arrow.png',
-                width: 24.0, height: 24.0)),
+                width: 24.0,
+                height: 24.0,
+                color: Theme.of(context).colorScheme.onBackground)),
       ),
       Expanded(
           child: Text(activity.title,
@@ -212,6 +214,9 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
     });
   }
 
+  /// Starts the countdown to update the view every second
+  /// Setting the Duration to exactly 1 second would update the view every >= 1 second
+  /// The Duration chosen is therefor shorter
   void startCountdown() {
     timer = widget
         .initTimer(Timer.periodic(const Duration(milliseconds: 250), (timer) {
@@ -262,7 +267,7 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
                         textAlign: TextAlign.center)),
                 Container(
                   margin: const EdgeInsets.only(top: 25.0),
-                  child: PauseButton("session", () {
+                  child: PauseButton("activity", () {
                     handleButtonPress();
                   }, onGoing),
                 )
@@ -306,7 +311,7 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
         ),
         Container(
           margin: const EdgeInsets.only(top: 40.0),
-          child: PauseButton("session", () {
+          child: PauseButton("activity", () {
             handleButtonPress();
           }, onGoing),
         )

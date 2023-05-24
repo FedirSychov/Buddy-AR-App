@@ -126,7 +126,9 @@ class Header extends StatelessWidget {
             width: 32.0,
             height: 32.0,
             child: Image.asset('assets/images/icons/Cross.png',
-                width: 24.0, height: 24.0)),
+                width: 24.0,
+                height: 24.0,
+                color: Theme.of(context).colorScheme.onBackground)),
       )
     ]);
   }
@@ -137,7 +139,7 @@ class KeyVisual extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset('assets/images/learning.jpg', height: 233, width: 290);
+    return Image.asset('assets/images/learning.png', height: 233, width: 290);
   }
 }
 
@@ -236,6 +238,9 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
     });
   }
 
+  /// Starts the countdown to update the view every second
+  /// Setting the Duration to exactly 1 second would update the view every >= 1 second
+  /// The Duration chosen is therefor shorter
   void startCountdown() {
     timer = widget
         .initTimer(Timer.periodic(const Duration(milliseconds: 250), (timer) {
