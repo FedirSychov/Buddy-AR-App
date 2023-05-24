@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:BUDdy/viewModels/setupSessionViewModel.dart';
 import 'package:BUDdy/views/DesignViews/buttons.dart';
 import 'package:BUDdy/views/homeView.dart';
-
 import '../model/speechBubbles.dart';
 
 class SetupSessionView extends StatelessWidget {
-  var viewModel = SetupSessionViewModel();
+  final SetupSessionViewModel viewModel = SetupSessionViewModel();
 
   SetupSessionView({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

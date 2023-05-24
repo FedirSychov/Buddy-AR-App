@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SimpleButton extends StatefulWidget {
-  String text;
-  Function func;
+  final String text;
+  final Function func;
 
   SimpleButton(this.text, this.func);
 
@@ -100,8 +100,8 @@ class _PauseButtonState extends State<PauseButton> {
 }
 
 class CancelButton extends StatefulWidget {
-  String text;
-  Function func;
+  final String text;
+  final Function func;
 
   CancelButton(this.text, this.func);
 

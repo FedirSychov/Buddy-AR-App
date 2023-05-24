@@ -12,7 +12,6 @@ class HomeView extends StatelessWidget {
 
   const HomeView({super.key, this.topSpeechBubble, this.bottomSpeechBubble});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

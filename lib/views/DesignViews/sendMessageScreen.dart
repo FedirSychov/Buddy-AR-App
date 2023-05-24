@@ -35,7 +35,7 @@ class _SpeechBubble extends State<SpeechBubble> with TickerProviderStateMixin {
     await controller.forward();
   }
 
-  //play reversed animation
+  // play reversed animation
   void reverseOnce() async {
     await controller.reverse();
   }

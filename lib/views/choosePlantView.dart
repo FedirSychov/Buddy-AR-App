@@ -9,7 +9,6 @@ import 'DesignViews/buttons.dart';
 class ChoosePlantView extends StatelessWidget {
   const ChoosePlantView({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -124,7 +123,7 @@ class PlantOption extends StatelessWidget {
     return InkWell(
         onTap: () {
           if (plantTypeOption == PlantType.appleTree) {
-            // Other plants are still WIP
+            // Adding further plants is WIP
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -164,7 +163,7 @@ class PlantOption extends StatelessWidget {
 class Bottom extends StatelessWidget {
   Bottom({super.key});
 
-  var viewModel = ChoosePlantViewModel();
+  final ChoosePlantViewModel viewModel = ChoosePlantViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +186,7 @@ class Bottom extends StatelessWidget {
             }),
           ),
           SimpleButton('Let\'s proceed', () {
-            viewModel.setIsRetunringUser(true);
+            viewModel.setIsReturningUser(true);
             Navigator.push(
                 context, MaterialPageRoute(builder: (_) => SetupSessionView()));
           })

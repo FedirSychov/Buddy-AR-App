@@ -28,8 +28,6 @@ class SharedPrefs {
     return sharedPrefs?.getBool(IS_RETURNING_USER) ?? false;
   }
 
-
-
   void setPlantType(PlantType plantType) async {
     await sharedPrefs?.setInt(PLANT_TYPE, plantType.index);
   }

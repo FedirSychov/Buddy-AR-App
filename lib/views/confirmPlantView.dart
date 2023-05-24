@@ -8,9 +8,8 @@ class ConfirmPlantView extends StatelessWidget {
   ConfirmPlantView({super.key, required this.plantType});
 
   final PlantType plantType;
-  final viewModel = ConfirmPlantViewModel();
+  final ConfirmPlantViewModel viewModel = ConfirmPlantViewModel();
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

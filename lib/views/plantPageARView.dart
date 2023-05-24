@@ -20,7 +20,7 @@ class PlantPageARView extends StatefulWidget {
 
   PlantPageARView({super.key, required this.promptSessionSetUpOnReturn});
 
-  final viewModel = PlantPageARViewModel();
+  final PlantPageARViewModel viewModel = PlantPageARViewModel();
 
   @override
   _PlantPageARViewState createState() => _PlantPageARViewState();
