@@ -89,10 +89,14 @@ class SharedPrefs {
     return sharedPrefs?.getInt(PLANT_TYPE);
   }
 
-  void incPlantProgress() async {
-    if (getPlantProgress() < 2) { // Maximum progress of plants
+  Future<bool> incPlantProgress() async {
+    bool hasGrown = false;
+    if (getPlantProgress() < 2) {
+      // Maximum progress of plants
       await sharedPrefs?.setInt(PLANT_PROGRESS, getPlantProgress() + 1);
+      hasGrown = true;
     }
+    return hasGrown;
   }
 
   int getPlantProgress() {

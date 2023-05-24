@@ -231,9 +231,13 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
         }
       } else {
         cancelCountdown();
-        SharedPrefs().incPlantProgress();
-        Navigator.push(context,
-            MaterialPageRoute(builder: (_) => const SessionCompleteView()));
+        SharedPrefs().incPlantProgress().then((hasGrown) => {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) =>
+                          SessionCompleteView(plantHasGrown: hasGrown)))
+            });
       }
     });
   }
