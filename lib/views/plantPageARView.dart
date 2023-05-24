@@ -35,7 +35,7 @@ class _PlantPageARViewState extends State<PlantPageARView> {
 
   @override
   Widget build(BuildContext context) {
-    return new WillPopScope(
+    return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
             body: Stack(children: [

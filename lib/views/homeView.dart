@@ -16,7 +16,7 @@ class HomeView extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return new WillPopScope(
+    return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
             backgroundColor: Theme.of(context).colorScheme.background,

@@ -2,7 +2,6 @@ import 'package:BUDdy/viewModels/onboardingViewModel.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import '../clients/sharedPrefs.dart';
 import '../model/enumScreens.dart';
 import 'DesignViews/buttons.dart';
 import 'choosePlantView.dart';
@@ -22,7 +21,7 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   @override
   Widget build(BuildContext context) {
-    return new WillPopScope(
+    return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
             backgroundColor: Theme.of(context).colorScheme.background,

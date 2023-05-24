@@ -1,7 +1,6 @@
 import 'package:BUDdy/viewModels/confirmPlantViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:BUDdy/views/DesignViews/buttons.dart';
-import '../clients/sharedPrefs.dart';
 import '../model/plantType.dart';
 import 'choosePlantView.dart';
 
@@ -14,7 +13,7 @@ class ConfirmPlantView extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return new WillPopScope(
+    return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
             backgroundColor: Theme.of(context).colorScheme.surface,

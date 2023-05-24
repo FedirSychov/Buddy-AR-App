@@ -2,9 +2,6 @@ import 'dart:async';
 
 import 'package:BUDdy/viewModels/splashScreenViewModel.dart';
 import 'package:flutter/material.dart';
-import 'package:BUDdy/clients/sharedPrefs.dart';
-import 'package:BUDdy/views/onboardingView.dart';
-import 'package:BUDdy/views/setupSessionView.dart';
 
 class SplashScreenView extends StatelessWidget {
   SplashScreenView({super.key});

@@ -10,7 +10,7 @@ class SessionCompleteView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new WillPopScope(
+    return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
             backgroundColor: Theme.of(context).colorScheme.surface,
