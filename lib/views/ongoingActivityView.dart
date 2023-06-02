@@ -254,7 +254,7 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
                     height: 200,
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
-                        child: VideoPlayer())),
+                        child: VideoPlayer(videoId: widget.activity.videoId))),
                 Container(
                     margin: const EdgeInsets.only(top: 25.0),
                     width: 294,
@@ -322,13 +322,15 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
 }
 
 class VideoPlayer extends StatelessWidget {
-  final _controller = YoutubePlayerController.fromVideoId(
-    videoId: 'dQw4w9WgXcQ',
+  final String videoId;
+
+  late final _controller = YoutubePlayerController.fromVideoId(
+    videoId: videoId,
     autoPlay: true,
     params: const YoutubePlayerParams(showFullscreenButton: true),
   );
 
-  VideoPlayer({super.key});
+  VideoPlayer({super.key, required this.videoId});
 
   @override
   Widget build(BuildContext context) {
