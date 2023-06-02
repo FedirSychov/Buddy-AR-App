@@ -1,63 +1,52 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:BUDdy/views/DesignViews/buttons.dart';
+import 'package:provider/provider.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import '../clients/sharedPrefs.dart';
 import '../model/activity.dart';
 import '../viewModels/ongoingActivityViewModel.dart';
-import 'activityCompleteView.dart';
 import 'ongoingSessionView.dart';
 
 class OngoingActivityView extends StatelessWidget {
-  final OngoingActivityViewModel viewModel = OngoingActivityViewModel();
   final Activity activity;
-  Timer? timer;
-
-  Timer _initTimer(Timer timer) {
-    this.timer = timer;
-    return timer;
-  }
-
-  void _cancelTimer() {
-    timer?.cancel();
-  }
 
   OngoingActivityView({super.key, required this.activity});
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: () async => false,
-        child: Scaffold(
-            backgroundColor: Theme.of(context).colorScheme.background,
-            body: Column(
-              children: [
-                Container(
-                    margin: const EdgeInsets.only(top: 65.0),
-                    child:
-                        Header(activity: activity, cancelTimer: _cancelTimer)),
-                Container(
-                    margin: const EdgeInsets.only(top: 75.0),
-                    child: KeyVisual(activity: activity)),
-                Container(
-                  margin: const EdgeInsets.only(top: 65.0),
-                  child: Countdown(
-                      initTimer: _initTimer,
-                      activity: activity,
-                      viewModel: viewModel),
-                )
-              ],
-            )));
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+              create: (_) => OngoingActivityViewModel(context: context))
+        ],
+        child: WillPopScope(
+            onWillPop: () async => false,
+            child: Scaffold(
+                backgroundColor: Theme.of(context).colorScheme.background,
+                body: Column(
+                  children: [
+                    Container(
+                        margin: const EdgeInsets.only(top: 65.0),
+                        child: Header(activity: activity)),
+                    Container(
+                        margin: const EdgeInsets.only(top: 75.0),
+                        child: KeyVisual(activity: activity)),
+                    Container(
+                      margin: const EdgeInsets.only(top: 65.0),
+                      child: Countdown(activity: activity),
+                    )
+                  ],
+                ))));
   }
 }
 
 class Header extends StatelessWidget {
-  final Function cancelTimer;
   final Activity activity;
 
-  const Header({super.key, required this.activity, required this.cancelTimer});
+  const Header({super.key, required this.activity});
 
-  Widget getAlertDialog(BuildContext context) {
+  Widget getAlertDialog(
+      BuildContext context, OngoingActivityViewModel viewModel) {
     return AlertDialog(
       backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
       title: Text('Discontinue activity?',
@@ -88,7 +77,7 @@ class Header extends StatelessWidget {
           ),
           child: const Text('Accept'),
           onPressed: () {
-            cancelTimer();
+            viewModel.cancelTimer();
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -99,21 +88,24 @@ class Header extends StatelessWidget {
     );
   }
 
-  Future<void> _dialogBuilder(BuildContext context) {
+  Future<void> _dialogBuilder(
+      BuildContext context, OngoingActivityViewModel viewModel) {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
-        return getAlertDialog(context);
+        return getAlertDialog(context, viewModel);
       },
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    OngoingActivityViewModel viewModel =
+        context.read<OngoingActivityViewModel>();
     return Row(children: [
       InkWell(
         onTap: () {
-          _dialogBuilder(context);
+          _dialogBuilder(context, viewModel);
         },
         child: Container(
             margin: const EdgeInsets.only(left: 15.0),
@@ -152,42 +144,26 @@ class KeyVisual extends StatelessWidget {
 }
 
 class Countdown extends StatefulWidget {
-  final Function initTimer;
   final Activity activity;
-  final OngoingActivityViewModel viewModel;
 
-  const Countdown(
-      {super.key,
-      required this.initTimer,
-      required this.activity,
-      required this.viewModel});
+  Countdown({required this.activity});
 
   @override
-  State<Countdown> createState() => _CountdownState(viewModel: viewModel);
+  State<Countdown> createState() => _CountdownState();
 }
 
 class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
-  bool onGoing = false;
-  bool _isInForeground = true;
-  OngoingActivityViewModel viewModel;
-
-  late DateTime until = viewModel.getInitDateTimeUntil();
-  late Duration timeLeft = viewModel.getInitRemainingDuration();
-  late Timer timer;
-
-  _CountdownState({required this.viewModel});
-
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addObserver(this);
-    startCountdown();
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    _isInForeground = state == AppLifecycleState.resumed;
+    bool _isInForeground = state == AppLifecycleState.resumed;
+    context.read<OngoingActivityViewModel>().setIsInForeground(_isInForeground);
   }
 
   @override
@@ -196,108 +172,87 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
     super.dispose();
   }
 
-  void countDown() {
-    setState(() {
-      timeLeft = until.difference(DateTime.now());
-      if (timeLeft.inSeconds <= 0) {
-        cancelCountdown();
-        if (!_isInForeground) {
-          widget.viewModel.showBigTextNotification(
-              "Hooray! Your break is complete.", "Let's get back to work! ");
-        }
-        Navigator.push(context,
-            MaterialPageRoute(builder: (_) => const ActivityCompleteView()));
-      }
-    });
-  }
-
-  /// Starts the countdown to update the view every second
-  /// Setting the Duration to exactly 1 second would update the view every >= 1 second
-  /// The Duration chosen is therefor shorter
-  void startCountdown() {
-    timer = widget
-        .initTimer(Timer.periodic(const Duration(milliseconds: 250), (timer) {
-      countDown();
-    }));
-    setState(() => onGoing = true);
-  }
-
-  void pauseCountdown() {
-    cancelCountdown();
+  void getPauseModal(OngoingActivityViewModel viewModel) {
     showModalBottomSheet<void>(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.surfaceTint,
-        context: context,
-        isScrollControlled: true,
-        builder: (context) {
-          return FractionallySizedBox(
-            heightFactor: 0.6,
-            child: Column(
-              children: <Widget>[
-                Container(
-                    margin: const EdgeInsets.only(top: 30.0),
-                    width: 294,
-                    child: Text(widget.activity.title,
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayLarge
-                            ?.copyWith(
-                                color: Theme.of(context).colorScheme.onSurface),
-                        textAlign: TextAlign.center)),
-                Container(
-                    margin: const EdgeInsets.only(top: 15.0),
-                    width: 328,
-                    height: 200,
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: VideoPlayer(videoId: widget.activity.videoId))),
-                Container(
-                    margin: const EdgeInsets.only(top: 25.0),
-                    width: 294,
-                    child: Text(widget.activity.breakDescription,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant),
-                        textAlign: TextAlign.center)),
-                Container(
-                  margin: const EdgeInsets.only(top: 25.0),
-                  child: PauseButton("activity", () {
-                    handleButtonPress();
-                  }, onGoing),
-                )
-              ],
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20.0),
+                  topRight: Radius.circular(20.0)),
             ),
-          );
-        }).whenComplete(() => {if (!onGoing) resumeCountdown()});
+            backgroundColor: Theme.of(context).colorScheme.surfaceTint,
+            context: context,
+            isScrollControlled: true,
+            builder: (context) {
+              return FractionallySizedBox(
+                heightFactor: 0.6,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        margin: const EdgeInsets.only(top: 30.0),
+                        width: 294,
+                        child: Text(widget.activity.title,
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayLarge
+                                ?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurface),
+                            textAlign: TextAlign.center)),
+                    Container(
+                        margin: const EdgeInsets.only(top: 15.0),
+                        width: 328,
+                        height: 200,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child:
+                                VideoPlayer(videoId: widget.activity.videoId))),
+                    Container(
+                        margin: const EdgeInsets.only(top: 25.0),
+                        width: 294,
+                        child: Text(widget.activity.breakDescription,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurfaceVariant),
+                            textAlign: TextAlign.center)),
+                    Container(
+                      margin: const EdgeInsets.only(top: 25.0),
+                      child: PauseButton("activity", () {
+                        handleButtonPress(viewModel);
+                      }, viewModel.isOnGoing),
+                    )
+                  ],
+                ),
+              );
+            })
+        .whenComplete(
+            () => {if (!viewModel.isOnGoing) viewModel.resumeCountdown()});
   }
 
-  void resumeCountdown() {
-    until = DateTime.now().add(timeLeft);
-    startCountdown();
-  }
-
-  void cancelCountdown() {
-    onGoing = false;
-    timer.cancel();
-  }
-
-  void handleButtonPress() {
-    if (onGoing) {
-      pauseCountdown();
+  void handleButtonPress(OngoingActivityViewModel viewModel) {
+    if (viewModel.isOnGoing) {
+      viewModel.cancelCountdown();
+      getPauseModal(viewModel);
     } else {
-      resumeCountdown();
+      viewModel.resumeCountdown();
       Navigator.pop(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    OngoingActivityViewModel viewModel =
+        context.watch<OngoingActivityViewModel>();
+
+    Duration timeLeft = viewModel.getTimeLeft;
     int hours = timeLeft.inHours % 24;
     int minutes = timeLeft.inMinutes % 60;
     int seconds = timeLeft.inSeconds % 60;
+
     return Column(
       children: [
         Text(
@@ -312,8 +267,8 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
         Container(
           margin: const EdgeInsets.only(top: 40.0),
           child: PauseButton("activity", () {
-            handleButtonPress();
-          }, onGoing),
+            handleButtonPress(viewModel);
+          }, viewModel.isOnGoing),
         )
       ],
     );
