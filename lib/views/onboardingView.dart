@@ -67,7 +67,7 @@ class OnboardingScreen extends StatelessWidget {
   OnboardingScreen({super.key, required this.screen});
 
   final Screens screen;
-  final viewModel = OnboardingViewModel();
+  final OnboardingViewModel viewModel = OnboardingViewModel();
 
   @override
   Widget build(BuildContext context) {

@@ -31,6 +31,7 @@ class BUDdyApp extends StatelessWidget {
 class Themes {
   static bool useMaterial3 = true;
   static String fontFamily = 'Lato';
+
   static TextTheme textTheme = const TextTheme(
     displayLarge: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w400),
     bodyLarge: TextStyle(fontSize: 57.0, fontWeight: FontWeight.w400),
@@ -39,6 +40,7 @@ class Themes {
     labelLarge: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500),
     labelMedium: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w500),
   );
+
   static ThemeData lightTheme = ThemeData(
     useMaterial3: useMaterial3,
     fontFamily: fontFamily,
@@ -68,9 +70,9 @@ class Themes {
       surfaceVariant: const Color(0xffF1E0D0),
       onSurfaceVariant: const Color(0xff504539),
       inverseSurface: const Color(0xffF6ECE4),
-      // surfaceContainer in design (value not supported by Flutter anymore)
+      // surfaceContainer in figma (value not supported by Flutter anymore)
       onInverseSurface: const Color(0xff855300),
-      // primaryFixed in design (value not supported by Flutter anymore)
+      // primaryFixed in figma (value not supported by Flutter anymore)
       surfaceTint: const Color(0xffFCF2EA),
       outline: const Color(0xff827568),
       outlineVariant: const Color(0xffD4C4B5),
@@ -107,9 +109,9 @@ class Themes {
         surfaceVariant: const Color(0xff504539),
         onSurfaceVariant: const Color(0xffD4C4B5),
         inverseSurface: const Color(0xff231F1A),
-        // surfaceContainer in design (value not supported by Flutter anymore)
+        // surfaceContainer in figma (value not supported by Flutter anymore)
         onInverseSurface: const Color(0xffFFDDB8),
-        // primaryFixed in design (value not supported by Flutter anymore)
+        // primaryFixed in figma (value not supported by Flutter anymore)
         surfaceTint: const Color(0xff1F1B16),
         outline: const Color(0xff9C8E80),
         outlineVariant: const Color(0xff9C8E80),

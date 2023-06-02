@@ -1,12 +1,11 @@
 import 'dart:async';
-
 import 'package:BUDdy/viewModels/splashScreenViewModel.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreenView extends StatelessWidget {
   SplashScreenView({super.key});
 
-  final viewModel = SplashScreenViewModel();
+  final SplashScreenViewModel viewModel = SplashScreenViewModel();
 
   void startTimer(BuildContext context) {
     Timer(const Duration(seconds: 5), () {

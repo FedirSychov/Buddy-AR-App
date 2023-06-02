@@ -3,7 +3,7 @@ import '../clients/sharedPrefs.dart';
 class ChoosePlantViewModel {
   SharedPrefs sharedPrefs = SharedPrefs();
 
-  void setIsRetunringUser(bool value) {
+  void setIsReturningUser(bool value) {
     sharedPrefs.setIsReturningUser(value);
   }
 }

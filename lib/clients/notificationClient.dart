@@ -1,11 +1,4 @@
-import 'dart:io';
-import 'dart:ui';
-
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
-import 'package:rxdart/subjects.dart';
-import 'package:timezone/data/latest_all.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 
 class NotificationClient {
   static Future initialize(
@@ -25,12 +18,14 @@ class NotificationClient {
       var payload,
       required FlutterLocalNotificationsPlugin fln}) async {
     AndroidNotificationDetails androidPlatformChannelSpecifics =
-        const AndroidNotificationDetails('example_name', 'channel_name',
-            playSound: true,
-            //sound: RawResourceAndroidNotificationSound('notification'),
-            importance: Importance.max,
-            priority: Priority.high,
-            icon: "@mipmap/ic_launcher",);
+        const AndroidNotificationDetails(
+      'BUDdy',
+      'BUDdy_notifications',
+      playSound: true,
+      importance: Importance.max,
+      priority: Priority.high,
+      icon: "@mipmap/ic_launcher",
+    );
 
     var not = NotificationDetails(
         android: androidPlatformChannelSpecifics,

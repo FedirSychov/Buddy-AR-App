@@ -25,6 +25,36 @@ class SetupSessionViewModel {
     }
   }
 
+  void saveCurrentStudyTime(String selectedDuration) {
+    sharedPrefs.setSelectedSessionDuration(selectedDuration);
+  }
+
+  String getCurrentStudyTime() {
+    return sharedPrefs.getSelectedSessionDuration() ?? basicStudyDuration;
+  }
+
+  void saveCurrentBreakTime(String selectedDuration) {
+    sharedPrefs.setSelectedBreakDuration(selectedDuration);
+  }
+
+  String getCurrentBreakTime() {
+    return sharedPrefs.getSelectedBreakDuration() ?? basicBreakDuration;
+  }
+
+  void setCountdownValues() {
+    String studyDuration =
+        sharedPrefs.getSelectedSessionDuration() ?? basicStudyDuration;
+    List<int> studyTime = translateSessionTimeIntoIntArray(studyDuration);
+    int studyTimeInSeconds = translateIntArrayToSeconds(studyTime);
+    sharedPrefs.setSessionDuration(studyTimeInSeconds);
+
+    String breakDuration =
+        sharedPrefs.getSelectedBreakDuration() ?? basicBreakDuration;
+    List<int> breakTime = translateBreakTimeIntoIntArray(breakDuration);
+    int breakTimeInSeconds = translateIntArrayToSeconds(breakTime);
+    sharedPrefs.setBreakDuration(breakTimeInSeconds);
+  }
+
   List<int> translateSessionTimeIntoIntArray(String sessionTime) {
     List<int> outputArray;
     switch (sessionTime) {
@@ -99,33 +129,7 @@ class SetupSessionViewModel {
     return outputArray;
   }
 
-  void saveCurrentStudyTime(String selectedDuration) {
-    sharedPrefs.setSelectedSessionDuration(selectedDuration);
-  }
-
-  void saveCurrentBreakTime(String selectedDuration) {
-    sharedPrefs.setSelectedBreakDuration(selectedDuration);
-  }
-
-  void setCountdownValues() {
-    String studyDuration =
-        sharedPrefs.getSelectedSessionDuration() ?? basicStudyDuration;
-    List<int> studyTime = translateSessionTimeIntoIntArray(studyDuration);
-    int studyTimeInSeconds = studyTime[0] * 3600 + studyTime[1] * 60 + studyTime[2];
-    sharedPrefs.setSessionDuration(studyTimeInSeconds);
-
-    String breakDuration =
-        sharedPrefs.getSelectedBreakDuration() ?? basicBreakDuration;
-    List<int> breakTime = translateBreakTimeIntoIntArray(breakDuration);
-    int breakTimeInSeconds = breakTime[0] * 3600 + breakTime[1] * 60 + breakTime[2];
-    sharedPrefs.setBreakDuration(breakTimeInSeconds);
-  }
-
-  String getCurrentStudyTime() {
-    return sharedPrefs.getSelectedSessionDuration() ?? basicStudyDuration;
-  }
-
-  String getCurrentBreakTime() {
-    return sharedPrefs.getSelectedBreakDuration() ?? basicBreakDuration;
+  int translateIntArrayToSeconds(List<int> intArray) {
+    return intArray[0] * 3600 + intArray[1] * 60 + intArray[2];
   }
 }
