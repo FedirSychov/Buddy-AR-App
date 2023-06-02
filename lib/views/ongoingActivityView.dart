@@ -163,20 +163,19 @@ class Countdown extends StatefulWidget {
       required this.viewModel});
 
   @override
-  State<Countdown> createState() => _CountdownState();
+  State<Countdown> createState() => _CountdownState(viewModel: viewModel);
 }
 
 class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
   bool onGoing = false;
   bool _isInForeground = true;
+  OngoingActivityViewModel viewModel;
 
-  DateTime until = DateTime.now()
-      .add(Duration(seconds: SharedPrefs().getBreakDuration()));
-  Duration timeLeft = DateTime.now()
-      .add(Duration(seconds: SharedPrefs().getBreakDuration())).difference(DateTime.now());
-
+  late DateTime until = viewModel.getInitDateTimeUntil();
+  late Duration timeLeft = viewModel.getInitRemainingDuration();
   late Timer timer;
 
+  _CountdownState({required this.viewModel});
 
   @override
   void initState() {
@@ -200,7 +199,7 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
   void countDown() {
     setState(() {
       timeLeft = until.difference(DateTime.now());
-      if (timeLeft.inSeconds <= 0)  {
+      if (timeLeft.inSeconds <= 0) {
         cancelCountdown();
         if (!_isInForeground) {
           widget.viewModel.showBigTextNotification(

@@ -157,24 +157,22 @@ class Countdown extends StatefulWidget {
       required this.viewModel});
 
   @override
-  State<Countdown> createState() => _CountdownState();
+  State<Countdown> createState() => _CountdownState(viewModel: viewModel);
 }
 
 class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
+  final OngoingSessionViewModel viewModel;
+
   bool onGoing = false;
   bool hasBeenNotified = false;
   bool _isInForeground = true;
 
-  DateTime until =
-      DateTime.now().add(Duration(seconds: SharedPrefs().getSessionDuration()));
-  Duration timeLeft = DateTime.now()
-      .add(Duration(seconds: SharedPrefs().getSessionDuration()))
-      .difference(DateTime.now());
-  int breakPoint =
-      (Duration(seconds: SharedPrefs().getSessionDuration()).inSeconds / 2)
-          .floor();
-
+  late DateTime until = viewModel.getInitDateTimeUntil();
+  late Duration timeLeft = viewModel.getInitRemainingDuration();
+  late int breakPoint = viewModel.getBreakPoint();
   late Timer timer;
+
+  _CountdownState({required this.viewModel});
 
   @override
   void initState() {
@@ -196,23 +194,37 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
   }
 
   void _showNotification() {
-    if (widget.isFirstHalf) {
-      if (timeLeft.inSeconds <= breakPoint) {
-        widget.viewModel.showBigTextNotification("Let's take a pause!",
-            "Hey! why don't you take a break?\nClick to start.");
-      } else if (timeLeft.inSeconds <= breakPoint + 300 && !hasBeenNotified) {
-        widget.viewModel
-            .showBigTextNotification("Keep going!", "5 more minutes to go.");
-        hasBeenNotified = true;
-      }
-    } else if (timeLeft.inSeconds <= 0) {
-      widget.viewModel.showBigTextNotification(
-          "Hooray! Your session is complete.", "Let's check you plant buddy. ");
-    } else if (timeLeft.inSeconds <= 300 && !hasBeenNotified) {
-      widget.viewModel
+    if (_shouldNotifyAboutNearlyDone()) {
+      viewModel
           .showBigTextNotification("Keep going!", "5 more minutes to go.");
       hasBeenNotified = true;
     }
+    if (_shouldNotifyAboutStartingBreak()) {
+      viewModel.showBigTextNotification("Let's take a pause!",
+          "Hey! why don't you take a break?\nClick to start.");
+    }
+    if (_shouldNotifyAboutSessionComplete()) {
+      viewModel.showBigTextNotification(
+          "Hooray! Your session is complete.", "Let's check you plant buddy. ");
+    }
+  }
+
+  bool _shouldNotifyAboutStartingBreak() {
+    return widget.isFirstHalf && timeLeft.inSeconds <= breakPoint;
+  }
+
+  bool _shouldNotifyAboutNearlyDone() {
+    bool shouldNotify = false;
+    if (widget.isFirstHalf) {
+      shouldNotify = timeLeft.inSeconds <= breakPoint + 300 && !hasBeenNotified;
+    } else {
+      shouldNotify = timeLeft.inSeconds <= 300 && !hasBeenNotified;
+    }
+    return shouldNotify;
+  }
+
+  bool _shouldNotifyAboutSessionComplete() {
+    return !widget.isFirstHalf && timeLeft.inSeconds <= 0;
   }
 
   void countDown() {
