@@ -172,7 +172,8 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
     super.dispose();
   }
 
-  void getPauseModal(OngoingActivityViewModel viewModel) {
+  void getPauseModal() {
+    OngoingActivityViewModel viewModel = context.read<OngoingActivityViewModel>();
     showModalBottomSheet<void>(
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
@@ -222,7 +223,7 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
                     Container(
                       margin: const EdgeInsets.only(top: 25.0),
                       child: PauseButton("activity", () {
-                        handleButtonPress(viewModel);
+                        handleButtonPress();
                       }, viewModel.isOnGoing),
                     )
                   ],
@@ -233,10 +234,11 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
             () => {if (!viewModel.isOnGoing) viewModel.resumeCountdown()});
   }
 
-  void handleButtonPress(OngoingActivityViewModel viewModel) {
+  void handleButtonPress() {
+    OngoingActivityViewModel viewModel = context.read<OngoingActivityViewModel>();
     if (viewModel.isOnGoing) {
       viewModel.cancelCountdown();
-      getPauseModal(viewModel);
+      getPauseModal();
     } else {
       viewModel.resumeCountdown();
       Navigator.pop(context);
@@ -267,7 +269,7 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
         Container(
           margin: const EdgeInsets.only(top: 40.0),
           child: PauseButton("activity", () {
-            handleButtonPress(viewModel);
+            handleButtonPress();
           }, viewModel.isOnGoing),
         )
       ],

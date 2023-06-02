@@ -1,3 +1,4 @@
+import 'package:BUDdy/viewModels/ongoingActivityViewModel.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:BUDdy/views/DesignViews/buttons.dart';
@@ -160,7 +161,8 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
     super.dispose();
   }
 
-  void getPauseModal(OngoingSessionViewModel viewModel) {
+  void getPauseModal() {
+    OngoingSessionViewModel viewModel = context.read<OngoingSessionViewModel>();
     showModalBottomSheet<void>(
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
@@ -196,7 +198,7 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
                     Container(
                       margin: const EdgeInsets.only(top: 35.0),
                       child: PauseButton("session", () {
-                        handleButtonPress(viewModel);
+                        handleButtonPress();
                       }, viewModel.isOnGoing),
                     )
                   ],
@@ -207,10 +209,11 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
             () => {if (!viewModel.isOnGoing) viewModel.resumeCountdown()});
   }
 
-  void handleButtonPress(OngoingSessionViewModel viewModel) {
+  void handleButtonPress() {
+    OngoingSessionViewModel viewModel = context.read<OngoingSessionViewModel>();
     if (viewModel.isOnGoing) {
       viewModel.cancelCountdown();
-      getPauseModal(viewModel);
+      getPauseModal();
     } else {
       viewModel.resumeCountdown();
       Navigator.pop(context);
@@ -241,7 +244,7 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
         Container(
           margin: const EdgeInsets.only(top: 40.0),
           child: PauseButton("session", () {
-            handleButtonPress(viewModel);
+            handleButtonPress();
           }, viewModel.isOnGoing),
         )
       ],

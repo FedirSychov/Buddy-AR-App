@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
+import 'package:provider/provider.dart';
 import '../model/activity.dart';
-import 'ongoingActivityView.dart';
+import '../viewModels/activityCountdownViewModel.dart';
 
 class ActivityCountdownView extends StatelessWidget {
   final Activity activity;
@@ -10,34 +10,40 @@ class ActivityCountdownView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: () async => false,
-        child: Scaffold(
-            backgroundColor: Theme.of(context).colorScheme.background,
-            body: Column(
-              children: [
-                Container(
-                    margin: const EdgeInsets.only(top: 65.0),
-                    child: Header(activity: activity)),
-                Container(
-                    margin: const EdgeInsets.only(top: 75.0),
-                    child: KeyVisual(activity: activity)),
-                Container(
-                    margin: const EdgeInsets.only(top: 40.0),
-                    child: Text('Let\'s start?',
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayLarge
-                            ?.copyWith(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onBackground))),
-                Container(
-                  margin: const EdgeInsets.only(top: 60.0),
-                  child: Countdown(activity: activity),
-                )
-              ],
-            )));
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+              create: (_) => ActivityCountdownViewModel(
+                  context: context, activity: activity))
+        ],
+        child: WillPopScope(
+            onWillPop: () async => false,
+            child: Scaffold(
+                backgroundColor: Theme.of(context).colorScheme.background,
+                body: Column(
+                  children: [
+                    Container(
+                        margin: const EdgeInsets.only(top: 65.0),
+                        child: Header(activity: activity)),
+                    Container(
+                        margin: const EdgeInsets.only(top: 75.0),
+                        child: KeyVisual(activity: activity)),
+                    Container(
+                        margin: const EdgeInsets.only(top: 40.0),
+                        child: Text('Let\'s start?',
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayLarge
+                                ?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground))),
+                    Container(
+                      margin: const EdgeInsets.only(top: 60.0),
+                      child: Countdown(),
+                    )
+                  ],
+                ))));
   }
 }
 
@@ -71,60 +77,14 @@ class KeyVisual extends StatelessWidget {
   }
 }
 
-class Countdown extends StatefulWidget {
-  final Activity activity;
-
-  const Countdown({super.key, required this.activity});
-
-  @override
-  State<Countdown> createState() => _CountdownState();
-}
-
-class _CountdownState extends State<Countdown> {
-  bool onGoing = false;
-  int seconds = 8;
-  late Timer timer;
-  late DateTime until;
-  late Duration timeLeft;
-
-  @override
-  void initState() {
-    super.initState();
-    until = DateTime.now().add(Duration(seconds: seconds));
-    startCountdown();
-  }
-
-  void countDown() {
-    timeLeft = until.difference(DateTime.now());
-
-    setState(() {
-      if (timeLeft.inSeconds > 0) {
-        seconds = timeLeft.inSeconds;
-      } else {
-        cancelCountdown();
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (_) =>
-                    OngoingActivityView(activity: widget.activity)));
-      }
-    });
-  }
-
-  void startCountdown() {
-    timer = Timer.periodic(const Duration(milliseconds: 250), (timer) {
-      countDown();
-    });
-    setState(() => onGoing = true);
-  }
-
-  void cancelCountdown() {
-    onGoing = false;
-    timer.cancel();
-  }
-
+class Countdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ActivityCountdownViewModel viewModel =
+        context.watch<ActivityCountdownViewModel>();
+
+    int seconds = viewModel.getSeconds;
+
     return Stack(alignment: Alignment.center, children: [
       RotatedBox(
         quarterTurns: -(seconds % 4),
