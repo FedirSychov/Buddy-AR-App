@@ -49,7 +49,7 @@ class HomeView extends StatelessWidget {
               Container(
                   margin: const EdgeInsets.only(top: 74.0),
                   alignment: Alignment.center,
-                  child: Image.asset('assets/gifs/HomeExcitedBuddy.gif',
+                  child: Image.asset('assets/gifs/plants/HomeExcitedBuddy.gif',
                       height: 280, width: 280)),
               const Spacer(),
               const SizedBox(height: 55, width: 50),

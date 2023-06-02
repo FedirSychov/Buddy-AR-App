@@ -1,11 +1,11 @@
 enum PlantType {
-  appleTree("Pocket Apple Tree", "assets/images/appleTree.png",
+  appleTree("Pocket Apple Tree", "assets/images/smallPlants/appleTree.png",
       "assets/gifs/AppleTree.gif", "AppleTree"),
-  monstera("Monstera", "assets/images/monstera.png", "assets/gifs/Monstera.gif",
-      "Monstera"),
-  cactus(
-      "Cactus", "assets/images/cactus.png", "assets/gifs/Cactus.gif", "Cactus"),
-  snakePlant("Snake Plant", "assets/images/snakePlant.png",
+  monstera("Monstera", "assets/images/smallPlants/monstera.png",
+      "assets/gifs/Monstera.gif", "Monstera"),
+  cactus("Cactus", "assets/images/smallPlants/cactus.png",
+      "assets/gifs/Cactus.gif", "Cactus"),
+  snakePlant("Snake Plant", "assets/images/smallPlants/snakePlant.png",
       "assets/gifs/SnakePlant.gif", "SnakePlant");
 
   // GitHub needs to be public
