@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import '../model/activity.dart';
-import '../views/ongoingActivityView.dart';
 import '../views/ongoingSessionView.dart';
 
 class SessionCountdownViewModel extends ChangeNotifier {
@@ -23,15 +21,16 @@ class SessionCountdownViewModel extends ChangeNotifier {
   void countDown(BuildContext context) {
     timeLeft = until.difference(DateTime.now());
 
-      if (timeLeft.inSeconds > 0) {
-        seconds = timeLeft.inSeconds;
-      } else {
-        cancelCountdown();
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (_) => OngoingSessionView(isFirstHalf: true)));
-      };
+    if (timeLeft.inSeconds > 0) {
+      seconds = timeLeft.inSeconds;
+    } else {
+      cancelCountdown();
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (_) => OngoingSessionView(isFirstHalf: true)));
+    }
+    ;
     notifyListeners();
   }
 

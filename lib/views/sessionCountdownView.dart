@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'dart:async';
 import '../viewModels/sessionCountdownViewModel.dart';
-import 'ongoingSessionView.dart';
 
 class SessionCountdownView extends StatelessWidget {
   const SessionCountdownView({super.key});

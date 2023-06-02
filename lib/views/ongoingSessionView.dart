@@ -1,4 +1,3 @@
-import 'package:BUDdy/viewModels/ongoingActivityViewModel.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:BUDdy/views/DesignViews/buttons.dart';

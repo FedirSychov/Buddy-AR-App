@@ -22,17 +22,17 @@ class ActivityCountdownViewModel extends ChangeNotifier {
 
   void countDown(BuildContext context) {
     timeLeft = until.difference(DateTime.now());
-      if (timeLeft.inSeconds > 0) {
-        seconds = timeLeft.inSeconds;
-      } else {
-        cancelCountdown();
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (_) =>
-                    OngoingActivityView(activity: activity)));
-      };
-      notifyListeners();
+    if (timeLeft.inSeconds > 0) {
+      seconds = timeLeft.inSeconds;
+    } else {
+      cancelCountdown();
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (_) => OngoingActivityView(activity: activity)));
+    }
+    ;
+    notifyListeners();
   }
 
   void startCountdown(BuildContext context) {
