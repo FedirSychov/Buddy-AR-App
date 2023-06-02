@@ -23,7 +23,6 @@ class OngoingActivityViewModel extends ChangeNotifier {
   late Timer timer;
 
   OngoingActivityViewModel({required this.context}) {
-    NotificationClient.initialize(flutterLocalNotificationsPlugin);
     startCountdown(context);
   }
 

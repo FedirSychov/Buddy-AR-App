@@ -27,7 +27,6 @@ class OngoingSessionViewModel extends ChangeNotifier {
   late Timer timer;
 
   OngoingSessionViewModel({required this.isFirstHalf, required this.context}) {
-    NotificationClient.initialize(flutterLocalNotificationsPlugin);
     startCountdown(context);
   }
 

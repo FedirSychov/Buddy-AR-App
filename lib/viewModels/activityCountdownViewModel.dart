@@ -31,7 +31,6 @@ class ActivityCountdownViewModel extends ChangeNotifier {
           MaterialPageRoute(
               builder: (_) => OngoingActivityView(activity: activity)));
     }
-    ;
     notifyListeners();
   }
 
