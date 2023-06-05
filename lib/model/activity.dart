@@ -10,25 +10,25 @@ enum Activity {
       "assets/gifs/people/Stretch.gif",
       "Stretching increases muscle blood flow and helps you work efficiently.",
       "Just a few minutes of stretching each day can make a noticeable difference on your overall wellbeing. Let\'s do some simple stretches!",
-      'dQw4w9WgXcQ'),
+      'L_xrDAtykMI'),
   meditating(
       'Meditate',
       "assets/gifs/people/Meditation.gif",
       "Meditation gives you a sense of calm, peace and balance instantly.",
       "Meditation helps you focus on the present, reduce all negative emotions and manage stress. It helps  increase self awareness, patience and tolerance.",
-      'dQw4w9WgXcQ'),
+      'a2pZOIzbp7Q'),
   yoga(
       'Easy Yoga',
       "assets/gifs/people/Yoga.gif",
       "Yoga helps you relax and helps with anxiety and relieves stress.",
       "Don't worry! It's yoga for beginners. Practicing yoga daily helps improve flexibility, strength and balance. It reduces stress and anxiety.",
-      'dQw4w9WgXcQ'),
+      '5yf0nLjAWd8'),
   freeChoice(
       'Free Choice',
       "assets/images/freeChoice.png",
       "Don’t like what you see? Do any activity which you like.",
       "Drink a coffee, have a snack or call your mom. Take a moment to indulge in an activity that refreshes and reenergizes you from within.",
-      'dQw4w9WgXcQ');
+      '8idWv7MLZqw');
 
   const Activity(this.title, this.assetPath, this.text, this.breakDescription,
       this.videoId);

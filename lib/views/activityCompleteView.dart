@@ -54,6 +54,6 @@ class KeyVisual extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset('assets/images/closeBook.png', height: 316, width: 294);
+    return Image.asset('assets/images/plants/closeBook.png', height: 316, width: 294);
   }
 }
