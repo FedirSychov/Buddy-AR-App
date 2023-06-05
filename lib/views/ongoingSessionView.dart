@@ -181,7 +181,7 @@ class _CountdownState extends State<Countdown> with WidgetsBindingObserver {
                         margin: const EdgeInsets.only(top: 40.0),
                         width: 240,
                         height: 240,
-                        child: Image.asset('assets/images/closeBook.png')),
+                        child: Image.asset('assets/images/plants/closeBook.png')),
                     Container(
                         margin: const EdgeInsets.only(top: 15.0),
                         width: 294,
